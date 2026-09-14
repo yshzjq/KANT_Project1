@@ -15,10 +15,10 @@ from config import DEBUG
 
 MODEL = "qwen3:4b-instruct-2507-q4_K_M"
 # MODEL = "exaone3.5:7.8b"
-QUESTION = "RAG 특강은 언제 시작하나요?"
+QUESTION = "Python 특강 자료 다운로드 URL을 알려줘"
 
 # 저장된 전체 기록을 검색하고, 입력 길이에 맞는 대화 묶음을 선택합니다.
-NUM_CTX = 4096
+NUM_CTX = 8192
 # 근거 설명과 긴 자료 URL을 함께 출력할 여유를 둡니다.
 NUM_PREDICT = 512
 
