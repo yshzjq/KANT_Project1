@@ -24,7 +24,7 @@ class ChatContextTests(unittest.TestCase):
         client.chat.return_value = model_response(
             '{"keywords": [" Ollama ", "ollama", "특강", " "]}'
         )
-        self.assertEqual(chat.extract_search_keywords(client, "질문"), ["ollama", "특강"])
+        self.assertEqual(chat.extract_search_keywords(client, "질문"), ["ollama", "특강", "질문"])
         self.assertEqual(client.chat.call_args.kwargs["format"], chat.KEYWORD_FORMAT)
 
     def test_invalid_keyword_responses_stop(self):

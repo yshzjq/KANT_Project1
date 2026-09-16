@@ -1,3 +1,6 @@
+# 원격 API에 고정 질문 한 개를 보내는 예제입니다. 읽는 순서: 키 입력 → 요청 → 오류/응답 확인.
+# 로컬 Ollama 예제와 실행 경로가 다르며, 이 파일을 실행하면 실제 API 호출이 발생합니다.
+
 from getpass import getpass
 
 from openai import APIError, APITimeoutError, OpenAI
@@ -10,6 +13,7 @@ api_key = getpass("OpenAI API 키를 붙여넣고 Enter (화면에 보이지 않
 if not api_key:
     raise SystemExit("키를 입력하지 않아 API를 호출하지 않았습니다.")
 
+# max_retries=0으로 두어 한 번의 실행에서 클라이언트가 같은 요청을 자동 재시도하지 않게 합니다.
 client = OpenAI(
     api_key=api_key,
     base_url="https://api.openai.com/v1",
@@ -18,6 +22,7 @@ client = OpenAI(
 )
 print("Luna에 질문을 보냈습니다. 답변을 기다려 주세요.")
 try:
+    # 출력 한도를 초과한 결과도 받을 수 있으므로, 맨 아래에서 status와 본문을 함께 확인합니다.
     response = client.responses.create(
         model="gpt-5.6-luna",
         input=QUESTION,

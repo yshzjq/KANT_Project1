@@ -4,6 +4,12 @@ main은 ensure_slack_data부터, 봇은 run_bot부터 읽습니다.
 상태 확인: python slack_bot.py --status / 종료: python slack_bot.py --stop
 """
 
+# 두 실행 흐름을 나눠 읽습니다.
+# main 쪽: ensure_slack_data → 실행 중인 봇 확인 → 저장 완료 대기 → JSON 반환.
+# 봇 쪽: run_bot → listen_and_sync → 이벤트 보관 → sync_pending → 수집기 호출.
+# 변경이 없으면 기록 API를 호출하지 않습니다. 최초 시작·재연결·파일 유실 시에는 전체 조회합니다.
+# 관련 검증: tests/test_slack_bot.py, tests/test_windows_background.py.
+
 import argparse
 import importlib.util
 import json
@@ -72,6 +78,7 @@ def ensure_slack_data(timeout=SLACK_READY_TIMEOUT):
         print("실행 중인 Slack 감지 봇을 사용합니다.", flush=True)
 
     # 살아 있는 봇도 파일이 지워졌다면 전체 기록을 다시 받아야 합니다.
+    # 요청 번호는 SQLite에 남으므로 main과 봇이 서로 다른 Python 프로세스여도 완료를 확인할 수 있습니다.
     saved = collector.load_saved_data(collector.DATA_PATH)
     collector.index_messages(saved.get("messages", []))
     request_id = state.request(full=not saved.get("messages"))
@@ -105,6 +112,8 @@ def ensure_slack_data(timeout=SLACK_READY_TIMEOUT):
 
 
 def validate_environment():
+    # APP_TOKEN은 Socket Mode 연결, BOT_TOKEN은 SDK 클라이언트,
+    # SLACK_TOKEN은 수집기·이름 조회의 인증에 쓰입니다. 실제 값은 환경변수에서만 읽습니다.
     if importlib.util.find_spec("slack_sdk") is None:
         raise RuntimeError("Slack 의존성이 없습니다. uv sync를 실행하세요.")
     for name, prefix in (("SLACK_BOT_TOKEN", "xoxb-"), ("SLACK_APP_TOKEN", "xapp-")):
@@ -115,6 +124,7 @@ def validate_environment():
 
 
 def start_background_bot():
+    # PID는 시작 결과이고, 이후 실행 여부는 bot.lock으로 확인합니다. PID 번호는 재사용될 수 있습니다.
     validate_environment()
     RUNTIME_DIR.mkdir(parents=True, exist_ok=True)
     command = [sys.executable, "-u", str(Path(__file__).resolve()), "--background"]
@@ -138,6 +148,8 @@ def launch_windows_process(command, cwd, environment):
         "environment": [f"{name}={value}" for name, value in environment.items()],
     }
     try:
+        # WMI가 새 프로세스를 만들어 부모 터미널과 수명을 분리합니다.
+        # 위 PowerShell의 CreateFlags=520은 DETACHED_PROCESS(8)+CREATE_NEW_PROCESS_GROUP(512)입니다.
         result = subprocess.run(
             [str(powershell), "-NoProfile", "-NonInteractive", "-Command", WINDOWS_LAUNCH_SCRIPT],
             input=json.dumps(payload, ensure_ascii=True), capture_output=True,
@@ -189,9 +201,11 @@ def sync_pending(state):
     if not snapshot["connected"] or snapshot["stop"]:
         return False
     full_sync = snapshot["recovery"] != snapshot["recovered"] or not collector.DATA_PATH.exists()
+    # 이벤트도 복구 필요도 없으면 수집기를 부르지 않습니다. main의 확인 요청만 완료할 수 있습니다.
     if full_sync or snapshot["events"]:
         collector.sync_slack_data(events=snapshot["events"], full_sync=full_sync)
     if full_sync or snapshot["events"] or snapshot["requested"] != snapshot["completed"]:
+        # 수집·저장이 예외 없이 끝났을 때만 번호를 전진시켜 실패한 변경이 유실되지 않게 합니다.
         state.finish(snapshot)
     return True
 
@@ -247,7 +261,8 @@ def listen_and_sync(state):
 
     def on_request(socket_client, request):
         if request.type == "events_api":
-            # 디스크 보관 후 ACK. 수집 API는 이 콜백 밖에서 실행합니다.
+            # ACK는 Slack에 보내는 수신 확인입니다. 이벤트를 먼저 디스크에 보관한 뒤 응답합니다.
+            # 느린 수집 API는 아래 반복문에서 처리해 수신 확인을 지연시키지 않습니다.
             record_event(state, request.payload)
         socket_client.send_socket_mode_response(SocketModeResponse(envelope_id=request.envelope_id))
 
@@ -309,6 +324,7 @@ def main():
         return
     state = BotState(STATE_PATH)
     if args.stop:
+        # 강제 종료 대신 종료 요청을 남겨 진행 중인 저장 작업을 마치게 합니다.
         state.execute("UPDATE state SET stop=1 WHERE id=1")
         print("봇 종료를 요청했습니다. 진행 중인 수집을 마치면 종료합니다.")
     else:

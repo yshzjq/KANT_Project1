@@ -1,13 +1,13 @@
 
-# 실행 시 로그 표시
-
-# True : 로그 표시
+# DEBUG는 검색·수집의 상세 로그를 조절합니다. 답변·상태·오류 안내는 False여도 출력됩니다.
 DEBUG = True
 
-# QUESTION_LIST에 정의한 질문을 순서대로 평가하고 결과를 저장합니다.
+# True: 아래 목록을 평가해 .md 저장 / False: 직접 입력한 질문에 반복 응답.
+# 평가 파일에는 검색어·선택 원문·제외 사유도 저장합니다. DEBUG 설정과는 무관합니다.
 QUESTION_EVALUATION = True
 
-# type과 expected_result는 결과 기록용이며, 모델에는 question만 질문으로 전달합니다.
+# 항목을 추가할 때 type(유형), question(질문), expected_result(기대 결과)를 모두 입력합니다.
+# 목록 순서가 Q01, Q02… 번호가 됩니다. 유형·기대 결과는 보고서용이며 모델에는 질문만 전달합니다.
 QUESTION_LIST = [
     {
         "type": "정상",
@@ -104,5 +104,5 @@ QUESTION_LIST = [
 # 평가 결과는 프로젝트 폴더 기준으로 저장합니다.
 QUESTION_EVALUATION_DIR = "data/private/evaluations"
 
-# 봇은 별도 프로세스로 유지됩니다. 이 시간은 main의 기록 준비 대기 한도입니다.
+# 단위: 초. main이 봇의 기록 준비를 기다리는 한도이며, 봇 수명이나 API 조회 간격이 아닙니다.
 SLACK_READY_TIMEOUT = 600

@@ -1,6 +1,6 @@
 {
   "channel_id": "C0BBNNCS4BG",
-  "last_sync_started_ts": "1789463712.869983",
+  "last_sync_started_ts": "1789550372.946734",
   "thread_versions": {
     "1782377086.422969": {
       "reply_count": 3,
@@ -383,8 +383,12 @@
       "latest_reply": "1789116413.448639"
     },
     "1789365207.914899": {
-      "reply_count": 7,
-      "latest_reply": "1789463366.915529"
+      "reply_count": 8,
+      "latest_reply": "1789528096.499259"
+    },
+    "1789356747.975839": {
+      "reply_count": 2,
+      "latest_reply": "1789537126.637729"
     }
   },
   "messages": [
@@ -8541,16 +8545,16 @@
           "users": [
             "U0BDC9H17M0",
             "U0BL1ALS54G",
-            "U0BC26KFZ54",
             "U0BG5A1SMKL",
+            "U0BC26KFZ54",
             "U0BMK5U2JRX",
             "U0BHTSWPS68",
             "U0BAPLX69J9",
-            "U0BKR5VQFGB",
-            "U0BK0FB6TSM",
             "U0BE4RMQTU5",
-            "U0BM4GD3YRG",
+            "U0BK0FB6TSM",
+            "U0BKR5VQFGB",
             "U0BKT0G7K88",
+            "U0BM4GD3YRG",
             "U0BKKN3UW7K",
             "U0BLRGP54MC",
             "U0BLSE5CWE4",
@@ -8604,9 +8608,9 @@
             "U0BDC9H17M0",
             "U0BAPLX69J9",
             "U0BC26KFZ54",
-            "U0BE4RMQTU5",
-            "U0BKKN3UW7K",
             "U0BKTK98P63",
+            "U0BKKN3UW7K",
+            "U0BE4RMQTU5",
             "U0BLSE5CWE4",
             "U0BJ7TBEJDR",
             "U0B9TV2GVC2",
@@ -8811,25 +8815,25 @@
           "name": "white_check_mark",
           "users": [
             "U0BMK5U2JRX",
-            "U0BLYK8P9N0",
             "U0BE6K33A6T",
-            "U0BM4GD3YRG",
+            "U0BLYK8P9N0",
             "U0BLSE5CWE4",
+            "U0BM4GD3YRG",
             "U0BGP4P648Y",
-            "U0B9TV2GVC2",
             "U0BJ7TBEJDR",
+            "U0B9TV2GVC2",
             "U0BM9LX2NBY",
             "U0BL1ALS54G",
             "U0B95PG4SJ1",
             "U0BKKN3UW7K",
-            "U0BA2JDFPTP",
             "U0BAPLX69J9",
             "U0BK0FB6TSM",
+            "U0BA2JDFPTP",
             "U0BC26KFZ54",
             "U0BE4NE2E73",
-            "U0BKT0G7K88",
             "U0BDC9H17M0",
             "U0BG5A1SMKL",
+            "U0BKT0G7K88",
             "U0BLRGP54MC",
             "U0BE4RMQTU5",
             "U0BHTSWPS68",
@@ -8873,8 +8877,8 @@
           "name": "white_check_mark",
           "users": [
             "U0BDC9H17M0",
-            "U0BMK5U2JRX",
             "U0BG5A1SMKL",
+            "U0BMK5U2JRX",
             "U0BGP4P648Y",
             "U0BE4RMQTU5",
             "U0BK0FB6TSM",
@@ -8888,8 +8892,8 @@
             "U0BKKN3UW7K",
             "U0BE6K33A6T",
             "U0BAPLX69J9",
-            "U0BHTSWPS68",
             "U0BKT0G7K88",
+            "U0BHTSWPS68",
             "U0BLYK8P9N0",
             "U0BJ7TBEJDR",
             "U0BKTK98P63",
@@ -9168,12 +9172,12 @@
           "users": [
             "U0BMK5U2JRX",
             "U0BE4RMQTU5",
-            "U0BHTSWPS68",
             "U0BHMFP7G6A",
             "U0BE6K33A6T",
+            "U0BHTSWPS68",
             "U0BCJ4W0H4H",
-            "U0BAPLX69J9",
             "U0BE4NE2E73",
+            "U0BAPLX69J9",
             "U0BC26KFZ54",
             "U0BCERR2FDG",
             "U0BA2JDFPTP",
@@ -9219,24 +9223,24 @@
         {
           "name": "white_check_mark",
           "users": [
-            "U0BDC9H17M0",
             "U0BMK5U2JRX",
-            "U0BLSE5CWE4",
+            "U0BDC9H17M0",
             "U0BHTSWPS68",
-            "U0BKKN3UW7K",
+            "U0BLSE5CWE4",
             "U0BE4RMQTU5",
             "U0BHMFP7G6A",
-            "U0BAPLX69J9",
+            "U0BKKN3UW7K",
             "U0BKTK98P63",
+            "U0BAPLX69J9",
             "U0BLRGP54MC",
-            "U0B9TV2GVC2",
             "U0BCJ4W0H4H",
-            "U0BK0FB6TSM",
+            "U0B9TV2GVC2",
             "U0BA2JDFPTP",
+            "U0BK0FB6TSM",
             "U0BE6K33A6T",
             "U0BKT0G7K88",
-            "U0BJ7TBEJDR",
             "U0BC26KFZ54",
+            "U0BJ7TBEJDR",
             "U0BLYK8P9N0",
             "U0BM4GD3YRG",
             "U0BM9LX2NBY",
@@ -9670,11 +9674,11 @@
             "U0B9TV2GVC2",
             "U0BCERR2FDG",
             "U0BHTSWPS68",
-            "U0BA2JDFPTP",
+            "U0BE4RMQTU5",
             "U0BLSE5CWE4",
+            "U0BA2JDFPTP",
             "U0BC26KFZ54",
             "U0BCJ4W0H4H",
-            "U0BE4RMQTU5",
             "U0BJ7TBEJDR",
             "U0BM9LX2NBY",
             "U0BE4NE2E73",
@@ -9684,9 +9688,9 @@
             "U0B9QHYG6AH",
             "U0BL1ALS54G",
             "U0BLRGP54MC",
-            "U0BHMFP7G6A",
             "U0BKR5VQFGB",
             "U0BM4GD3YRG",
+            "U0BHMFP7G6A",
             "U0BAPLX69J9",
             "U0BK0FB6TSM",
             "U0BMK5U2JRX"
@@ -11636,8 +11640,8 @@
           "name": "+1",
           "users": [
             "U0BCERR2FDG",
-            "U0BM4GD3YRG",
             "U0BKKN3UW7K",
+            "U0BM4GD3YRG",
             "U0BK0FB6TSM",
             "U0BHMFP7G6A",
             "U0BMK5U2JRX",
@@ -26408,11 +26412,11 @@
           "users": [
             "U0BMK5U2JRX",
             "U0BJ7TBEJDR",
-            "U0BLSE5CWE4",
             "U0BDC9H17M0",
-            "U0BKR5VQFGB",
-            "U0BE4RMQTU5",
+            "U0BLSE5CWE4",
             "U0BE6K33A6T",
+            "U0BE4RMQTU5",
+            "U0BKR5VQFGB",
             "U0BA2JDFPTP",
             "U0BKKN3UW7K",
             "U0BCJ4W0H4H",
@@ -30774,14 +30778,6 @@
       ],
       "reactions": [
         {
-          "name": "raised_hands",
-          "users": [
-            "U0BMJN4CA5A",
-            "U0BMK5U2JRX"
-          ],
-          "count": 2
-        },
-        {
           "name": "eyes",
           "users": [
             "U0BMJN4CA5A",
@@ -30789,6 +30785,14 @@
             "U0BPVBUTB2L"
           ],
           "count": 3
+        },
+        {
+          "name": "raised_hands",
+          "users": [
+            "U0BMJN4CA5A",
+            "U0BMK5U2JRX"
+          ],
+          "count": 2
         },
         {
           "name": "typingcat",
@@ -35707,7 +35711,7 @@
       ],
       "reactions": [
         {
-          "name": "eyes",
+          "name": "raised_hands",
           "users": [
             "U0BMJN4CA5A",
             "U0B9QHYG6AH",
@@ -35716,7 +35720,7 @@
           "count": 3
         },
         {
-          "name": "raised_hands",
+          "name": "eyes",
           "users": [
             "U0BMJN4CA5A",
             "U0B9QHYG6AH",
@@ -38864,6 +38868,16 @@
         "ts": "1789356765.000000"
       },
       "client_msg_id": "c3a5df4f-5ad0-48c6-bb89-b73b4af6860d",
+      "thread_ts": "1789356747.975839",
+      "reply_count": 2,
+      "reply_users_count": 2,
+      "latest_reply": "1789537126.637729",
+      "reply_users": [
+        "U0BK0FB6TSM",
+        "U0BCERR2FDG"
+      ],
+      "is_locked": false,
+      "subscribed": false,
       "reactions": [
         {
           "name": "감사합니다_핑크",
@@ -39002,9 +39016,9 @@
       "text": "<!channel>\n네트워크 속도 저하 문제 겪으시는 수강생분들 계시다면, 어떤 작업중이신지, 속도 어떻게나오는지 댓글로 적어주시면 감사하겠습니다 :cry:\n<https://fast.com/ko/|fast.com/ko>",
       "team": "T0B3958SGS3",
       "thread_ts": "1789365207.914899",
-      "reply_count": 7,
+      "reply_count": 8,
       "reply_users_count": 4,
-      "latest_reply": "1789463366.915529",
+      "latest_reply": "1789528096.499259",
       "reply_users": [
         "U0BM9LX2NBY",
         "U0BGDNUQNM8",
@@ -39094,9 +39108,10 @@
           "name": "meow_party",
           "users": [
             "U0BE6K33A6T",
-            "U0BAKV9PABB"
+            "U0BAKV9PABB",
+            "U0B9TV2GVC2"
           ],
-          "count": 2
+          "count": 3
         }
       ]
     },
@@ -39423,6 +39438,308 @@
           ]
         }
       ]
+    },
+    {
+      "user": "U0BGDNUQNM8",
+      "type": "message",
+      "ts": "1789528096.499259",
+      "client_msg_id": "8d0a6aa9-b210-47bd-aade-b38455a35595",
+      "text": "<@U0BLSE5CWE4> 헉 무선은 트래픽이 많이몰리면 느려지긴 합니다 ㅠㅠ 그래서그런것같아요.. 오늘 랜선 다 비치해두겠습니다. 용량 큰 파일의 경우 유선환경에서 다운로드해주시면 감사하겠습니다 !",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789365207.914899",
+      "parent_user_id": "U0BGDNUQNM8",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "AWhNf",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "user",
+                  "user_id": "U0BLSE5CWE4"
+                },
+                {
+                  "type": "text",
+                  "text": " 헉 무선은 트래픽이 많이몰리면 느려지긴 합니다 ㅠㅠ 그래서그런것같아요.. 오늘 랜선 다 비치해두겠습니다. 용량 큰 파일의 경우 유선환경에서 다운로드해주시면 감사하겠습니다 !"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subtype": "thread_broadcast",
+      "user": "U0BK0FB6TSM",
+      "thread_ts": "1789356747.975839",
+      "root": {
+        "text": "<!channel> 여러분~ 오늘 진행한 Git 강의 자료 공유드립니다! :computer:\n자료 확인해보시고, 프로젝트 진행하면서 추가로 궁금하거나 막히는 부분이 있다면 튜터님께 마구마구 질문해주세요~! :raised_hands:\n궁금한 건 바로바로 해결하면서 프로젝트 진행해봅시다! :fire:\n• Git 강의 자료 : F0C1F30R5EZ",
+        "files": [
+          {
+            "id": "F0C1F30R5EZ",
+            "created": 1789355929,
+            "timestamp": 1789355929,
+            "mimetype": "application/pdf",
+            "filetype": "pdf",
+            "pretty_type": "PDF",
+            "user": "U0BUR6RKQFN",
+            "user_team": "T0B3958SGS3",
+            "editable": false,
+            "size": 2656062,
+            "mode": "hosted",
+            "is_external": false,
+            "external_type": "",
+            "is_public": false,
+            "public_url_shared": false,
+            "display_as_bot": false,
+            "username": "",
+            "name": "git 참고자료.pdf",
+            "title": "git 참고자료.pdf",
+            "is_modified_by_ai": false,
+            "url_private": "https://files.slack.com/files-pri/T0B3958SGS3-F0C1F30R5EZ/git_____________.pdf",
+            "url_private_download": "https://files.slack.com/files-pri/T0B3958SGS3-F0C1F30R5EZ/download/git_____________.pdf",
+            "media_display_type": "unknown",
+            "thumb_pdf": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C1F30R5EZ-d9f90b6ba1/git______________thumb_pdf.png",
+            "thumb_pdf_w": 2200,
+            "thumb_pdf_h": 1238,
+            "permalink": "https://2026kant.slack.com/files/U0BC26KFZ54/F0C1F30R5EZ/git_____________.pdf",
+            "permalink_public": "https://slack-files.com/T0B3958SGS3-F0C1F30R5EZ-2590a0286f",
+            "is_starred": false,
+            "skipped_shares": true,
+            "has_rich_preview": false,
+            "file_access": "visible"
+          }
+        ],
+        "upload": false,
+        "user": "U0BDAC2R3AL",
+        "display_as_bot": false,
+        "x_files": [
+          "F0C1F30R5EZ"
+        ],
+        "blocks": [
+          {
+            "type": "rich_text",
+            "block_id": "THwyK",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "broadcast",
+                    "range": "channel"
+                  },
+                  {
+                    "type": "text",
+                    "text": " 여러분~ 오늘 진행한 Git 강의 자료 공유드립니다! "
+                  },
+                  {
+                    "type": "emoji",
+                    "name": "computer",
+                    "unicode": "1f4bb"
+                  },
+                  {
+                    "type": "text",
+                    "text": "\n자료 확인해보시고, 프로젝트 진행하면서 추가로 궁금하거나 막히는 부분이 있다면 튜터님께 마구마구 질문해주세요~! "
+                  },
+                  {
+                    "type": "emoji",
+                    "name": "raised_hands",
+                    "unicode": "1f64c"
+                  },
+                  {
+                    "type": "text",
+                    "text": "\n궁금한 건 바로바로 해결하면서 프로젝트 진행해봅시다! "
+                  },
+                  {
+                    "type": "emoji",
+                    "name": "fire",
+                    "unicode": "1f525"
+                  },
+                  {
+                    "type": "text",
+                    "text": "\n"
+                  }
+                ]
+              },
+              {
+                "type": "rich_text_list",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "type": "text",
+                        "text": "Git 강의 자료 : "
+                      },
+                      {
+                        "type": "file",
+                        "file_id": "F0C1F30R5EZ",
+                        "text": "https://2026kant.slack.com/files/U0BDAC2R3AL/F0C1F30R5EZ/git_____________.pdf",
+                        "url": "https://2026kant.slack.com/files/U0BDAC2R3AL/F0C1F30R5EZ/git_____________.pdf"
+                      }
+                    ]
+                  }
+                ],
+                "style": "bullet",
+                "indent": 0,
+                "border": 0
+              }
+            ]
+          }
+        ],
+        "type": "message",
+        "ts": "1789356747.975839",
+        "edited": {
+          "user": "U0BDAC2R3AL",
+          "ts": "1789356765.000000"
+        },
+        "client_msg_id": "c3a5df4f-5ad0-48c6-bb89-b73b4af6860d",
+        "thread_ts": "1789356747.975839",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1789537126.637729",
+        "reply_users": [
+          "U0BK0FB6TSM",
+          "U0BCERR2FDG"
+        ],
+        "is_locked": false,
+        "subscribed": false
+      },
+      "type": "message",
+      "ts": "1789536447.854819",
+      "client_msg_id": "20a5efc1-c083-4513-9fbc-cfd006688e20",
+      "text": "깃 명령어 실습이 가능한 사이트 공유드립니다!\n<https://learngitbranching.js.org/?locale=ko|learngitbranching.js.org/?locale=ko>",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "loQOh",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "깃 명령어 실습이 가능한 사이트 공유드립니다!\n"
+                },
+                {
+                  "type": "link",
+                  "url": "https://learngitbranching.js.org/?locale=ko",
+                  "text": "learngitbranching.js.org/?locale=ko",
+                  "truncated": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reactions": [
+        {
+          "name": "우와",
+          "users": [
+            "U0BDAC2R3AL",
+            "U0BM9LX2NBY"
+          ],
+          "count": 2
+        },
+        {
+          "name": "감사합니다_핑크",
+          "users": [
+            "U0BDAC2R3AL",
+            "U0BCERR2FDG",
+            "U0BC26KFZ54",
+            "U0BAPLX69J9"
+          ],
+          "count": 4
+        },
+        {
+          "name": "meow_party",
+          "users": [
+            "U0BCERR2FDG"
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "text": "신기해요! 좋은 사이트네요~",
+      "files": [
+        {
+          "id": "F0C21GM8JJH",
+          "created": 1789537122,
+          "timestamp": 1789537122,
+          "mimetype": "image/png",
+          "filetype": "png",
+          "pretty_type": "PNG",
+          "user": "U0BCERR2FDG",
+          "user_team": "T0B3958SGS3",
+          "editable": false,
+          "size": 99582,
+          "mode": "hosted",
+          "is_external": false,
+          "external_type": "",
+          "is_public": false,
+          "public_url_shared": false,
+          "display_as_bot": false,
+          "username": "",
+          "name": "image.png",
+          "title": "image.png",
+          "is_modified_by_ai": false,
+          "url_private": "https://files.slack.com/files-pri/T0B3958SGS3-F0C21GM8JJH/image.png",
+          "url_private_download": "https://files.slack.com/files-pri/T0B3958SGS3-F0C21GM8JJH/download/image.png",
+          "media_display_type": "unknown",
+          "thumb_64": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C21GM8JJH-add6143c63/image_64.png",
+          "thumb_80": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C21GM8JJH-add6143c63/image_80.png",
+          "thumb_360": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C21GM8JJH-add6143c63/image_360.png",
+          "thumb_360_w": 360,
+          "thumb_360_h": 161,
+          "thumb_480": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C21GM8JJH-add6143c63/image_480.png",
+          "thumb_480_w": 480,
+          "thumb_480_h": 214,
+          "thumb_160": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C21GM8JJH-add6143c63/image_160.png",
+          "thumb_720": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C21GM8JJH-add6143c63/image_720.png",
+          "thumb_720_w": 720,
+          "thumb_720_h": 321,
+          "thumb_800": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C21GM8JJH-add6143c63/image_800.png",
+          "thumb_800_w": 800,
+          "thumb_800_h": 357,
+          "original_w": 1902,
+          "original_h": 848,
+          "thumb_tiny": "AwAWADBreRxlXPH97NOWCFlB2dfc1Wq5F/ql+lVBES0G/Z4v7n6mj7PF/c/U1LgDp0orSyIuyEwRDnZn8TShIlIZYgCPUn/GpG+7TM8AZPHas5bnTRScbsqVci/1S/SqdXIv9Uv0pw3MZ7D6KKK0MxG+7UdSN92o6ynudmH+H5n/2Q==",
+          "permalink": "https://2026kant.slack.com/files/U0BC26KFZ54/F0C21GM8JJH/image.png",
+          "permalink_public": "https://slack-files.com/T0B3958SGS3-F0C21GM8JJH-a4d873b4f5",
+          "is_starred": false,
+          "skipped_shares": true,
+          "has_rich_preview": false,
+          "file_access": "visible"
+        }
+      ],
+      "upload": false,
+      "user": "U0BCERR2FDG",
+      "display_as_bot": false,
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "ooKf0",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "신기해요! 좋은 사이트네요~"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "message",
+      "ts": "1789537126.637729",
+      "client_msg_id": "3432510b-903a-471b-b92c-eb42e369257c",
+      "thread_ts": "1789356747.975839",
+      "parent_user_id": "U0BDAC2R3AL"
     }
   ]
 }

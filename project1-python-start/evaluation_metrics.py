@@ -1,7 +1,11 @@
-"""Ollama 호출 통계와 실행 조건을 수집하고 Markdown 평가 보고서를 만듭니다.
+"""로컬·클라우드 호출 통계와 실행 조건을 수집하고 Markdown 평가 보고서를 만듭니다.
 
 미측정 값은 None과 사유로 보관합니다. ps 조회는 질문의 elapsed 구간 밖에서 합니다.
 """
+
+# 검증 순서: MeasuredClient.chat → response_metrics → render_question → render_summary.
+# 모델 응답 자체와 성능 통계는 분리해서 보며, 품질 점수는 여기서 계산하지 않습니다.
+# 관련 검증: tests/test_evaluation_metrics.py, tests/test_question_evaluation.py.
 
 import json
 import math
@@ -32,10 +36,12 @@ def validate_questions(items):
 
 
 def field(obj, name):
+    # 실제 SDK 응답 객체와 테스트용 사전을 같은 계산 함수에 넣을 수 있게 합니다.
     return obj.get(name) if isinstance(obj, dict) else getattr(obj, name, None)
 
 
 def numeric(value, minimum=0, strict=False):
+    # Python에서는 True도 int로 취급하므로 따로 제외합니다. NaN·무한대도 평균에 넣지 않습니다.
     return (
         isinstance(value, (int, float)) and not isinstance(value, bool)
         and math.isfinite(value) and (value > minimum if strict else value >= minimum)
@@ -43,10 +49,18 @@ def numeric(value, minimum=0, strict=False):
 
 
 def metric(value=None, reason=None):
+    # value=None은 미측정, value=0은 실제 측정된 0입니다. 미측정 이유를 함께 보관합니다.
     return {"value": value, "reason": reason}
 
 
 def response_metrics(response):
+    if field(response, "provider") == "openai_responses":
+        return {
+            "load_seconds": metric(reason="OpenAI Responses API가 load_duration을 제공하지 않음"),
+            "tokens_per_second": metric(reason="OpenAI Responses API가 eval_duration을 제공하지 않음"),
+        }
+    # Ollama의 duration은 ns(10억분의 1초)입니다. 생성 속도에는 생성 시간만 분모로 사용합니다.
+    # 모델 로딩 시간이나 프롬프트 처리 시간을 분모에 섞으면 다른 지표가 됩니다.
     load = field(response, "load_duration")
     count = field(response, "eval_count")
     duration = field(response, "eval_duration")
@@ -67,11 +81,16 @@ def canonical_model(tag):
 
 
 def running_model(client, model):
+    if getattr(client, "provider", None) == "openai_responses":
+        # 클라우드 상태를 로컬 Ollama의 ps 결과로 잘못 대체하지 않습니다.
+        return client.runtime_snapshot()
+    # loaded의 세 상태: True=목록에서 확인, False=목록에 없음, None=조회·판단 불가.
     snapshot = {"observed_at": datetime.now(timezone.utc).isoformat(), "loaded": None}
     try:
         models = field(client.ps(), "models")
         if not isinstance(models, (list, tuple)):
             raise ValueError("models 목록 누락")
+        # 여러 모델이 적재돼 있어도 요청한 태그와 일치하는 항목만 선택합니다.
         matches = [item for item in models if canonical_model(model) in (
             canonical_model(field(item, "model")), canonical_model(field(item, "name")),
         )]
@@ -91,6 +110,7 @@ def running_model(client, model):
 
 
 def vram_metric(snapshot):
+    # size_vram은 바이트입니다. 1 MiB=1024*1024바이트이며, GPU 전체 사용량·최댓값은 아닙니다.
     value = snapshot.get("size_vram")
     if numeric(value):
         return metric(value / (1024 * 1024))
@@ -120,11 +140,15 @@ class MeasuredClient:
         self.calls = []
 
     def chat(self, **kwargs):
+        # 현재 answer_question의 호출 순서에 대응합니다. 호출 단계를 추가하면 이 구분도 함께 검토합니다.
         record = {
             "stage": "검색어 생성" if not self.calls else "최종 답변",
             "model": kwargs.get("model"), "success": False,
             "settings": {key: kwargs[key] for key in ("options", "stream", "format", "think", "keep_alive") if key in kwargs},
         }
+        if getattr(self.client, "provider", None) == "openai_responses":
+            record["provider"] = "openai_responses"
+            record["settings"] = self.client.request_settings(**kwargs)
         self.calls.append(record)
         started = time.perf_counter()
         try:
@@ -133,7 +157,7 @@ class MeasuredClient:
             record["error"] = type(error).__name__
             raise
         else:
-            record["success"] = True  # API 정상 반환 여부입니다. 내용의 품질 점수가 아닙니다.
+            record["success"] = True  # 서버 응답 수신 여부이며, 내용의 정확성·완결성과는 별개입니다.
             record["response"] = {
                 name: field(response, name) for name in (
                     "model", "created_at", "done", "done_reason", "total_duration", "load_duration",
@@ -142,6 +166,9 @@ class MeasuredClient:
             }
             record["response"]["content"] = field(field(response, "message"), "content")
             record["response"]["thinking"] = field(field(response, "message"), "thinking")
+            if field(response, "provider") == "openai_responses":
+                # Responses의 usage·status·refusal을 변환 전 형태로 남깁니다.
+                record["response"]["openai_response"] = field(response, "openai_response")
             record.update(response_metrics(response))
             return response
         finally:
@@ -163,11 +190,13 @@ def display(measurement, unit):
 
 
 def average(values, unit):
+    # n은 전체 질문 수가 아니라 이 지표의 유효한 값 개수입니다. 각 지표의 n은 달라도 됩니다.
     values = [value for value in values if numeric(value)]
     return f"{number_text(mean(values))}{unit} (n={len(values)})" if values else "측정 불가 (n=0)"
 
 
 def fenced(text, language=""):
+    # 원문에 ```가 포함돼도 보고서의 코드 블록이 중간에 닫히지 않도록 더 긴 구분자를 씁니다.
     fence = "`" * max(3, 1 + max((len(match[0]) for match in re.finditer(r"`+", text)), default=0))
     return f"{fence}{language}\n{text}\n{fence}\n"
 
@@ -183,6 +212,75 @@ def snapshot_value(snapshot, name):
 
 def initial_state(snapshot):
     return {True: "시작 전 로드됨", False: "시작 전 미적재", None: "시작 전 상태 미확인"}[snapshot["loaded"]]
+
+
+def table_cell(value):
+    # Slack 본문·검색어의 파이프나 줄바꿈으로 Markdown 표가 깨지지 않게 합니다.
+    return str(value).replace("&", "&amp;").replace("<", "&lt;").replace(
+        ">", "&gt;"
+    ).replace("|", "&#124;").replace("`", "&#96;").replace("\r", " ").replace("\n", " ")
+
+
+def render_retrieval(trace):
+    """검색 진단은 응답과 분리해 보여 주며, 원문과 실제 전송 내용을 구분합니다."""
+    if trace is None:
+        return "### 검색 과정\n\n검색 진단 기록 없음 (이전 형식의 기록).\n"
+    window = trace.get("date_window")
+    date_label = " ~ ".join(window) if window else "날짜 제한 없음" if "date_window" in trace else "미수행"
+    lines = [
+        "### 검색 과정", "",
+        f"- 마지막 처리 단계: {trace['stage']}",
+        f"- 질문 기준 시각 (KST): {trace.get('reference_time', '미수행')}",
+        f"- 질문 날짜 범위: {date_label}", "",
+        "#### 모델이 생성한 검색어", "",
+        fenced(json.dumps(trace["raw_keywords"], ensure_ascii=False), "json") if "raw_keywords" in trace else "검색어 해석 전 실패·중단 또는 미수행. 원본 응답은 호출 기록을 확인하세요.",
+        "", "#### 실제 검색에 사용한 검색어", "",
+        fenced(json.dumps(trace["search_keywords"], ensure_ascii=False), "json") if "search_keywords" in trace else "미수행",
+    ]
+    if "candidates" in trace:
+        candidates = trace["candidates"]
+        lines += ["", f"- 검색어가 일치한 후보: {len(candidates)}개 대화 묶음"]
+        if "score_cutoff" in trace:
+            lines.append(f"- 검색 점수 통과 기준: {trace['score_cutoff']:.4f} (날짜 통과 후보 최고 점수의 65%)")
+        lines += ["", "#### 후보 대화와 선택·제외 사유", ""]
+        if candidates:
+            lines += ["| 검색 순위 | 대화 ID | 점수 | 일치 검색어 | 처리 | 사유 |",
+                      "|---:|---|---:|---|---|---|"]
+            for candidate in candidates:
+                values = [candidate["rank"], candidate["thread_id"], f"{candidate['score']:.4f}",
+                          ", ".join(candidate["matched_keywords"]), candidate["decision"], candidate["reason"]]
+                lines.append("| " + " | ".join(table_cell(value) for value in values) + " |")
+        else:
+            lines.append("일치한 후보가 없습니다. 이 결과만으로 실제 일정이나 과제가 없다고 판단하지 않습니다.")
+        if window:
+            lines += ["", "#### 메시지별 날짜 판정", "",
+                      "구체 날짜와 검색 주제의 연결을 확인한 결과입니다. 기간·주제를 통과한 메시지만 참고합니다.", "",
+                      "| 대화 ID | 메시지 ID | 게시일 | 판정에 사용한 본문 날짜 | 일치 검색어 | 날짜 판정 | 사유 | 주제·날짜 연결 문장 |",
+                      "|---|---|---|---|---|---|---|---|"]
+            for candidate in candidates:
+                for check in candidate["date_checks"]:
+                    values = [candidate["thread_id"], check["ts"], check["posted_on"],
+                              ", ".join(check["resolved_dates"]) or "없음", ", ".join(check["matched_keywords"]) or "없음",
+                              "통과" if check["matches"] else "제외", check["reason"], check.get("topic_evidence", "—")]
+                    lines.append("| " + " | ".join(table_cell(value) for value in values) + " |")
+    if trace.get("no_context_reason"):
+        lines += ["", f"최종 답변 모델 미호출 사유: {trace['no_context_reason']}"]
+    lines += ["", "#### 선택된 Slack 원문 (발췌·날짜 변환 전)", ""]
+    for message in trace.get("selected_messages", []):
+        lines += [f"- 메시지 ID: {message['ts']} / 대화 ID: {message['thread_id']} / 작성: {message['posted_at']}",
+                  f"- 본문 발췌 여부: {'예' if message['excerpted'] else '아니요'}", "",
+                  fenced(message["original_text"], "text")]
+    if not trace.get("selected_messages"):
+        lines.append("최종 원문 선택 기록 없음. 위 처리 단계와 제외 사유를 확인하세요.")
+    lines += ["", "#### 모델용 Slack 문맥 (발췌·날짜 변환 후)", ""]
+    lines.append(fenced(trace["context"], "text") if trace.get("context") is not None else "작성되지 않았습니다.")
+    lines += ["", "#### 최종 답변 모델 요청 메시지", ""]
+    if "final_messages" in trace:
+        lines += ["호출 직전의 system/user 메시지입니다. 응답 수신 성공 여부는 호출 결과를 확인하세요.", "",
+                  fenced(json.dumps(trace["final_messages"], ensure_ascii=False, indent=2), "json")]
+    else:
+        lines.append("최종 답변 모델을 호출하지 않았습니다.")
+    return "\n".join(lines) + "\n"
 
 
 def render_question(record):
@@ -221,6 +319,7 @@ def render_question(record):
         lines += ["", f"#### {call['stage']} — 요청 설정·원본 응답", "",
                   fenced(json.dumps({"settings": call["settings"], "response": call.get("response"),
                                      "error": call.get("error")}, ensure_ascii=False, indent=2), "json")]
+    lines += ["", render_retrieval(record.get("retrieval"))]
     return "\n".join(lines) + "\n---\n\n"
 
 
@@ -235,6 +334,7 @@ def render_summary(records, planned, experiment_kind):
     for model, rows in groups.items():
         calls = [call for row in rows for call in row["calls"]]
         success = [call for call in calls if call["success"]]
+        # 질문 전체 시간은 완료된 답변끼리 비교합니다. 실패·중단·근거 없음 안내는 아래에 따로 나열합니다.
         answers = [row for row in rows if row["status"] == "답변 완료"]
         lines += [f"### {model}", "", f"- 모델 호출 성공 수 / 전체 시도 수: {len(success)} / {len(calls)}",
                   f"- 최종 모델 답변 완료: {len(answers)} / 질문 시도 {len(rows)}", "",
@@ -244,6 +344,7 @@ def render_summary(records, planned, experiment_kind):
         for state in ("시작 전 미적재", "시작 전 로드됨", "시작 전 상태 미확인"):
             lines.append(f"| 전체 응답 시간 — {state} | {average([row['elapsed'] for row in answers if initial_state(row['before']) == state], '초')} |")
         for stage in ("검색어 생성", "최종 답변"):
+            # 단계별 통계는 API가 반환한 호출 기준입니다. 최종 답변 완료 질문 수와 분모가 다릅니다.
             stage_calls = [call for call in calls if call["stage"] == stage]
             returned = [call for call in stage_calls if call["success"]]
             lines += ["", f"#### {stage}: 호출 성공 {len(returned)} / 시도 {len(stage_calls)}", "",
@@ -252,6 +353,16 @@ def render_summary(records, planned, experiment_kind):
                       f"| 모델 로딩 시간 | {average([call['load_seconds']['value'] for call in returned], '초')} |",
                       f"| 토큰 생성 속도 | {average([call['tokens_per_second']['value'] for call in returned], ' tokens/s')} |",
                       f"| 호출 실패까지 걸린 시간 | {average([call['elapsed'] for call in stage_calls if not call['success']], '초')} |"]
+            cloud = [call for call in returned if call.get("provider") == "openai_responses"]
+            if any(call.get("provider") == "openai_responses" for call in stage_calls):
+                usages = [field(call["response"]["openai_response"], "usage") for call in cloud]
+                for label, values in (
+                    ("입력 토큰", [field(usage, "input_tokens") for usage in usages]),
+                    ("출력 토큰 (추론 포함)", [field(usage, "output_tokens") for usage in usages]),
+                    ("추론 토큰", [field(field(usage, "output_tokens_details"), "reasoning_tokens") for usage in usages]),
+                    ("캐시 입력 토큰", [field(field(usage, "input_tokens_details"), "cached_tokens") for usage in usages]),
+                ):
+                    lines.append(f"| {label} | {average(values, ' tokens')} |")
         other_rows = [row for row in rows if row["status"] != "답변 완료"]
         if other_rows:
             lines += ["", "성공 답변 평균에서 제외한 질문:", ""]

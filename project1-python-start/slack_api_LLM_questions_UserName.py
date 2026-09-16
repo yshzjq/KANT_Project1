@@ -1,3 +1,7 @@
+# Slack 사용자 ID를 표시 이름으로 바꾸는 보조 모듈입니다.
+# 읽는 순서: get_user_names → 캐시 확인 → fetch_user_name → save_name_updates.
+# 이름 조회 실패 시 저장된 이름이나 ID로 계속 답변합니다. 관련 검증: tests/test_user_names.py.
+
 import json
 import os
 from pathlib import Path
@@ -35,6 +39,7 @@ def load_name_cache(cache_path):
 
 def save_name_updates(cache_path, updates):
     """저장 직전에 최신 캐시를 읽어, 다른 실행이 추가한 이름을 보존합니다."""
+    # API 조회 중 다른 실행이 저장했을 수 있어, 잠금을 얻은 뒤 파일을 다시 읽고 이번 변경만 합칩니다.
     with FileLock(cache_path.with_suffix(".lock")):
         cache = load_name_cache(cache_path)
         cache.update(updates)
@@ -96,7 +101,7 @@ def fetch_user_name(user_id, token):
     if not isinstance(profile, dict):
         profile = {}
 
-    # 표시 이름에는 '이름(담임매니저/LLM/1기)' 같은 정보가 포함될 수 있습니다.
+    # 표시 이름에 역할 정보가 붙어 있을 수 있어 display_name을 우선하고, 없을 때 실명·계정명을 씁니다.
     for name in (
         profile.get("display_name"),
         profile.get("real_name"),
@@ -125,6 +130,7 @@ def get_user_names(user_ids, cache_path=None):
     cache_path = Path(cache_path) if cache_path is not None else CACHE_PATH
     cache = load_name_cache(cache_path)
 
+    # 반환값을 ID로 먼저 채워 두어, 조회가 중간에 실패해도 모든 요청 ID를 표시할 수 있게 합니다.
     names = {user_id: user_id for user_id in user_ids}
     pending = []
     now = time.time()
@@ -136,6 +142,7 @@ def get_user_names(user_ids, cache_path=None):
             fetched_at = entry.get("fetched_at")
             if isinstance(name, str) and name.strip() and name != user_id:
                 names[user_id] = name.strip()
+                # 24시간 안의 이름이면 API를 생략합니다. 오래된 이름은 재조회 실패 시에도 대체값으로 남깁니다.
                 if (
                     isinstance(fetched_at, (int, float))
                     and 0 <= now - fetched_at < CACHE_TTL_SECONDS

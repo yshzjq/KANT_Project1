@@ -4,6 +4,10 @@
 ts는 메시지 식별값, thread_ts는 답글이 속한 원글의 식별값입니다.
 """
 
+# 봇은 이벤트가 가리키는 메시지·스레드만 조회하고, 시작·재연결 때는 전체 조회를 요청합니다.
+# 이 파일을 직접 실행하면 sync_slack_data()의 기본값(full_sync=True)으로 전체 조회합니다.
+# 네트워크 실패 시 기존 JSON 보존 여부는 tests/test_slack_sync.py에서 확인합니다.
+
 import json
 import os
 import time
@@ -32,7 +36,7 @@ def sync_slack_data(data_path=DATA_PATH, read_pages=None, events=None, full_sync
 def _sync_slack_data(data_path, read_pages, events, full_sync):
     """동기화의 전체 순서입니다. 실제 실행은 파일 맨 아래에서 시작합니다."""
     data_path = Path(data_path)
-    # 평소에는 Slack을 조회합니다. 테스트할 때만 가짜 조회 함수를 전달합니다.
+    # read_pages를 전달하면 실제 API 대신 가짜 응답으로 동기화 과정을 검증할 수 있습니다.
     read_pages = read_pages or read_all_pages
     sync_started = f"{time.time():.6f}"
 
@@ -49,7 +53,7 @@ def _sync_slack_data(data_path, read_pages, events, full_sync):
             read_pages, sync_started, events or [], existing,
         )
 
-    # 삭제 이벤트가 확인된 메시지만 제거합니다. 조회에서 누락된 기록은 보존합니다.
+    # API 목록에서 빠진 이유가 삭제인지 접근 제한인지 구분할 수 없으므로, 삭제 이벤트가 있는 ts만 지웁니다.
     deleted = {
         event["deleted_ts"] for event in (events or [])
         if event.get("subtype") == "message_deleted" and event.get("deleted_ts")
@@ -65,7 +69,6 @@ def _sync_slack_data(data_path, read_pages, events, full_sync):
         return saved_data
 
     # 4. 같은 ts는 최신 내용으로 교체하고, 새로운 ts는 추가합니다.
-    # 조회에서 사라진 기록은 보존합니다. 접근 제한과 삭제를 구별할 수 없기 때문입니다.
     merged = existing.copy()
     merged.update(current)
     for message_ts in deleted:
@@ -82,7 +85,7 @@ def _sync_slack_data(data_path, read_pages, events, full_sync):
         "messages": sorted(merged.values(), key=lambda message: Decimal(message["ts"])),
     })
 
-    # 5. 모든 조회·비교가 끝난 뒤 파일을 저장합니다.
+    # 5. 중간 조회가 실패하면 여기까지 도달하지 않아 기존 파일이 유지됩니다.
     save_json(data_path, save_data)
     print(f"대화기록 저장 완료: 신규 {new_count}개 / 변경 {changed_count}개 / 삭제 {deleted_count}개")
     if DEBUG:
@@ -158,6 +161,7 @@ def save_json(data_path, data):
 
 def fetch_event_messages(read_pages, sync_started, events, existing):
     """이벤트는 감지에만 쓰고, 해당 메시지·스레드의 최신 본문은 API로 조회합니다."""
+    # 같은 스레드에서 여러 이벤트가 와도 한 번만 조회하도록 집합으로 모읍니다.
     roots, threads, deleted = set(), set(), set()
     for event in events:
         if event.get("subtype") == "message_deleted":
@@ -279,6 +283,7 @@ def read_all_pages(method, **params):
             if data.get("has_more"):
                 raise RuntimeError("추가 기록이 있지만 다음 페이지 정보가 없습니다.")
             break
+        # 잘못된 페이지 정보 때문에 같은 페이지를 무한히 요청하는 일을 막습니다.
         if next_cursor in seen_cursors:
             raise RuntimeError("같은 페이지 정보가 반복됩니다.")
 
@@ -293,7 +298,6 @@ def call_slack(method, **params):
     if not token:
         raise RuntimeError("SLACK_TOKEN 환경변수를 찾을 수 없습니다.")
 
-    # method는 API 이름, params는 channel·ts 같은 조회 조건입니다.
     # 토큰은 URL에 넣지 않고 인증 헤더로 전달합니다.
     url = f"https://slack.com/api/{method}?{urlencode(params)}"
     request = Request(url, headers={"Authorization": f"Bearer {token}"})
@@ -318,12 +322,12 @@ def call_slack(method, **params):
 
         if not isinstance(data, dict):
             raise ValueError("Slack 응답이 객체 형식이 아닙니다.")
+        # HTTP 통신이 성공해도 Slack 응답의 ok가 False이면 업무 요청은 실패한 것입니다.
         if not data.get("ok"):
             raise RuntimeError(f"{method} 조회 실패: {data.get('error')}")
         return data
 
 
-# 이 파일을 직접 실행할 때만 동기화를 시작합니다.
 if __name__ == "__main__":
     try:
         sync_slack_data()
