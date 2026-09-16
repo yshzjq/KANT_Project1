@@ -1,6 +1,6 @@
 {
   "channel_id": "C0BBNNCS4BG",
-  "last_sync_started_ts": "1789385940.177917",
+  "last_sync_started_ts": "1789463712.869983",
   "thread_versions": {
     "1782377086.422969": {
       "reply_count": 3,
@@ -383,8 +383,8 @@
       "latest_reply": "1789116413.448639"
     },
     "1789365207.914899": {
-      "reply_count": 4,
-      "latest_reply": "1789366327.673979"
+      "reply_count": 7,
+      "latest_reply": "1789463366.915529"
     }
   },
   "messages": [
@@ -20367,19 +20367,19 @@
           "count": 2
         },
         {
-          "name": "white_check_mark",
-          "users": [
-            "U0BMK5U2JRX"
-          ],
-          "count": 1
-        },
-        {
           "name": "eyes",
           "users": [
             "U0BMK5U2JRX",
             "U0BDAC2R3AL"
           ],
           "count": 2
+        },
+        {
+          "name": "white_check_mark",
+          "users": [
+            "U0BMK5U2JRX"
+          ],
+          "count": 1
         }
       ]
     },
@@ -21288,15 +21288,6 @@
       "subscribed": false,
       "reactions": [
         {
-          "name": "white_check_mark",
-          "users": [
-            "U0BKZBJP1UJ",
-            "U0BDAC2R3AL",
-            "U0BK0FB6TSM"
-          ],
-          "count": 3
-        },
-        {
           "name": "raised_hands",
           "users": [
             "U0BMJN4CA5A",
@@ -21305,6 +21296,15 @@
             "U0BK0FB6TSM"
           ],
           "count": 4
+        },
+        {
+          "name": "white_check_mark",
+          "users": [
+            "U0BKZBJP1UJ",
+            "U0BDAC2R3AL",
+            "U0BK0FB6TSM"
+          ],
+          "count": 3
         },
         {
           "name": "eyes",
@@ -39002,13 +39002,14 @@
       "text": "<!channel>\n네트워크 속도 저하 문제 겪으시는 수강생분들 계시다면, 어떤 작업중이신지, 속도 어떻게나오는지 댓글로 적어주시면 감사하겠습니다 :cry:\n<https://fast.com/ko/|fast.com/ko>",
       "team": "T0B3958SGS3",
       "thread_ts": "1789365207.914899",
-      "reply_count": 4,
-      "reply_users_count": 3,
-      "latest_reply": "1789366327.673979",
+      "reply_count": 7,
+      "reply_users_count": 4,
+      "latest_reply": "1789463366.915529",
       "reply_users": [
         "U0BM9LX2NBY",
         "U0BGDNUQNM8",
-        "U0B9TV2GVC2"
+        "U0B9TV2GVC2",
+        "U0BLSE5CWE4"
       ],
       "is_locked": false,
       "subscribed": false,
@@ -39284,6 +39285,138 @@
                 {
                   "type": "text",
                   "text": "알려주셔서 감사합니다 !"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "저는 이렇게 나옵니다!",
+      "files": [
+        {
+          "id": "F0C1R5PRZJP",
+          "created": 1789462282,
+          "timestamp": 1789462282,
+          "mimetype": "image/png",
+          "filetype": "png",
+          "pretty_type": "PNG",
+          "user": "U0BLSE5CWE4",
+          "user_team": "T0B3958SGS3",
+          "editable": false,
+          "size": 102280,
+          "mode": "hosted",
+          "is_external": false,
+          "external_type": "",
+          "is_public": false,
+          "public_url_shared": false,
+          "display_as_bot": false,
+          "username": "",
+          "name": "스크린샷 2026-09-15 175105.png",
+          "title": "스크린샷 2026-09-15 175105.png",
+          "is_modified_by_ai": false,
+          "url_private": "https://files.slack.com/files-pri/T0B3958SGS3-F0C1R5PRZJP/_____________2026-09-15_175105.png",
+          "url_private_download": "https://files.slack.com/files-pri/T0B3958SGS3-F0C1R5PRZJP/download/_____________2026-09-15_175105.png",
+          "media_display_type": "unknown",
+          "thumb_64": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C1R5PRZJP-6b0cdecf85/_____________2026-09-15_175105_64.png",
+          "thumb_80": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C1R5PRZJP-6b0cdecf85/_____________2026-09-15_175105_80.png",
+          "thumb_360": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C1R5PRZJP-6b0cdecf85/_____________2026-09-15_175105_360.png",
+          "thumb_360_w": 360,
+          "thumb_360_h": 320,
+          "thumb_480": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C1R5PRZJP-6b0cdecf85/_____________2026-09-15_175105_480.png",
+          "thumb_480_w": 480,
+          "thumb_480_h": 427,
+          "thumb_160": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C1R5PRZJP-6b0cdecf85/_____________2026-09-15_175105_160.png",
+          "original_w": 1288,
+          "original_h": 1146,
+          "thumb_tiny": "AwArADDTooooAZIRkBm2jBJO7HSoYwyS4OFyT8oI5GTjj6c/hUrRh2VmUblPynceB/n/AApFhRZNwjAbg5B44BHH4UDuS0UgOQCQR7GloEFNkQuoUNt5GSOuKdUc4kaIrFwx75xgUAV8LbzsIQdqRlnXJxnt+P8ASo0ZCqSnzA5xmY5257jr07elWIoyqeV5CrGc5w+f6UwxTPF9mZBsGB5gbqAfT1oAkELrJvM7EAk7T0xz/jUkauFTe+SB83HU0rLuxnsc4pw4FAEc0vl7QOWY8ADJPH1FPUgjg5H1paKAGRyq4JHQY+nPvT6KKAI02Lkg43MRy2ec9qkoooA//9k=",
+          "permalink": "https://2026kant.slack.com/files/U0BC26KFZ54/F0C1R5PRZJP/_____________2026-09-15_175105.png",
+          "permalink_public": "https://slack-files.com/T0B3958SGS3-F0C1R5PRZJP-39840840c7",
+          "is_starred": false,
+          "skipped_shares": true,
+          "has_rich_preview": false,
+          "file_access": "visible"
+        }
+      ],
+      "upload": false,
+      "user": "U0BLSE5CWE4",
+      "display_as_bot": false,
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "RUxhm",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "저는 이렇게 나옵니다!"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "message",
+      "ts": "1789462288.396759",
+      "client_msg_id": "4789fd89-8eb3-48ec-a752-78147fcd4380",
+      "thread_ts": "1789365207.914899",
+      "parent_user_id": "U0BGDNUQNM8"
+    },
+    {
+      "user": "U0BGDNUQNM8",
+      "type": "message",
+      "ts": "1789462384.743239",
+      "client_msg_id": "dc875957-8d90-43e7-8c6b-5ca6416579c0",
+      "text": "<@U0BLSE5CWE4> 유선일까요 무선일까요?! 저때 다운로드 업로드 트래픽이 발생했을까요? 혹시 무선이라면 claas5 tmp 와이파이 접속하신거 맞으실까요?!",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789365207.914899",
+      "parent_user_id": "U0BGDNUQNM8",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "WU5A5",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "user",
+                  "user_id": "U0BLSE5CWE4",
+                  "from_llm": false
+                },
+                {
+                  "type": "text",
+                  "text": " 유선일까요 무선일까요?! 저때 다운로드 업로드 트래픽이 발생했을까요? 혹시 무선이라면 claas5 tmp 와이파이 접속하신거 맞으실까요?!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BLSE5CWE4",
+      "type": "message",
+      "ts": "1789463366.915529",
+      "client_msg_id": "6b32c248-0e65-450e-8669-cb54235c1301",
+      "text": "무선입니다! 업로드 트래픽은 발생안했고 class5 tmp 와이파이 접속 했어요",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789365207.914899",
+      "parent_user_id": "U0BGDNUQNM8",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "2mImk",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "무선입니다! 업로드 트래픽은 발생안했고 class5 tmp 와이파이 접속 했어요"
                 }
               ]
             }

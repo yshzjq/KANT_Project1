@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .env
 .env.*
+data/private/evaluations/
+data/private/slack_runtime/
+data/private/*.lock

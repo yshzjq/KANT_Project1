@@ -3,11 +3,13 @@ import os
 from pathlib import Path
 import sys
 import time
+from tempfile import NamedTemporaryFile
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from config import DEBUG
+from slack_runtime import AlreadyRunning, FileLock
 
 
 CACHE_PATH = Path(__file__).resolve().parent / "data/private/slack_user_names.json"
@@ -16,6 +18,38 @@ CACHE_TTL_SECONDS = 24 * 60 * 60
 
 class UserNameLookupError(RuntimeError):
     """토큰 등 민감한 내용을 포함하지 않는 조회 실패 정보입니다."""
+
+
+def load_name_cache(cache_path):
+    if not cache_path.exists():
+        return {}
+    try:
+        cache = json.loads(cache_path.read_text(encoding="utf-8"))
+        if not isinstance(cache, dict):
+            raise ValueError("캐시가 객체 형식이 아닙니다.")
+        return cache
+    except (OSError, ValueError):
+        print("작성자 이름 캐시를 읽지 못해 필요한 이름을 다시 조회합니다.")
+        return {}
+
+
+def save_name_updates(cache_path, updates):
+    """저장 직전에 최신 캐시를 읽어, 다른 실행이 추가한 이름을 보존합니다."""
+    with FileLock(cache_path.with_suffix(".lock")):
+        cache = load_name_cache(cache_path)
+        cache.update(updates)
+        temp_path = None
+        try:
+            with NamedTemporaryFile(
+                mode="w", encoding="utf-8", dir=cache_path.parent,
+                prefix=cache_path.stem + "_", suffix=".tmp", delete=False,
+            ) as temp_file:
+                temp_path = Path(temp_file.name)
+                json.dump(cache, temp_file, ensure_ascii=False, indent=2)
+            temp_path.replace(cache_path)
+        finally:
+            if temp_path is not None:
+                temp_path.unlink(missing_ok=True)
 
 
 def fetch_user_name(user_id, token):
@@ -89,15 +123,7 @@ def get_user_names(user_ids, cache_path=None):
         return {}
 
     cache_path = Path(cache_path) if cache_path is not None else CACHE_PATH
-    cache = {}
-    if cache_path.exists():
-        try:
-            cache = json.loads(cache_path.read_text(encoding="utf-8"))
-            if not isinstance(cache, dict):
-                raise ValueError("캐시가 객체 형식이 아닙니다.")
-        except (OSError, ValueError):
-            print("작성자 이름 캐시를 읽지 못해 필요한 이름을 다시 조회합니다.")
-            cache = {}
+    cache = load_name_cache(cache_path)
 
     names = {user_id: user_id for user_id in user_ids}
     pending = []
@@ -132,7 +158,7 @@ def get_user_names(user_ids, cache_path=None):
         print("SLACK_TOKEN이 없어 저장된 작성자 이름 또는 ID를 사용합니다.")
         return names
 
-    updated = 0
+    updates = {}
     for user_id in pending:
         try:
             name = fetch_user_name(user_id, token)
@@ -144,22 +170,16 @@ def get_user_names(user_ids, cache_path=None):
 
         if name:
             names[user_id] = name
-            cache[user_id] = {"name": name, "fetched_at": time.time()}
-            updated += 1
+            updates[user_id] = {"name": name, "fetched_at": time.time()}
         else:
             # 실패 결과를 이름으로 저장하지 않아 다음 실행에서 다시 확인합니다.
             print(f"작성자 {user_id}: 이름을 확인하지 못했습니다.")
 
-    if updated:
+    if updates:
         try:
-            cache_path.parent.mkdir(parents=True, exist_ok=True)
-            temp_path = cache_path.with_suffix(".tmp")
-            temp_path.write_text(
-                json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8"
-            )
-            temp_path.replace(cache_path)
-            print(f"작성자 이름 {updated}명을 조회해 캐시에 저장했습니다.")
-        except OSError:
+            save_name_updates(cache_path, updates)
+            print(f"작성자 이름 {len(updates)}명을 조회해 캐시에 저장했습니다.")
+        except (OSError, AlreadyRunning):
             print("이름 캐시를 저장하지 못했지만 이번 답변에는 조회한 이름을 사용합니다.")
 
     return names
@@ -167,5 +187,5 @@ def get_user_names(user_ids, cache_path=None):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        raise SystemExit("사용법: python slack_api_UserName.py 작성자ID [작성자ID ...]")
+        raise SystemExit("사용법: python slack_api_LLM_questions_UserName.py 작성자ID [작성자ID ...]")
     print(json.dumps(get_user_names(sys.argv[1:]), ensure_ascii=False, indent=2))
