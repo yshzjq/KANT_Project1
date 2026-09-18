@@ -1,6 +1,6 @@
 {
   "channel_id": "C0BBNNCS4BG",
-  "last_sync_started_ts": "1789691879.595203",
+  "last_sync_started_ts": "1789694493.173339",
   "thread_versions": {
     "1782377086.422969": {
       "reply_count": 3,
@@ -8555,12 +8555,12 @@
             "U0BL1ALS54G",
             "U0BG5A1SMKL",
             "U0BC26KFZ54",
-            "U0BMK5U2JRX",
             "U0BHTSWPS68",
+            "U0BMK5U2JRX",
             "U0BAPLX69J9",
             "U0BKR5VQFGB",
-            "U0BK0FB6TSM",
             "U0BE4RMQTU5",
+            "U0BK0FB6TSM",
             "U0BKT0G7K88",
             "U0BM4GD3YRG",
             "U0BKKN3UW7K",
@@ -8614,12 +8614,12 @@
           "users": [
             "U0BDC9H17M0",
             "U0BHMFP7G6A",
-            "U0BC26KFZ54",
             "U0BAPLX69J9",
-            "U0BLSE5CWE4",
+            "U0BC26KFZ54",
             "U0BE4RMQTU5",
             "U0BKTK98P63",
             "U0BKKN3UW7K",
+            "U0BLSE5CWE4",
             "U0BJ7TBEJDR",
             "U0B9TV2GVC2",
             "U0BKT0G7K88",
@@ -8823,25 +8823,25 @@
           "name": "white_check_mark",
           "users": [
             "U0BMK5U2JRX",
-            "U0BLYK8P9N0",
             "U0BE6K33A6T",
-            "U0BLSE5CWE4",
+            "U0BLYK8P9N0",
             "U0BGP4P648Y",
+            "U0BLSE5CWE4",
             "U0BM4GD3YRG",
-            "U0B9TV2GVC2",
             "U0BJ7TBEJDR",
+            "U0B9TV2GVC2",
             "U0BM9LX2NBY",
             "U0BL1ALS54G",
             "U0B95PG4SJ1",
             "U0BKKN3UW7K",
-            "U0BK0FB6TSM",
             "U0BAPLX69J9",
             "U0BA2JDFPTP",
+            "U0BK0FB6TSM",
             "U0BE4NE2E73",
             "U0BC26KFZ54",
+            "U0BKT0G7K88",
             "U0BDC9H17M0",
             "U0BG5A1SMKL",
-            "U0BKT0G7K88",
             "U0BLRGP54MC",
             "U0BE4RMQTU5",
             "U0BHTSWPS68",
@@ -8885,8 +8885,8 @@
           "name": "white_check_mark",
           "users": [
             "U0BDC9H17M0",
-            "U0BMK5U2JRX",
             "U0BG5A1SMKL",
+            "U0BMK5U2JRX",
             "U0BGP4P648Y",
             "U0BE4RMQTU5",
             "U0BK0FB6TSM",
@@ -8902,8 +8902,8 @@
             "U0BAPLX69J9",
             "U0BHTSWPS68",
             "U0BKT0G7K88",
-            "U0BJ7TBEJDR",
             "U0BLYK8P9N0",
+            "U0BJ7TBEJDR",
             "U0BKTK98P63",
             "U0BL1ALS54G",
             "U0BCERR2FDG",
@@ -9179,16 +9179,16 @@
           "name": "white_check_mark",
           "users": [
             "U0BMK5U2JRX",
+            "U0BE4RMQTU5",
+            "U0BHTSWPS68",
             "U0BHMFP7G6A",
             "U0BE6K33A6T",
-            "U0BHTSWPS68",
-            "U0BE4RMQTU5",
             "U0BCJ4W0H4H",
             "U0BAPLX69J9",
             "U0BE4NE2E73",
             "U0BC26KFZ54",
-            "U0BA2JDFPTP",
             "U0BCERR2FDG",
+            "U0BA2JDFPTP",
             "U0B9TV2GVC2",
             "U0BKKN3UW7K",
             "U0BJ7TBEJDR",
@@ -9231,13 +9231,13 @@
         {
           "name": "white_check_mark",
           "users": [
-            "U0BDC9H17M0",
             "U0BMK5U2JRX",
-            "U0BLSE5CWE4",
+            "U0BDC9H17M0",
             "U0BHTSWPS68",
-            "U0BKKN3UW7K",
+            "U0BLSE5CWE4",
             "U0BE4RMQTU5",
             "U0BHMFP7G6A",
+            "U0BKKN3UW7K",
             "U0BAPLX69J9",
             "U0BKTK98P63",
             "U0BLRGP54MC",
@@ -9247,8 +9247,8 @@
             "U0BK0FB6TSM",
             "U0BE6K33A6T",
             "U0BKT0G7K88",
-            "U0BC26KFZ54",
             "U0BJ7TBEJDR",
+            "U0BC26KFZ54",
             "U0BLYK8P9N0",
             "U0BM4GD3YRG",
             "U0BM9LX2NBY",
@@ -9682,16 +9682,16 @@
             "U0B9TV2GVC2",
             "U0BCERR2FDG",
             "U0BHTSWPS68",
-            "U0BE4RMQTU5",
-            "U0BA2JDFPTP",
             "U0BLSE5CWE4",
-            "U0BC26KFZ54",
+            "U0BE4RMQTU5",
             "U0BCJ4W0H4H",
-            "U0BM9LX2NBY",
+            "U0BA2JDFPTP",
+            "U0BC26KFZ54",
             "U0BJ7TBEJDR",
-            "U0BKKN3UW7K",
+            "U0BM9LX2NBY",
             "U0BDC9H17M0",
             "U0BE4NE2E73",
+            "U0BKKN3UW7K",
             "U0BLYK8P9N0",
             "U0B9QHYG6AH",
             "U0BL1ALS54G",
@@ -11648,8 +11648,8 @@
           "name": "+1",
           "users": [
             "U0BCERR2FDG",
-            "U0BM4GD3YRG",
             "U0BKKN3UW7K",
+            "U0BM4GD3YRG",
             "U0BK0FB6TSM",
             "U0BHMFP7G6A",
             "U0BMK5U2JRX",
@@ -26422,9 +26422,9 @@
             "U0BJ7TBEJDR",
             "U0BLSE5CWE4",
             "U0BDC9H17M0",
+            "U0BKR5VQFGB",
             "U0BE4RMQTU5",
             "U0BE6K33A6T",
-            "U0BKR5VQFGB",
             "U0BA2JDFPTP",
             "U0BKKN3UW7K",
             "U0BCJ4W0H4H",
@@ -35719,7 +35719,7 @@
       ],
       "reactions": [
         {
-          "name": "eyes",
+          "name": "raised_hands",
           "users": [
             "U0BMJN4CA5A",
             "U0B9QHYG6AH",
@@ -35728,7 +35728,7 @@
           "count": 3
         },
         {
-          "name": "raised_hands",
+          "name": "eyes",
           "users": [
             "U0BMJN4CA5A",
             "U0B9QHYG6AH",
@@ -40385,16 +40385,43 @@
         {
           "name": "우와",
           "users": [
-            "U0B9QHYG6AH"
+            "U0B9QHYG6AH",
+            "U0B9TV2GVC2"
           ],
-          "count": 1
+          "count": 2
         },
         {
           "name": "최고",
           "users": [
-            "U0B9QHYG6AH"
+            "U0B9QHYG6AH",
+            "U0B9TV2GVC2"
           ],
-          "count": 1
+          "count": 2
+        }
+      ]
+    },
+    {
+      "user": "U0BMJN4CA5A",
+      "type": "message",
+      "ts": "1789693576.344859",
+      "client_msg_id": "fc0c597a-fd47-40ee-a59c-bb01036e362d",
+      "text": "LLM과 private LLM, SLM의 차이는 무엇이 될까요,.\n\n SLM 평가 항목의 세부 구성\n구분\t평가 항목\t상세 설명\n모델 능력\t지식베이스 규모\t도메인 관련 정보량\n어휘 이해도\t전문용어 인식 능력\n논리적 사고\t추론/분석 능력\n운영 효율성\t처리 속도\t응답 지연시간 (Latency)\n메모리 활용도\tVRAM 사용률\n전력 소비\t에너지 효율\n경제적 효율성\t구축비용\t초기 투자 비용\n운영비용\t유지보수 비용\n스케일링 비용\t데이터 증가 시 비용\n보안 및 규제\t접근 권한 관리\t인증/인가\n데이터 보호\t암호화/개인정보\n사용자 경험\t응답 품질\t출력의 정확성\n사용 편의성\t인터페이스\n오류 발생률\t비정상 응답 빈도",
+      "team": "T0B3958SGS3",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "RxMHk",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "LLM과 private LLM, SLM의 차이는 무엇이 될까요,.\n\n SLM 평가 항목의 세부 구성\n구분\t평가 항목\t상세 설명\n모델 능력\t지식베이스 규모\t도메인 관련 정보량\n어휘 이해도\t전문용어 인식 능력\n논리적 사고\t추론/분석 능력\n운영 효율성\t처리 속도\t응답 지연시간 (Latency)\n메모리 활용도\tVRAM 사용률\n전력 소비\t에너지 효율\n경제적 효율성\t구축비용\t초기 투자 비용\n운영비용\t유지보수 비용\n스케일링 비용\t데이터 증가 시 비용\n보안 및 규제\t접근 권한 관리\t인증/인가\n데이터 보호\t암호화/개인정보\n사용자 경험\t응답 품질\t출력의 정확성\n사용 편의성\t인터페이스\n오류 발생률\t비정상 응답 빈도"
+                }
+              ]
+            }
+          ]
         }
       ]
     }

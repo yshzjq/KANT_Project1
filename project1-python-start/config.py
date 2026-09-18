@@ -5,7 +5,7 @@ DEBUG = True
 
 # True: 아래 목록을 평가해 .md 저장 / False: 직접 입력한 질문에 반복 응답.
 # 평가 파일에는 검색어·선택 원문·제외 사유도 저장합니다. DEBUG 설정과는 무관합니다.
-QUESTION_EVALUATION = True
+QUESTION_EVALUATION = False
 
 # 항목을 추가할 때 type(유형), question(질문), expected_result(기대 결과)를 모두 입력합니다.
 # 목록 순서가 Q01, Q02… 번호가 됩니다. 유형·기대 결과는 보고서용이며 모델에는 질문만 전달합니다.
@@ -77,7 +77,7 @@ QUESTION_LIST = [
     },
     {
         "type": "경계",
-        "question": "이번 주까지 제가 반드시 해야 하는 과제를 정리해주세요.",
+        "question": "이번 주까지 제가 반드시 해야 하는 프로젝트를 정리해주세요.",
         "expected_result": "사용자 개인 배정 커리큘럼을 모르면 일반 안내와 개인 정보를 구분해야 함",
     },
     {
