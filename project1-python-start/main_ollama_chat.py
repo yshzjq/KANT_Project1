@@ -33,7 +33,7 @@ from evaluation_metrics import (EXPERIMENT_KINDS, MeasuredClient, field, render_
                                 validate_questions)
 
 
-MODEL = "qwen3:4b-instruct-2507-q8_0"  # 최종 답변 생성용
+MODEL = "qwen3:4b-instruct-2507-q4_K_M"  # 최종 답변 생성용
 
 KEYWORD_MODEL = "qwen3:4b-instruct-2507-q4_K_M"  # 검색어 JSON 생성 전용; MODEL과 달라도 됩니다.
 
