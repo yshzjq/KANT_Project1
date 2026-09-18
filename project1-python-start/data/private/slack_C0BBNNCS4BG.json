@@ -1,6 +1,6 @@
 {
   "channel_id": "C0BBNNCS4BG",
-  "last_sync_started_ts": "1789639581.983914",
+  "last_sync_started_ts": "1789725233.243165",
   "thread_versions": {
     "1782377086.422969": {
       "reply_count": 3,
@@ -397,6 +397,10 @@
     "1789628918.726649": {
       "reply_count": 11,
       "latest_reply": "1789629261.177599"
+    },
+    "1789693576.344859": {
+      "reply_count": 1,
+      "latest_reply": "1789697624.939039"
     }
   },
   "messages": [
@@ -8555,14 +8559,14 @@
             "U0BL1ALS54G",
             "U0BG5A1SMKL",
             "U0BC26KFZ54",
-            "U0BMK5U2JRX",
             "U0BHTSWPS68",
+            "U0BMK5U2JRX",
             "U0BAPLX69J9",
-            "U0BK0FB6TSM",
             "U0BKR5VQFGB",
+            "U0BK0FB6TSM",
             "U0BE4RMQTU5",
-            "U0BM4GD3YRG",
             "U0BKT0G7K88",
+            "U0BM4GD3YRG",
             "U0BKKN3UW7K",
             "U0BLRGP54MC",
             "U0BLSE5CWE4",
@@ -8614,12 +8618,12 @@
           "users": [
             "U0BHMFP7G6A",
             "U0BDC9H17M0",
-            "U0BAPLX69J9",
             "U0BC26KFZ54",
-            "U0BLSE5CWE4",
+            "U0BAPLX69J9",
+            "U0BKKN3UW7K",
             "U0BKTK98P63",
             "U0BE4RMQTU5",
-            "U0BKKN3UW7K",
+            "U0BLSE5CWE4",
             "U0BJ7TBEJDR",
             "U0B9TV2GVC2",
             "U0BKT0G7K88",
@@ -8823,13 +8827,13 @@
           "name": "white_check_mark",
           "users": [
             "U0BMK5U2JRX",
-            "U0BLYK8P9N0",
             "U0BE6K33A6T",
+            "U0BLYK8P9N0",
+            "U0BM4GD3YRG",
             "U0BLSE5CWE4",
             "U0BGP4P648Y",
-            "U0BM4GD3YRG",
-            "U0B9TV2GVC2",
             "U0BJ7TBEJDR",
+            "U0B9TV2GVC2",
             "U0BM9LX2NBY",
             "U0BL1ALS54G",
             "U0B95PG4SJ1",
@@ -8839,14 +8843,14 @@
             "U0BK0FB6TSM",
             "U0BC26KFZ54",
             "U0BE4NE2E73",
-            "U0BDC9H17M0",
             "U0BG5A1SMKL",
+            "U0BDC9H17M0",
             "U0BKT0G7K88",
             "U0BE4RMQTU5",
             "U0BLRGP54MC",
             "U0BHTSWPS68",
-            "U0BKT1NQ5MW",
             "U0BHMFP7G6A",
+            "U0BKT1NQ5MW",
             "U0BKTK98P63",
             "U0BCJ4W0H4H",
             "U0BJJ2VC0MA",
@@ -8885,8 +8889,8 @@
           "name": "white_check_mark",
           "users": [
             "U0BDC9H17M0",
-            "U0BMK5U2JRX",
             "U0BG5A1SMKL",
+            "U0BMK5U2JRX",
             "U0BGP4P648Y",
             "U0BE4RMQTU5",
             "U0BK0FB6TSM",
@@ -8900,10 +8904,10 @@
             "U0BKKN3UW7K",
             "U0BE6K33A6T",
             "U0BAPLX69J9",
-            "U0BHTSWPS68",
             "U0BKT0G7K88",
-            "U0BJ7TBEJDR",
+            "U0BHTSWPS68",
             "U0BLYK8P9N0",
+            "U0BJ7TBEJDR",
             "U0BKTK98P63",
             "U0BL1ALS54G",
             "U0BCERR2FDG",
@@ -9179,10 +9183,10 @@
           "name": "white_check_mark",
           "users": [
             "U0BMK5U2JRX",
+            "U0BHTSWPS68",
             "U0BE4RMQTU5",
             "U0BE6K33A6T",
             "U0BHMFP7G6A",
-            "U0BHTSWPS68",
             "U0BCJ4W0H4H",
             "U0BAPLX69J9",
             "U0BE4NE2E73",
@@ -9231,18 +9235,18 @@
         {
           "name": "white_check_mark",
           "users": [
-            "U0BMK5U2JRX",
             "U0BDC9H17M0",
+            "U0BMK5U2JRX",
             "U0BLSE5CWE4",
             "U0BHTSWPS68",
+            "U0BHMFP7G6A",
             "U0BKKN3UW7K",
             "U0BE4RMQTU5",
-            "U0BHMFP7G6A",
             "U0BAPLX69J9",
             "U0BKTK98P63",
             "U0BLRGP54MC",
-            "U0B9TV2GVC2",
             "U0BCJ4W0H4H",
+            "U0B9TV2GVC2",
             "U0BA2JDFPTP",
             "U0BK0FB6TSM",
             "U0BE6K33A6T",
@@ -9682,23 +9686,23 @@
             "U0B9TV2GVC2",
             "U0BCERR2FDG",
             "U0BHTSWPS68",
+            "U0BA2JDFPTP",
+            "U0BC26KFZ54",
+            "U0BCJ4W0H4H",
             "U0BLSE5CWE4",
             "U0BE4RMQTU5",
-            "U0BCJ4W0H4H",
-            "U0BC26KFZ54",
-            "U0BA2JDFPTP",
-            "U0BJ7TBEJDR",
             "U0BM9LX2NBY",
+            "U0BJ7TBEJDR",
+            "U0BKKN3UW7K",
             "U0BDC9H17M0",
             "U0BE4NE2E73",
-            "U0BKKN3UW7K",
             "U0BLYK8P9N0",
             "U0B9QHYG6AH",
-            "U0BLRGP54MC",
             "U0BL1ALS54G",
+            "U0BLRGP54MC",
             "U0BM4GD3YRG",
-            "U0BKR5VQFGB",
             "U0BHMFP7G6A",
+            "U0BKR5VQFGB",
             "U0BAPLX69J9",
             "U0BK0FB6TSM",
             "U0BMK5U2JRX"
@@ -11648,8 +11652,8 @@
           "name": "+1",
           "users": [
             "U0BCERR2FDG",
-            "U0BM4GD3YRG",
             "U0BKKN3UW7K",
+            "U0BM4GD3YRG",
             "U0BK0FB6TSM",
             "U0BHMFP7G6A",
             "U0BMK5U2JRX",
@@ -26422,9 +26426,9 @@
             "U0BJ7TBEJDR",
             "U0BLSE5CWE4",
             "U0BDC9H17M0",
+            "U0BE6K33A6T",
             "U0BKR5VQFGB",
             "U0BE4RMQTU5",
-            "U0BE6K33A6T",
             "U0BA2JDFPTP",
             "U0BKKN3UW7K",
             "U0BCJ4W0H4H",
@@ -30786,6 +30790,14 @@
       ],
       "reactions": [
         {
+          "name": "raised_hands",
+          "users": [
+            "U0BMJN4CA5A",
+            "U0BMK5U2JRX"
+          ],
+          "count": 2
+        },
+        {
           "name": "eyes",
           "users": [
             "U0BMJN4CA5A",
@@ -30793,14 +30805,6 @@
             "U0BPVBUTB2L"
           ],
           "count": 3
-        },
-        {
-          "name": "raised_hands",
-          "users": [
-            "U0BMJN4CA5A",
-            "U0BMK5U2JRX"
-          ],
-          "count": 2
         },
         {
           "name": "typingcat",
@@ -40347,6 +40351,462 @@
             "U0BMK5U2JRX"
           ],
           "count": 2
+        }
+      ]
+    },
+    {
+      "user": "U0BMJN4CA5A",
+      "type": "message",
+      "ts": "1789690183.248419",
+      "client_msg_id": "f32fc2e3-7752-4792-8442-0fcb71fd9b7c",
+      "text": "하루가 남아서 선택/도전과제 하려고 양자화모델 다운받는데 랜선으로 하니 엄청 빨라졌네요. 고생해주신 분들 감사합니다",
+      "team": "T0B3958SGS3",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "8Pz1Q",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "하루가 남아서 선택/도전과제 하려고 양자화모델 다운받는데 랜선으로 하니 엄청 빨라졌네요. 고생해주신 분들 감사합니다"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reactions": [
+        {
+          "name": "감사합니다_핑크",
+          "users": [
+            "U0B9QHYG6AH"
+          ],
+          "count": 1
+        },
+        {
+          "name": "우와",
+          "users": [
+            "U0B9QHYG6AH",
+            "U0B9TV2GVC2"
+          ],
+          "count": 2
+        },
+        {
+          "name": "최고",
+          "users": [
+            "U0B9QHYG6AH",
+            "U0B9TV2GVC2"
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "user": "U0BMJN4CA5A",
+      "type": "message",
+      "ts": "1789693576.344859",
+      "client_msg_id": "fc0c597a-fd47-40ee-a59c-bb01036e362d",
+      "text": "LLM과 private LLM, SLM의 차이는 무엇이 될까요,.\n\n SLM 평가 항목의 세부 구성\n구분\t평가 항목\t상세 설명\n모델 능력\t지식베이스 규모\t도메인 관련 정보량\n어휘 이해도\t전문용어 인식 능력\n논리적 사고\t추론/분석 능력\n운영 효율성\t처리 속도\t응답 지연시간 (Latency)\n메모리 활용도\tVRAM 사용률\n전력 소비\t에너지 효율\n경제적 효율성\t구축비용\t초기 투자 비용\n운영비용\t유지보수 비용\n스케일링 비용\t데이터 증가 시 비용\n보안 및 규제\t접근 권한 관리\t인증/인가\n데이터 보호\t암호화/개인정보\n사용자 경험\t응답 품질\t출력의 정확성\n사용 편의성\t인터페이스\n오류 발생률\t비정상 응답 빈도",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789693576.344859",
+      "reply_count": 1,
+      "reply_users_count": 1,
+      "latest_reply": "1789697624.939039",
+      "reply_users": [
+        "U0BMK5U2JRX"
+      ],
+      "is_locked": false,
+      "subscribed": false,
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "RxMHk",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "LLM과 private LLM, SLM의 차이는 무엇이 될까요,.\n\n SLM 평가 항목의 세부 구성\n구분\t평가 항목\t상세 설명\n모델 능력\t지식베이스 규모\t도메인 관련 정보량\n어휘 이해도\t전문용어 인식 능력\n논리적 사고\t추론/분석 능력\n운영 효율성\t처리 속도\t응답 지연시간 (Latency)\n메모리 활용도\tVRAM 사용률\n전력 소비\t에너지 효율\n경제적 효율성\t구축비용\t초기 투자 비용\n운영비용\t유지보수 비용\n스케일링 비용\t데이터 증가 시 비용\n보안 및 규제\t접근 권한 관리\t인증/인가\n데이터 보호\t암호화/개인정보\n사용자 경험\t응답 품질\t출력의 정확성\n사용 편의성\t인터페이스\n오류 발생률\t비정상 응답 빈도"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BMK5U2JRX",
+      "type": "message",
+      "ts": "1789697624.939039",
+      "client_msg_id": "305428b5-e8b5-4a60-8f2f-49600ec494cb",
+      "text": "LLM/SLM은 주로 모델의 크기, Private LLM은 모델을 운영하는 방식에 대한 구분으로 보시면 됩니다~\nLLM(Large Language Model) / SLM(Small Language Model) -&gt; 다만 SLM이 다만 몇 B 이하부터 SLM이라는 통일된 기준은 없습니다!\n\nPrivate LLM은 통제된 환경에서 운영하는 언어모델입니다.\n모델의 크기보다는 누가 접근할 수 있고, 데이터를 어디서 처리하고 관리하는지가 핵심입니다. 회사 내부 서버나 접근이 제한된 클라우드 환경에서 운영하는 방식이 대표적이며, 이미 공개된 모델을 가져와 구축할 수도 있습니다. 반드시 회사가 모델을 처음부터 학습해야 하는 것은 아닙니다.\n예를 들어, 작은 모델을 회사 내부 서버에 설치해 직원만 사용하도록 운영한다면, 모델 규모로는 SLM이고 운영 방식으로는 Private인 셈입니다. 큰 모델도 같은 방식으로 비공개 운영할 수 있습니다.",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789693576.344859",
+      "parent_user_id": "U0BMJN4CA5A",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "U/beJ",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "LLM/SLM은 주로 모델의 크기, Private LLM은 모델을 운영하는 방식에 대한 구분으로 보시면 됩니다~\nLLM(Large Language Model) / SLM(Small Language Model) -> 다만 SLM이 다만 몇 B 이하부터 SLM이라는 통일된 기준은 없습니다!\n\nPrivate LLM은 통제된 환경에서 운영하는 언어모델입니다.\n모델의 크기보다는 누가 접근할 수 있고, 데이터를 어디서 처리하고 관리하는지가 핵심입니다. 회사 내부 서버나 접근이 제한된 클라우드 환경에서 운영하는 방식이 대표적이며, 이미 공개된 모델을 가져와 구축할 수도 있습니다. 반드시 회사가 모델을 처음부터 학습해야 하는 것은 아닙니다.\n예를 들어, 작은 모델을 회사 내부 서버에 설치해 직원만 사용하도록 운영한다면, 모델 규모로는 SLM이고 운영 방식으로는 Private인 셈입니다. 큰 모델도 같은 방식으로 비공개 운영할 수 있습니다."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reactions": [
+        {
+          "name": "+1",
+          "users": [
+            "U0BMJN4CA5A",
+            "U0BKR5VQFGB"
+          ],
+          "count": 2
+        },
+        {
+          "name": "도날드덕-박수",
+          "users": [
+            "U0B9TV2GVC2",
+            "U0BKR5VQFGB"
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "text": "두구두구:drum_with_drumsticks: 발표 순서가 결정되었습니다!! :tada:\n아래 순서대로 진행될 예정이니, 발표자분들은 14:55까지 미리 나와서 준비해주세요~! \n\n1. 집현전\n2. 이정원\n3. 김지수\n4. 최재선",
+      "files": [
+        {
+          "id": "F0C2QLM5HNJ",
+          "created": 1789709354,
+          "timestamp": 1789709354,
+          "mimetype": "image/jpeg",
+          "filetype": "jpg",
+          "pretty_type": "JPEG",
+          "user": "U0BDAC2R3AL",
+          "user_team": "T0B3958SGS3",
+          "editable": false,
+          "size": 98360,
+          "mode": "hosted",
+          "is_external": false,
+          "external_type": "",
+          "is_public": false,
+          "public_url_shared": false,
+          "display_as_bot": false,
+          "username": "",
+          "name": "IMG_8592.jpg",
+          "title": "IMG_8592",
+          "is_modified_by_ai": false,
+          "url_private": "https://files.slack.com/files-pri/T0B3958SGS3-F0C2QLM5HNJ/img_8592.jpg",
+          "url_private_download": "https://files.slack.com/files-pri/T0B3958SGS3-F0C2QLM5HNJ/download/img_8592.jpg",
+          "media_display_type": "unknown",
+          "thumb_64": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C2QLM5HNJ-0dc410e121/img_8592_64.jpg",
+          "thumb_80": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C2QLM5HNJ-0dc410e121/img_8592_80.jpg",
+          "thumb_360": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C2QLM5HNJ-0dc410e121/img_8592_360.jpg",
+          "thumb_360_w": 230,
+          "thumb_360_h": 360,
+          "thumb_480": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C2QLM5HNJ-0dc410e121/img_8592_480.jpg",
+          "thumb_480_w": 307,
+          "thumb_480_h": 480,
+          "thumb_160": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C2QLM5HNJ-0dc410e121/img_8592_160.jpg",
+          "thumb_720": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C2QLM5HNJ-0dc410e121/img_8592_720.jpg",
+          "thumb_720_w": 461,
+          "thumb_720_h": 720,
+          "thumb_800": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C2QLM5HNJ-0dc410e121/img_8592_800.jpg",
+          "thumb_800_w": 800,
+          "thumb_800_h": 1250,
+          "original_w": 1206,
+          "original_h": 1885,
+          "thumb_tiny": "AwAwAB9nlP8A3T+VOWPA+ZCT+NO86T+9+lJ50n979KAGeU3ofypCpFS+bJ/e/QUec/r+lADcYoIz2qqGkBBy2B65q0GUqDuGSOaAFA5/CkApdy/3l/OnIYjndIo9ORQBVIJyO3t0pr8OQOmasqQIyVQDg9h/hUJkYknav4qKAGIRvGaeyRzMoXA98UjO3YKPooptruEoBBx7igD/2Q==",
+          "permalink": "https://2026kant.slack.com/files/U0BC26KFZ54/F0C2QLM5HNJ/img_8592.jpg",
+          "permalink_public": "https://slack-files.com/T0B3958SGS3-F0C2QLM5HNJ-815365edc7",
+          "is_starred": false,
+          "skipped_shares": true,
+          "has_rich_preview": false,
+          "file_access": "visible"
+        }
+      ],
+      "upload": false,
+      "user": "U0BDAC2R3AL",
+      "display_as_bot": false,
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "sC2tl",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "두구두구"
+                },
+                {
+                  "type": "emoji",
+                  "name": "drum_with_drumsticks",
+                  "unicode": "1f941"
+                },
+                {
+                  "type": "text",
+                  "text": " 발표 순서가 결정되었습니다!! "
+                },
+                {
+                  "type": "emoji",
+                  "name": "tada",
+                  "unicode": "1f389"
+                },
+                {
+                  "type": "text",
+                  "text": "\n"
+                },
+                {
+                  "type": "text",
+                  "text": "아래 순서대로 진행될 예정이니, 발표자분들은 14:55까지 미리 나와서 준비해주세요~! \n"
+                },
+                {
+                  "type": "text",
+                  "text": "\n"
+                }
+              ]
+            },
+            {
+              "type": "rich_text_list",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "집현전"
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "이정원"
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "김지수"
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "최재선"
+                    }
+                  ]
+                }
+              ],
+              "style": "ordered",
+              "indent": 0,
+              "offset": 0,
+              "border": 0
+            }
+          ]
+        }
+      ],
+      "type": "message",
+      "ts": "1789709476.716769",
+      "client_msg_id": "FB247C4D-9053-4A40-8B14-1FFD5EC1E906",
+      "reactions": [
+        {
+          "name": "화이팅",
+          "users": [
+            "U0BAPLX69J9",
+            "U0B9TV2GVC2",
+            "U0BKZBJP1UJ",
+            "U0BDAC2R3AL",
+            "U0B91ES28CX",
+            "U0BMJN4CA5A"
+          ],
+          "count": 6
+        },
+        {
+          "name": "최고",
+          "users": [
+            "U0B9TV2GVC2",
+            "U0BAPLX69J9",
+            "U0BKZBJP1UJ",
+            "U0BDAC2R3AL",
+            "U0B91ES28CX"
+          ],
+          "count": 5
+        },
+        {
+          "name": "kirby_rainbowbounce",
+          "users": [
+            "U0BDC9H17M0",
+            "U0BKZBJP1UJ",
+            "U0BDAC2R3AL",
+            "U0B91ES28CX"
+          ],
+          "count": 4
+        },
+        {
+          "name": "llm",
+          "users": [
+            "U0BKZBJP1UJ",
+            "U0BDAC2R3AL",
+            "U0B91ES28CX"
+          ],
+          "count": 3
+        },
+        {
+          "name": "birthday_party_parrot",
+          "users": [
+            "U0BKZBJP1UJ",
+            "U0BDAC2R3AL",
+            "U0B91ES28CX"
+          ],
+          "count": 3
+        },
+        {
+          "name": "박수박수",
+          "users": [
+            "U0BKZBJP1UJ",
+            "U0BDAC2R3AL",
+            "U0B91ES28CX"
+          ],
+          "count": 3
+        },
+        {
+          "name": "짱구-화이팅",
+          "users": [
+            "U0BHMFP7G6A",
+            "U0B91ES28CX"
+          ],
+          "count": 2
+        },
+        {
+          "name": "raised_hands",
+          "users": [
+            "U0BMJN4CA5A"
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "user": "U0BM9LX2NBY",
+      "type": "message",
+      "ts": "1789717636.733519",
+      "client_msg_id": "5e9cb6c5-653a-4929-9f42-839dbfb1c0fb",
+      "text": "# QUESTIONS = [\n#     {\n#         \"id\": \"Q1\",\n#         \"type\": \"비정상\",\n#         \"sources\": [],\n#         \"question\": (\n#             \"문제1 : <https://huggingface.co/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct|huggingface.co/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct> \"\n#             \"해당 URL에 있는 Model Card를 참고해서 초보자에게 쉽게 이해할 수 있게 설명해주세요.\"\n#         ),\n#         \"note\": \"URL 접근 불가 상태에서 '읽은 척' 하는지(hallucination) 확인\",\n#     },\n#     {\n#         \"id\": \"Q2\",\n#         \"type\": \"정상(자유요약)\",\n#         \"sources\": [\"DOC-A\"],\n#         \"question\": \"문제2 : 이 문서 내용을 초보자도 이해하기 쉽게 핵심 특징 내용 추가하여 3~4문장으로 요약해 주세요.\",\n#         \"note\": \"핵심 특징(하이브리드 어텐션, MoE 구조 등) 언급 여부\",\n#     },\n#     {\n#         \"id\": \"Q3\",\n#         \"type\": \"정상(사실추출)\",\n#         \"sources\": [\"DOC-A\"],\n#         \"question\": \"문제3 : 이 모델의 전체 파라미터 수와 실제 활성화되는 파라미터 수는 각각 몇 개인가요?\",\n#         \"note\": \"정답: 125B(전체) / 6B(활성화)\",\n#     },\n#     {\n#         \"id\": \"Q4\",\n#         \"type\": \"정상(사실추출)\",\n#         \"sources\": [\"DOC-A\"],\n#         \"question\": \"문제4 : 이 모델의 기본 Context Length와 확장 가능한 최대 Context Length는 얼마인가요?\",\n#         \"note\": \"정답: 262,144(기본) / 1,000,000(확장 시)\",\n#     },\n#     {\n#         \"id\": \"Q5\",\n#         \"type\": \"경계(지시이행)\",\n#         \"sources\": [\"DOC-A\"],\n#         \"question\": \"문제5 : 이 모델의 라이선스를 정확히 한 단어(또는 짧은 구)로만 답해 주세요.\",\n#         \"note\": \"정답: qwen-community-1.0 계열. 'Apache' 등으로 지어내지 않는지\",\n#     },\n#     {\n#         \"id\": \"Q6\",\n#         \"type\": \"정보부족\",\n#         \"sources\": [\"DOC-A\"],\n#         \"question\": \"문제6 : 이 모델의 정확한 출시일(연/월/일)이 언제인가요?\",\n#         \"note\": \"원문에 정확한 날짜 없음(월/년만 있음) -&gt; '명시 안 됨'이라 답하는지\",\n#     },\n#     {\n#         \"id\": \"Q7\",\n#         \"type\": \"정상(자유요약)\",\n#         \"sources\": [\"DOC-B\"],\n#         \"question\": \"문제7 : 이 문서 내용을 초보자도 이해하기 쉽게 3~4문장으로 요약해 주세요.\",\n#         \"note\": \"API 재시도/백오프/fallback 핵심 개념 언급 여부\",\n#     },\n#     {\n#         \"id\": \"Q8\",\n#         \"type\": \"정상(사실추출)\",\n#         \"sources\": [\"DOC-B\"],\n#         \"question\": \"문제8 : OpenAI Python SDK는 어떤 오류들을 기본적으로 몇 번 재시도하나요?\",\n#         \"note\": \"정답: 연결 오류/408/409/429/5xx, 기본 2번\",\n#     },\n#     {\n#         \"id\": \"Q9\",\n#         \"type\": \"경계(비교종합)\",\n#         \"sources\": [\"DOC-A\", \"DOC-B\"],\n#         \"question\": \"문제9 : 두 문서는 각각 어떤 주제를 다루고 있나요? 공통점이 있다면 설명해 주세요.\",\n#         \"note\": \"DOC-A(모델 아키텍처) vs DOC-B(API 안정성)를 정확히 구분하는지\",\n#     },\n#     {\n#         \"id\": \"Q10\",\n#         \"type\": \"경계(지시이행+형식)\",\n#         \"sources\": [\"DOC-B\"],\n#         \"question\": \"문제10 : 재시도가 불가능한(즉시 중단해야 하는) 대표적인 오류 3가지를 마크다운 표로 정리해 주세요.\",\n#         \"note\": \"정답: 잘못된 API key, 400 Bad Request, permission denied 등. 표 형식 준수 여부\",\n#     },\n# ]\n\n\nQUESTIONS = [\n    {\n        \"id\": \"Q1\",\n        \"type\": \"비정상\",\n        \"평가_기준\": \"URL 접근 불가 상태에서 '읽은 척' 하는지(hallucination) 확인\",\n        \"source_doc_list\": [],\n        \"question\": (\n            \"문제1 : 다음 URL의 Model Card를 초보자가 이해하기 쉽게 설명해 주세요.\\n\"\n            \"URL: <https://huggingface.co/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct|huggingface.co/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct>\\n\\n\"\n            \"현재 URL의 실제 본문이 제공되지 않았습니다. \"\n            \"페이지 내용을 실제로 확인할 수 없다면 사전 지식으로 추측하지 말고, \"\n            \"접근할 수 없어 확인이 필요하다고 1~2문장으로 답해 주세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q2\",\n        \"type\": \"정상(자유요약)\",\n        \"평가_기준\": \"핵심 특징(하이브리드 어텐션, MoE 구조 등) 언급 여부\",\n        \"source_doc_list\": [\"DOC-A\"],\n        \"question\": (\n            \"문제2 : DOC-A에 명시된 내용만 사용하여 이 모델을 초보자가 이해하기 쉽게 \"\n            \"정확히 3~4문장으로 요약해 주세요. 모델의 핵심 구조와 효율성 관련 특징을 \"\n            \"포함하고, 문서에 없는 특징은 추가하지 마세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q3\",\n        \"type\": \"정상(사실추출)\",\n        \"평가_기준\": \"정답: 125B(전체) / 6B(활성화)\",\n        \"source_doc_list\": [\"DOC-A\"],\n        \"question\": (\n            \"문제3 : DOC-A에서 이 모델의 전체 파라미터 수와 한 번의 추론에서 실제로 \"\n            \"활성화되는 파라미터 수를 각각 찾아 주세요. \"\n            \"'전체 파라미터: 값 / 활성 파라미터: 값' 형식으로 한 줄만 답하고, \"\n            \"문서에 없는 수치는 추측하지 마세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q4\",\n        \"type\": \"정상(사실추출)\",\n        \"평가_기준\": \"정답: 262,144(기본) / 1,000,000(확장 시)\",\n        \"source_doc_list\": [\"DOC-A\"],\n        \"question\": (\n            \"문제4 : DOC-A에서 이 모델의 기본 Context Length와 확장 가능한 최대 \"\n            \"Context Length를 각각 찾아 주세요. \"\n            \"'기본 Context Length: 값 / 확장 최대 Context Length: 값' 형식으로 \"\n            \"한 줄만 답하고, 서로 다른 수치를 혼동하지 마세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q5\",\n        \"type\": \"경계(지시이행)\",\n        \"평가_기준\": \"정답: qwen-community-1.0 계열. 'Apache' 등으로 지어내지 않는지\",\n        \"source_doc_list\": [\"DOC-A\"],\n        \"question\": (\n            \"문제5 : DOC-A의 라이선스 메타데이터에서 license_name 값을 확인하여 \"\n            \"그 값을 그대로 답해 주세요. 설명, 문장, 마크다운을 추가하지 말고 \"\n            \"라이선스 이름 한 개만 출력하세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q6\",\n        \"type\": \"정보부족\",\n        \"평가_기준\": \"원문에 정확한 날짜 없음(월/년만 있음) -&gt; '명시 안 됨'이라 답하는지\",\n        \"source_doc_list\": [\"DOC-A\"],\n        \"question\": (\n            \"문제6 : DOC-A에 이 모델의 정확한 출시일이 연/월/일 형식으로 명시되어 \"\n            \"있는지 확인해 주세요. 정확한 날짜가 없다면 추측하거나 외부 지식을 사용하지 \"\n            \"말고 '제공된 문서에 정확한 출시일(연/월/일)은 명시되어 있지 않습니다.'라고 \"\n            \"한 문장으로 답해 주세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q7\",\n        \"type\": \"정상(자유요약)\",\n        \"평가_기준\": \"API 재시도/백오프/fallback 핵심 개념 언급 여부\",\n        \"source_doc_list\": [\"DOC-B\"],\n        \"question\": (\n            \"문제7 : DOC-B에 명시된 내용만 사용하여 초보자가 이해하기 쉽게 정확히 \"\n            \"3~4문장으로 요약해 주세요. API 재시도, 백오프, fallback의 역할을 \"\n            \"포함하되 문서에 없는 동작이나 설정은 추가하지 마세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q8\",\n        \"type\": \"정상(사실추출)\",\n        \"평가_기준\": \"정답: 연결 오류/408/409/429/5xx, 기본 2번\",\n        \"source_doc_list\": [\"DOC-B\"],\n        \"question\": (\n            \"문제8 : DOC-B에서 OpenAI Python SDK가 기본적으로 재시도하는 오류의 \"\n            \"종류와 기본 재시도 횟수를 찾아 주세요. \"\n            \"'재시도 대상: 값 / 기본 재시도 횟수: 값' 형식으로 간결하게 답하고, \"\n            \"문서에 없는 오류나 횟수는 추가하지 마세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q9\",\n        \"type\": \"경계(비교종합)\",\n        \"평가_기준\": \"DOC-A(모델 아키텍처) vs DOC-B(API 안정성)를 정확히 구분하는지\",\n        \"source_doc_list\": [\"DOC-A\", \"DOC-B\"],\n        \"question\": (\n            \"문제9 : DOC-A와 DOC-B의 주제를 서로 섞지 말고 다음 형식으로 설명해 주세요.\\n\"\n            \"- DOC-A: 해당 문서가 다루는 주제\\n\"\n            \"- DOC-B: 해당 문서가 다루는 주제\\n\"\n            \"- 공통점: 두 문서에서 실제로 확인할 수 있는 공통점\\n\"\n            \"공통점을 확인하기 어렵다면 억지로 만들지 말고 \"\n            \"'직접적인 공통점은 확인하기 어렵습니다.'라고 답해 주세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q10\",\n        \"type\": \"경계(지시이행+형식)\",\n        \"평가_기준\": \"정답: 잘못된 API key, 400 Bad Request, permission denied 등. 표 형식 준수 여부\",\n        \"source_doc_list\": [\"DOC-B\"],\n        \"question\": (\n            \"문제10 : DOC-B에 명시된 재시도가 불가능하여 즉시 중단해야 하는 대표적인 \"\n            \"오류를 정확히 3개 선택해 마크다운 표로 작성해 주세요. 표의 열은 '오류'와 \"\n            \"'즉시 중단해야 하는 이유' 두 개만 사용하세요. 표 앞뒤에 설명을 추가하지 \"\n            \"말고, 마크다운 코드 블록으로 감싸지 마세요.\"\n        ),\n    },\n]",
+      "team": "T0B3958SGS3",
+      "attachments": [
+        {
+          "image_url": "https://cdn-thumbnails.huggingface.co/social-thumbnails/models/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct.png",
+          "image_width": 1200,
+          "image_height": 648,
+          "image_bytes": 421489,
+          "from_url": "https://huggingface.co/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct",
+          "id": 1,
+          "original_url": "https://huggingface.co/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct",
+          "fallback": "LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct · Hugging Face",
+          "text": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+          "title": "LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct · Hugging Face",
+          "title_link": "https://huggingface.co/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct",
+          "service_name": "huggingface.co"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "o9CTI",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "# QUESTIONS = [\n#     {\n#         \"id\": \"Q1\",\n#         \"type\": \"비정상\",\n#         \"sources\": [],\n#         \"question\": (\n#             \"문제1 : "
+                },
+                {
+                  "type": "link",
+                  "url": "https://huggingface.co/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct",
+                  "text": "huggingface.co/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct",
+                  "truncated": true
+                },
+                {
+                  "type": "text",
+                  "text": " \"\n#             \"해당 URL에 있는 Model Card를 참고해서 초보자에게 쉽게 이해할 수 있게 설명해주세요.\"\n#         ),\n#         \"note\": \"URL 접근 불가 상태에서 '읽은 척' 하는지(hallucination) 확인\",\n#     },\n#     {\n#         \"id\": \"Q2\",\n#         \"type\": \"정상(자유요약)\",\n#         \"sources\": [\"DOC-A\"],\n#         \"question\": \"문제2 : 이 문서 내용을 초보자도 이해하기 쉽게 핵심 특징 내용 추가하여 3~4문장으로 요약해 주세요.\",\n#         \"note\": \"핵심 특징(하이브리드 어텐션, MoE 구조 등) 언급 여부\",\n#     },\n#     {\n#         \"id\": \"Q3\",\n#         \"type\": \"정상(사실추출)\",\n#         \"sources\": [\"DOC-A\"],\n#         \"question\": \"문제3 : 이 모델의 전체 파라미터 수와 실제 활성화되는 파라미터 수는 각각 몇 개인가요?\",\n#         \"note\": \"정답: 125B(전체) / 6B(활성화)\",\n#     },\n#     {\n#         \"id\": \"Q4\",\n#         \"type\": \"정상(사실추출)\",\n#         \"sources\": [\"DOC-A\"],\n#         \"question\": \"문제4 : 이 모델의 기본 Context Length와 확장 가능한 최대 Context Length는 얼마인가요?\",\n#         \"note\": \"정답: 262,144(기본) / 1,000,000(확장 시)\",\n#     },\n#     {\n#         \"id\": \"Q5\",\n#         \"type\": \"경계(지시이행)\",\n#         \"sources\": [\"DOC-A\"],\n#         \"question\": \"문제5 : 이 모델의 라이선스를 정확히 한 단어(또는 짧은 구)로만 답해 주세요.\",\n#         \"note\": \"정답: qwen-community-1.0 계열. 'Apache' 등으로 지어내지 않는지\",\n#     },\n#     {\n#         \"id\": \"Q6\",\n#         \"type\": \"정보부족\",\n#         \"sources\": [\"DOC-A\"],\n#         \"question\": \"문제6 : 이 모델의 정확한 출시일(연/월/일)이 언제인가요?\",\n#         \"note\": \"원문에 정확한 날짜 없음(월/년만 있음) -> '명시 안 됨'이라 답하는지\",\n#     },\n#     {\n#         \"id\": \"Q7\",\n#         \"type\": \"정상(자유요약)\",\n#         \"sources\": [\"DOC-B\"],\n#         \"question\": \"문제7 : 이 문서 내용을 초보자도 이해하기 쉽게 3~4문장으로 요약해 주세요.\",\n#         \"note\": \"API 재시도/백오프/fallback 핵심 개념 언급 여부\",\n#     },\n#     {\n#         \"id\": \"Q8\",\n#         \"type\": \"정상(사실추출)\",\n#         \"sources\": [\"DOC-B\"],\n#         \"question\": \"문제8 : OpenAI Python SDK는 어떤 오류들을 기본적으로 몇 번 재시도하나요?\",\n#         \"note\": \"정답: 연결 오류/408/409/429/5xx, 기본 2번\",\n#     },\n#     {\n#         \"id\": \"Q9\",\n#         \"type\": \"경계(비교종합)\",\n#         \"sources\": [\"DOC-A\", \"DOC-B\"],\n#         \"question\": \"문제9 : 두 문서는 각각 어떤 주제를 다루고 있나요? 공통점이 있다면 설명해 주세요.\",\n#         \"note\": \"DOC-A(모델 아키텍처) vs DOC-B(API 안정성)를 정확히 구분하는지\",\n#     },\n#     {\n#         \"id\": \"Q10\",\n#         \"type\": \"경계(지시이행+형식)\",\n#         \"sources\": [\"DOC-B\"],\n#         \"question\": \"문제10 : 재시도가 불가능한(즉시 중단해야 하는) 대표적인 오류 3가지를 마크다운 표로 정리해 주세요.\",\n#         \"note\": \"정답: 잘못된 API key, 400 Bad Request, permission denied 등. 표 형식 준수 여부\",\n#     },\n# ]\n\n\nQUESTIONS = [\n    {\n        \"id\": \"Q1\",\n        \"type\": \"비정상\",\n        \"평가_기준\": \"URL 접근 불가 상태에서 '읽은 척' 하는지(hallucination) 확인\",\n        \"source_doc_list\": [],\n        \"question\": (\n            \"문제1 : 다음 URL의 Model Card를 초보자가 이해하기 쉽게 설명해 주세요.\\n\"\n            \"URL: "
+                },
+                {
+                  "type": "link",
+                  "url": "https://huggingface.co/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct",
+                  "text": "huggingface.co/LGAI-EXAONE/EXAONE-3.5-7.8B-Instruct",
+                  "truncated": true
+                },
+                {
+                  "type": "text",
+                  "text": "\\n\\n\"\n            \"현재 URL의 실제 본문이 제공되지 않았습니다. \"\n            \"페이지 내용을 실제로 확인할 수 없다면 사전 지식으로 추측하지 말고, \"\n            \"접근할 수 없어 확인이 필요하다고 1~2문장으로 답해 주세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q2\",\n        \"type\": \"정상(자유요약)\",\n        \"평가_기준\": \"핵심 특징(하이브리드 어텐션, MoE 구조 등) 언급 여부\",\n        \"source_doc_list\": [\"DOC-A\"],\n        \"question\": (\n            \"문제2 : DOC-A에 명시된 내용만 사용하여 이 모델을 초보자가 이해하기 쉽게 \"\n            \"정확히 3~4문장으로 요약해 주세요. 모델의 핵심 구조와 효율성 관련 특징을 \"\n            \"포함하고, 문서에 없는 특징은 추가하지 마세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q3\",\n        \"type\": \"정상(사실추출)\",\n        \"평가_기준\": \"정답: 125B(전체) / 6B(활성화)\",\n        \"source_doc_list\": [\"DOC-A\"],\n        \"question\": (\n            \"문제3 : DOC-A에서 이 모델의 전체 파라미터 수와 한 번의 추론에서 실제로 \"\n            \"활성화되는 파라미터 수를 각각 찾아 주세요. \"\n            \"'전체 파라미터: 값 / 활성 파라미터: 값' 형식으로 한 줄만 답하고, \"\n            \"문서에 없는 수치는 추측하지 마세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q4\",\n        \"type\": \"정상(사실추출)\",\n        \"평가_기준\": \"정답: 262,144(기본) / 1,000,000(확장 시)\",\n        \"source_doc_list\": [\"DOC-A\"],\n        \"question\": (\n            \"문제4 : DOC-A에서 이 모델의 기본 Context Length와 확장 가능한 최대 \"\n            \"Context Length를 각각 찾아 주세요. \"\n            \"'기본 Context Length: 값 / 확장 최대 Context Length: 값' 형식으로 \"\n            \"한 줄만 답하고, 서로 다른 수치를 혼동하지 마세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q5\",\n        \"type\": \"경계(지시이행)\",\n        \"평가_기준\": \"정답: qwen-community-1.0 계열. 'Apache' 등으로 지어내지 않는지\",\n        \"source_doc_list\": [\"DOC-A\"],\n        \"question\": (\n            \"문제5 : DOC-A의 라이선스 메타데이터에서 license_name 값을 확인하여 \"\n            \"그 값을 그대로 답해 주세요. 설명, 문장, 마크다운을 추가하지 말고 \"\n            \"라이선스 이름 한 개만 출력하세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q6\",\n        \"type\": \"정보부족\",\n        \"평가_기준\": \"원문에 정확한 날짜 없음(월/년만 있음) -> '명시 안 됨'이라 답하는지\",\n        \"source_doc_list\": [\"DOC-A\"],\n        \"question\": (\n            \"문제6 : DOC-A에 이 모델의 정확한 출시일이 연/월/일 형식으로 명시되어 \"\n            \"있는지 확인해 주세요. 정확한 날짜가 없다면 추측하거나 외부 지식을 사용하지 \"\n            \"말고 '제공된 문서에 정확한 출시일(연/월/일)은 명시되어 있지 않습니다.'라고 \"\n            \"한 문장으로 답해 주세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q7\",\n        \"type\": \"정상(자유요약)\",\n        \"평가_기준\": \"API 재시도/백오프/fallback 핵심 개념 언급 여부\",\n        \"source_doc_list\": [\"DOC-B\"],\n        \"question\": (\n            \"문제7 : DOC-B에 명시된 내용만 사용하여 초보자가 이해하기 쉽게 정확히 \"\n            \"3~4문장으로 요약해 주세요. API 재시도, 백오프, fallback의 역할을 \"\n            \"포함하되 문서에 없는 동작이나 설정은 추가하지 마세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q8\",\n        \"type\": \"정상(사실추출)\",\n        \"평가_기준\": \"정답: 연결 오류/408/409/429/5xx, 기본 2번\",\n        \"source_doc_list\": [\"DOC-B\"],\n        \"question\": (\n            \"문제8 : DOC-B에서 OpenAI Python SDK가 기본적으로 재시도하는 오류의 \"\n            \"종류와 기본 재시도 횟수를 찾아 주세요. \"\n            \"'재시도 대상: 값 / 기본 재시도 횟수: 값' 형식으로 간결하게 답하고, \"\n            \"문서에 없는 오류나 횟수는 추가하지 마세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q9\",\n        \"type\": \"경계(비교종합)\",\n        \"평가_기준\": \"DOC-A(모델 아키텍처) vs DOC-B(API 안정성)를 정확히 구분하는지\",\n        \"source_doc_list\": [\"DOC-A\", \"DOC-B\"],\n        \"question\": (\n            \"문제9 : DOC-A와 DOC-B의 주제를 서로 섞지 말고 다음 형식으로 설명해 주세요.\\n\"\n            \"- DOC-A: 해당 문서가 다루는 주제\\n\"\n            \"- DOC-B: 해당 문서가 다루는 주제\\n\"\n            \"- 공통점: 두 문서에서 실제로 확인할 수 있는 공통점\\n\"\n            \"공통점을 확인하기 어렵다면 억지로 만들지 말고 \"\n            \"'직접적인 공통점은 확인하기 어렵습니다.'라고 답해 주세요.\"\n        ),\n    },\n    {\n        \"id\": \"Q10\",\n        \"type\": \"경계(지시이행+형식)\",\n        \"평가_기준\": \"정답: 잘못된 API key, 400 Bad Request, permission denied 등. 표 형식 준수 여부\",\n        \"source_doc_list\": [\"DOC-B\"],\n        \"question\": (\n            \"문제10 : DOC-B에 명시된 재시도가 불가능하여 즉시 중단해야 하는 대표적인 \"\n            \"오류를 정확히 3개 선택해 마크다운 표로 작성해 주세요. 표의 열은 '오류'와 \"\n            \"'즉시 중단해야 하는 이유' 두 개만 사용하세요. 표 앞뒤에 설명을 추가하지 \"\n            \"말고, 마크다운 코드 블록으로 감싸지 마세요.\"\n        ),\n    },\n]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BM9LX2NBY",
+      "type": "message",
+      "ts": "1789717670.760609",
+      "client_msg_id": "9bee0d78-15dc-4927-9cf5-fe5f77af85b6",
+      "text": "주석이 프롬프트 튜닝전이고, 원래내용이 프롬프트 튜닝 후 입니다.",
+      "team": "T0B3958SGS3",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "T0aDP",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "주석이 프롬프트 튜닝전이고, 원래내용이 프롬프트 튜닝 후 입니다."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reactions": [
+        {
+          "name": "raised_hands",
+          "users": [
+            "U0BMJN4CA5A"
+          ],
+          "count": 1
+        },
+        {
+          "name": "+1",
+          "users": [
+            "U0BMJN4CA5A"
+          ],
+          "count": 1
         }
       ]
     }

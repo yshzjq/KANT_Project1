@@ -70,7 +70,20 @@ _spec.loader.exec_module(collector)
 def ensure_slack_data(timeout=SLACK_READY_TIMEOUT, *, verbose=True):
     """봇이 없으면 시작하고, 현재까지 수신한 변경이 저장되면 기록을 반환합니다."""
     state = BotState(STATE_PATH)
-    if not is_locked(LOCK_PATH):
+    channel_ids = list(collector.get_channel_ids())
+    deadline = time.monotonic() + timeout
+    running = is_locked(LOCK_PATH)
+    if running and state.snapshot()["channel_ids"] != channel_ids:
+        # 이전 버전·이전 채널 설정으로 실행 중인 봇도 저장을 끝낸 뒤 교체합니다.
+        state.execute("UPDATE state SET stop=1 WHERE id=1")
+        if verbose:
+            print("Slack 채널 설정이 바뀌어 감지 봇을 다시 시작합니다.", flush=True)
+        while is_locked(LOCK_PATH):
+            if time.monotonic() >= deadline:
+                raise RuntimeError("이전 Slack 봇의 저장·종료를 기다리다 시간 제한에 도달했습니다.")
+            time.sleep(0.5)
+        running = False
+    if not running:
         state.fail("")  # 이전 프로세스의 실패를 새 시작의 실패로 오인하지 않습니다.
         start_background_bot()
         if verbose:
@@ -80,16 +93,16 @@ def ensure_slack_data(timeout=SLACK_READY_TIMEOUT, *, verbose=True):
 
     # 살아 있는 봇도 파일이 지워졌다면 전체 기록을 다시 받아야 합니다.
     # 요청 번호는 SQLite에 남으므로 main과 봇이 서로 다른 Python 프로세스여도 완료를 확인할 수 있습니다.
-    saved = collector.load_saved_data(collector.DATA_PATH)
-    collector.index_messages(saved.get("messages", []))
-    request_id = state.request(full=not saved.get("messages"))
-    deadline = time.monotonic() + timeout
+    collector.load_all_saved_data()  # 손상된 파일을 새 기록이 없는 것으로 취급하지 않습니다.
+    request_id = state.request(full=any(
+        not collector.data_path_for(channel_id).exists() for channel_id in channel_ids
+    ))
     next_notice = time.monotonic() + 15
     while time.monotonic() < deadline:
         snapshot = state.snapshot()
-        if is_ready(snapshot, request_id) and is_locked(LOCK_PATH):
-            data = collector.load_saved_data(collector.DATA_PATH)
-            collector.index_messages(data.get("messages", []))
+        if (snapshot["channel_ids"] == channel_ids
+                and is_ready(snapshot, request_id) and is_locked(LOCK_PATH)):
+            data = collector.load_all_saved_data()
             if verbose:
                 print("Slack 변경 확인 완료. 저장된 대화기록을 사용합니다.", flush=True)
             return data
@@ -188,7 +201,7 @@ def record_event(state, payload):
         state.request(full=True)
         return
     event = payload.get("event") or {}
-    if event.get("type") != "message" or event.get("channel") != collector.CHANNEL_ID:
+    if event.get("type") != "message" or event.get("channel") not in collector.get_channel_ids():
         return
     event_id = payload.get("event_id")
     if not event_id:
@@ -203,11 +216,19 @@ def sync_pending(state):
     snapshot = state.snapshot()
     if not snapshot["connected"] or snapshot["stop"]:
         return False
-    full_sync = snapshot["recovery"] != snapshot["recovered"] or not collector.DATA_PATH.exists()
-    # 이벤트도 복구 필요도 없으면 수집기를 부르지 않습니다. main의 확인 요청만 완료할 수 있습니다.
-    if full_sync or snapshot["events"]:
-        collector.sync_slack_data(events=snapshot["events"], full_sync=full_sync)
-    if full_sync or snapshot["events"] or snapshot["requested"] != snapshot["completed"]:
+    recovery = snapshot["recovery"] != snapshot["recovered"]
+    collected = False
+    # 공지방 이벤트 때문에 질문잡담방을 다시 조회하지 않습니다. 최초·재연결만 모든 채널을 확인합니다.
+    for channel_id in collector.get_channel_ids():
+        events = [event for event in snapshot["events"] if event.get("channel") == channel_id]
+        full_sync = recovery or not collector.data_path_for(channel_id).exists()
+        if full_sync or events:
+            try:
+                collector.sync_slack_data(events=events, full_sync=full_sync, channel_id=channel_id)
+            except (RuntimeError, ValueError) as error:
+                raise RuntimeError(f"채널 {channel_id} 기록 수집 실패: {error}") from None
+            collected = True
+    if collected or snapshot["events"] or snapshot["requested"] != snapshot["completed"]:
         # 수집·저장이 예외 없이 끝났을 때만 번호를 전진시켜 실패한 변경이 유실되지 않게 합니다.
         state.finish(snapshot)
     return True
@@ -224,7 +245,7 @@ def run_bot():
     state = BotState(STATE_PATH)
     try:
         with FileLock(LOCK_PATH):
-            state.begin()
+            state.begin(collector.get_channel_ids())
             try:
                 validate_environment()
                 listen_and_sync(state)
@@ -288,7 +309,7 @@ def listen_and_sync(state):
     monitor.start()
     try:
         client.connect()
-        print(f"Slack 이벤트 감지 시작: {collector.CHANNEL_ID} / PID {os.getpid()}", flush=True)
+        print(f"Slack 이벤트 감지 시작: {', '.join(collector.get_channel_ids())} / PID {os.getpid()}", flush=True)
         retry_at = 0
         while not state.snapshot()["stop"]:
             if time.monotonic() >= retry_at:
@@ -333,6 +354,7 @@ def main():
     else:
         snapshot = state.snapshot()
         print(f"PID: {snapshot['pid']} / Slack 연결: {bool(snapshot['connected'])}")
+        print(f"감지 채널: {', '.join(snapshot['channel_ids']) or '이전 버전: 재시작 필요'}")
         print(f"대기 이벤트: {len(snapshot['events'])} / 기록 준비: {bool(is_ready(snapshot, snapshot['requested']))}")
         print(f"최근 오류: {snapshot['error'] or '없음'}\n로그: {LOG_PATH}")
 

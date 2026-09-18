@@ -18,6 +18,23 @@ def message(day, text, **extra):
 
 
 class RankingAndDateTests(unittest.TestCase):
+    def test_question_words_do_not_outrank_project_notice(self):
+        sources = [message(1, "베이스캠프 기간에 언제든 질문해주세요."),
+                   message(2, "프로젝트 선행 학습을 하다가 막히면 언제든 질문해주세요."),
+                   message(14, "프로젝트 기간: 9/14 ~ 9/18")]
+        question = "프로젝트 기간은 언제인가요?"
+        terms = expand_search_terms(["프로젝트", "기간", "언제"], question)
+        self.assertNotIn("언제", terms)
+        self.assertEqual(chat.find_matching_threads(sources, terms, question)[0]["thread_id"], sources[2]["ts"])
+
+    def test_frequency_question_and_compound_particles_keep_subject(self):
+        terms = expand_search_terms(["개인 일지", "얼마나", "자주", "작성"],
+                                    "개인 일지는 얼마나 자주 작성해야 하나요?")
+        self.assertNotIn("얼마나", terms)
+        self.assertNotIn("자주", terms)
+        for question, subject in (("프로젝트 기간에도", "기간"), ("결석이나 조퇴", "결석")):
+            self.assertIn(subject, expand_search_terms([], question))
+
     def test_upcoming_schedule_paraphrases_exclude_past_exam(self):
         for question in ("다음 시험 날짜는?", "다음에 치를 시험은 언제인가요?",
                          "다음번 볼 평가는 언제인가요?", "다가오는 과제 일정은?"):

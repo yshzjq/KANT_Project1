@@ -96,6 +96,32 @@ class ChatContextTests(unittest.TestCase):
         self.assertGreater(threads[1]["score"], threads[2]["score"])
         self.assertEqual(len(threads[2]["messages"]), 3)
 
+    def test_same_timestamp_in_two_channels_stays_separate_in_search_and_trace(self):
+        messages = [
+            {"channel_id": "CCHAT", "channel_name": "질문잡담방", "ts": "100.1", "text": "학습 안내 질문"},
+            {"channel_id": "CCHAT", "channel_name": "질문잡담방", "ts": "101.1", "thread_ts": "100.1", "text": "질문방 답글"},
+            {"channel_id": "CNEWS", "channel_name": "공지방", "ts": "100.1", "text": "학습 안내 공지"},
+            {"channel_id": "CNEWS", "channel_name": "공지방", "ts": "101.1", "thread_ts": "100.1", "text": "공지방 답글"},
+        ]
+        threads = chat.find_matching_threads(messages, ["학습 안내"])
+        self.assertEqual({thread["thread_id"] for thread in threads}, {"CCHAT:100.1", "CNEWS:100.1"})
+        self.assertTrue(all(len({m["channel_id"] for m in thread["messages"]}) == 1 for thread in threads))
+        trace = {}
+        with patch.object(chat, "get_user_names", return_value={}):
+            context = chat.prepare_context(messages, ["학습 안내"], "학습 방식은?", trace=trace)
+        self.assertIn("[채널: 질문잡담방 / ID: CCHAT]", context)
+        self.assertIn("[채널: 공지방 / ID: CNEWS]", context)
+        originals = {(item["channel_id"], item["ts"]): item["original_text"] for item in trace["selected_messages"]}
+        self.assertEqual(originals, {(m["channel_id"], m["ts"]): m["text"] for m in messages})
+
+    def test_matching_text_in_one_channel_does_not_select_same_timestamp_elsewhere(self):
+        messages = [
+            {"channel_id": "CCHAT", "ts": "100.1", "text": "인사"},
+            {"channel_id": "CNEWS", "ts": "100.1", "text": "수업 준비물 안내"},
+        ]
+        threads = chat.find_matching_threads(messages, ["준비물"])
+        self.assertEqual([thread["thread_id"] for thread in threads], ["CNEWS:100.1"])
+
     def test_long_thread_is_skipped_and_short_thread_keeps_parent_and_reply(self):
         messages = [
             {"ts": "300.1", "text": "Ollama " + "긴 본문" * 10000},
@@ -118,6 +144,18 @@ class ChatContextTests(unittest.TestCase):
             info = chat.prepare_context(messages, ["ollama"], "질문")
         self.assertEqual(list(names.call_args.args[0]), ["U1"])
         self.assertIn("작성자 (ID: U1)", info)
+
+    def test_mentioned_contact_is_resolved_without_changing_original_trace(self):
+        text = "결석 시 날짜, 시간, 사유를 <@U2>에게 미리 Slack DM으로 알려주세요."
+        messages = [{"ts": "100.1", "text": text, "user": "U1"}]
+        trace = {}
+        with patch.object(chat, "get_user_names", return_value={"U1": "작성자", "U2": "담당 매니저"}) as names:
+            info = chat.prepare_context(messages, ["결석"], "결석은 누구에게 알리나요?", trace=trace)
+        self.assertEqual(set(names.call_args.args[0]), {"U1", "U2"})
+        self.assertIn("담당 매니저에게 미리 Slack DM", info)
+        self.assertNotIn("<@U2>", info)
+        self.assertEqual(trace["selected_messages"][0]["original_text"], text)
+        self.assertIn("<@U2>", chat.format_message(messages[0], {"U1": "작성자"}))
 
     def test_author_names_are_included_in_second_length_check(self):
         messages = [

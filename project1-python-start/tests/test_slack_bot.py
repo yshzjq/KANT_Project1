@@ -26,16 +26,21 @@ class BotTests(unittest.TestCase):
         self.parent = {"ts": "100.000001", "text": "안내", "reply_count": 1}
         self.reply = {"ts": "101.000001", "thread_ts": "100.000001", "text": "답글"}
         self.data = {"channel_id": bot.collector.CHANNEL_ID, "messages": [self.parent, self.reply]}
+        self.expected_data = {"channel_ids": [bot.collector.CHANNEL_ID], "messages": [
+            {**message, "channel_id": bot.collector.CHANNEL_ID, "channel_name": "질문잡담방"}
+            for message in [self.parent, self.reply]
+        ]}
         self.data_path.write_text(json.dumps(self.data), encoding="utf-8")
         for replacement in (
             patch.object(bot, "STATE_PATH", self.state_path),
             patch.object(bot, "LOCK_PATH", self.lock_path),
             patch.object(bot.collector, "DATA_PATH", self.data_path),
+            patch.object(bot.collector, "SLACK_CHANNELS", {bot.collector.CHANNEL_ID: "질문잡담방"}),
             contextlib.redirect_stdout(io.StringIO()),
         ):
             replacement.__enter__()
             self.addCleanup(replacement.__exit__, None, None, None)
-        self.state.begin()
+        self.state.begin(bot.collector.get_channel_ids())
         self.state.connected()
 
     def clean(self):
@@ -125,7 +130,7 @@ class BotTests(unittest.TestCase):
              patch.object(bot.time, "sleep", side_effect=lambda _: bot.sync_pending(self.state)), \
              patch.object(bot.collector, "sync_slack_data") as sync, contextlib.redirect_stdout(output):
             data = bot.ensure_slack_data(timeout=1, verbose=False)
-        self.assertEqual(data, self.data)
+        self.assertEqual(data, self.expected_data)
         self.assertEqual(output.getvalue(), "")
         start.assert_not_called()
         sync.assert_not_called()
@@ -139,7 +144,7 @@ class BotTests(unittest.TestCase):
              patch.object(bot, "start_background_bot") as start, \
              patch.object(bot.time, "sleep", side_effect=lambda _: bot.sync_pending(self.state)), \
              contextlib.redirect_stdout(output):
-            self.assertEqual(bot.ensure_slack_data(timeout=1, verbose=False), self.data)
+            self.assertEqual(bot.ensure_slack_data(timeout=1, verbose=False), self.expected_data)
         start.assert_called_once()
         self.assertEqual(output.getvalue(), "")
 
@@ -153,7 +158,7 @@ class BotTests(unittest.TestCase):
         with FileLock(self.lock_path), \
              patch.object(bot.time, "sleep", side_effect=lambda _: bot.sync_pending(self.state)), \
              patch.object(bot.collector, "sync_slack_data", side_effect=save) as sync:
-            self.assertEqual(bot.ensure_slack_data(timeout=1), self.data)
+            self.assertEqual(bot.ensure_slack_data(timeout=1), self.expected_data)
         self.assertTrue(sync.call_args.kwargs["full_sync"])
 
     def test_stale_heartbeat_and_disconnected_state_are_not_ready(self):
@@ -163,6 +168,84 @@ class BotTests(unittest.TestCase):
         self.state.heartbeat()
         self.state.disconnected()
         self.assertFalse(is_ready(self.state.snapshot(), 0))
+
+    def test_two_channels_sync_only_changed_channel_and_merge_without_overwriting(self):
+        second = "CTESTNEWS"
+        channels = {bot.collector.CHANNEL_ID: "질문잡담방", second: "공지방"}
+        notice = {"ts": self.parent["ts"], "text": "공지방 원문"}
+        path = bot.collector.data_path_for(second)
+        path.write_text(json.dumps({"channel_id": second, "messages": [notice]}), encoding="utf-8")
+        self.clean()
+        before = self.data_path.read_bytes()
+        with patch.object(bot.collector, "SLACK_CHANNELS", channels):
+            bot.record_event(self.state, self.payload(channel=second))
+            with patch.object(bot.collector, "sync_slack_data") as sync:
+                bot.sync_pending(self.state)
+            sync.assert_called_once()
+            self.assertEqual(sync.call_args.kwargs["channel_id"], second)
+            self.assertFalse(sync.call_args.kwargs["full_sync"])
+            self.assertEqual(sync.call_args.kwargs["events"][0]["channel"], second)
+            merged = bot.collector.load_all_saved_data()
+        self.assertEqual(self.data_path.read_bytes(), before)
+        self.assertEqual(len(merged["messages"]), 3)
+        self.assertEqual({m["text"] for m in merged["messages"] if m["ts"] == self.parent["ts"]},
+                         {"안내", "공지방 원문"})
+        self.assertEqual({m["channel_id"] for m in merged["messages"]}, set(channels))
+
+    def test_partial_channel_failure_keeps_all_pending_events(self):
+        second = "CTESTNEWS"
+        with patch.object(bot.collector, "SLACK_CHANNELS", {bot.collector.CHANNEL_ID: "질문", second: "공지"}):
+            bot.record_event(self.state, self.payload())
+            bot.record_event(self.state, self.payload("Ev2", channel=second))
+            with patch.object(bot.collector, "sync_slack_data", side_effect=[None, RuntimeError("not_in_channel")]):
+                with self.assertRaisesRegex(RuntimeError, second):
+                    bot.sync_pending(self.state)
+        snapshot = self.state.snapshot()
+        self.assertEqual(len(snapshot["events"]), 2)
+        self.assertNotEqual(snapshot["recovery"], snapshot["recovered"])
+
+    def test_missing_second_file_recovers_only_that_channel(self):
+        self.clean()
+        with patch.object(bot.collector, "SLACK_CHANNELS", {bot.collector.CHANNEL_ID: "질문", "CTESTNEWS": "공지"}), \
+             patch.object(bot.collector, "sync_slack_data") as sync:
+            bot.sync_pending(self.state)
+        sync.assert_called_once_with(events=[], full_sync=True, channel_id="CTESTNEWS")
+
+    def test_configuration_change_restarts_bot_after_it_releases_lock(self):
+        self.clean()
+        self.state.execute("UPDATE bot_config SET channel_ids='[]' WHERE id=1")
+        old_lock = FileLock(self.lock_path)
+        old_lock.__enter__()
+        new_lock = None
+
+        def progress(_):
+            nonlocal old_lock
+            if old_lock is not None:
+                self.assertTrue(self.state.snapshot()["stop"])
+                old_lock.__exit__()
+                old_lock = None
+            else:
+                bot.sync_pending(self.state)
+
+        def start():
+            nonlocal new_lock
+            new_lock = FileLock(self.lock_path)
+            new_lock.__enter__()
+            self.state.begin(bot.collector.get_channel_ids())
+            self.state.connected()
+
+        try:
+            with patch.object(bot, "start_background_bot", side_effect=start) as launch, \
+                 patch.object(bot.time, "sleep", side_effect=progress), \
+                 patch.object(bot.collector, "sync_slack_data"):
+                result = bot.ensure_slack_data(timeout=2, verbose=False)
+            launch.assert_called_once()
+            self.assertEqual(result, self.expected_data)
+        finally:
+            if old_lock is not None:
+                old_lock.__exit__()
+            if new_lock is not None:
+                new_lock.__exit__()
 
     def test_changed_reply_fetches_only_affected_thread_using_api_content(self):
         event = self.payload(subtype="message_changed", message=self.reply)["event"]

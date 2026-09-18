@@ -10,43 +10,77 @@ ts는 메시지 식별값, thread_ts는 답글이 속한 원글의 식별값입�
 
 import json
 import os
+import re
 import time
 from decimal import Decimal
+from functools import partial
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-from config import DEBUG
+from config import DEBUG, SLACK_CHANNELS
 from slack_runtime import FileLock
 
-CHANNEL_ID = "C0BBNNCS4BG"
+CHANNEL_ID = next(iter(SLACK_CHANNELS))  # 기존 단일 채널 호출의 기본값
 LIMIT = 100  # API에서 한 페이지에 요청할 메시지 수
 DATA_PATH = Path(__file__).resolve().parent / "data/private" / f"slack_{CHANNEL_ID}.json"
 
 
-def sync_slack_data(data_path=DATA_PATH, read_pages=None, events=None, full_sync=True):
+def get_channel_ids():
+    """잘못된 ID가 파일 경로나 API 요청에 쓰이지 않게 시작 전에 검사합니다."""
+    if not isinstance(SLACK_CHANNELS, dict) or not SLACK_CHANNELS:
+        raise ValueError("config.py의 SLACK_CHANNELS에 채널을 하나 이상 지정하세요.")
+    for channel_id, name in SLACK_CHANNELS.items():
+        if not isinstance(channel_id, str) or not re.fullmatch(r"[CG][A-Z0-9]+", channel_id):
+            raise ValueError("SLACK_CHANNELS에는 C 또는 G로 시작하는 Slack 채널 ID가 필요합니다.")
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError("SLACK_CHANNELS의 채널 이름을 입력하세요.")
+    return tuple(SLACK_CHANNELS)
+
+
+def data_path_for(channel_id):
+    # 첫 채널의 기존 파일은 그대로 사용합니다. 다른 채널도 같은 폴더에 따로 저장합니다.
+    return DATA_PATH if channel_id == CHANNEL_ID else DATA_PATH.with_name(f"slack_{channel_id}.json")
+
+
+def load_all_saved_data():
+    """채널별 원본 파일은 유지하고, 검색용 목록에만 출처를 붙여 합칩니다."""
+    channel_ids = get_channel_ids()
+    messages = []
+    for channel_id in channel_ids:
+        saved = load_saved_data(data_path_for(channel_id), channel_id=channel_id)
+        indexed = index_messages(saved.get("messages", []))
+        messages.extend({**message, "channel_id": channel_id,
+                         "channel_name": SLACK_CHANNELS[channel_id]} for message in indexed.values())
+    return {"channel_ids": list(channel_ids), "messages": sorted(
+        messages, key=lambda message: (Decimal(message["ts"]), message["channel_id"]),
+    )}
+
+
+def sync_slack_data(data_path=None, read_pages=None, events=None, full_sync=True, *, channel_id=CHANNEL_ID):
     """직접 수집과 상시 봇이 같은 JSON을 동시에 덮어쓰지 않게 잠급니다."""
-    data_path = Path(data_path)
+    data_path = Path(data_path) if data_path is not None else data_path_for(channel_id)
     with FileLock(data_path.with_suffix(".lock")):
-        return _sync_slack_data(data_path, read_pages, events, full_sync)
+        return _sync_slack_data(data_path, read_pages, events, full_sync, channel_id)
 
 
-def _sync_slack_data(data_path, read_pages, events, full_sync):
+def _sync_slack_data(data_path, read_pages, events, full_sync, channel_id):
     """동기화의 전체 순서입니다. 실제 실행은 파일 맨 아래에서 시작합니다."""
     data_path = Path(data_path)
     # read_pages를 전달하면 실제 API 대신 가짜 응답으로 동기화 과정을 검증할 수 있습니다.
-    read_pages = read_pages or read_all_pages
+    read_pages = read_pages or partial(read_all_pages, channel_id=channel_id)
+    events = [event for event in (events or []) if event.get("channel", channel_id) == channel_id]
     sync_started = f"{time.time():.6f}"
 
     # 1. 저장된 기록을 읽고, ts로 메시지를 찾을 수 있는 사전을 만듭니다.
-    saved_data = load_saved_data(data_path)
+    saved_data = load_saved_data(data_path, channel_id=channel_id)
     existing = index_messages(saved_data.get("messages", []))
-    print(f"기존 저장 메시지: {len(existing)}개", flush=True)
+    print(f"채널 {SLACK_CHANNELS.get(channel_id, channel_id)} ({channel_id}) / 기존 저장 메시지: {len(existing)}개", flush=True)
 
     # 2. 수정된 답글도 확인할 수 있도록 원글과 답글을 조회합니다.
-    if full_sync or not saved_data.get("messages"):
+    if full_sync or not data_path.exists():
         current, thread_versions = fetch_current_messages(read_pages, sync_started)
     else:
         current, thread_versions = fetch_event_messages(
@@ -79,7 +113,7 @@ def _sync_slack_data(data_path, read_pages, events, full_sync):
         versions.pop(message_ts, None)
     save_data = saved_data.copy()
     save_data.update({
-        "channel_id": CHANNEL_ID,
+        "channel_id": channel_id,
         "last_sync_started_ts": sync_started,
         "thread_versions": versions,
         "messages": sorted(merged.values(), key=lambda message: Decimal(message["ts"])),
@@ -95,13 +129,14 @@ def _sync_slack_data(data_path, read_pages, events, full_sync):
 
 # --- 파일 읽기·비교·저장 ---
 
-def load_saved_data(data_path):
+def load_saved_data(data_path, *, channel_id=CHANNEL_ID):
     """처음 실행하면 빈 사전을, 기존 파일이 있으면 JSON 내용을 반환합니다."""
+    data_path = Path(data_path)
     if not data_path.exists():
         return {}
 
     data = json.loads(data_path.read_text(encoding="utf-8"))
-    if not isinstance(data, dict) or data.get("channel_id") != CHANNEL_ID:
+    if not isinstance(data, dict) or data.get("channel_id") != channel_id:
         raise RuntimeError("저장 파일의 채널 ID가 다릅니다.")
     return data
 
@@ -257,7 +292,7 @@ def find_thread_ids(messages):
 
 # --- Slack API 통신: 한 페이지 요청 → 다음 페이지 반복 ---
 
-def read_all_pages(method, **params):
+def read_all_pages(method, *, channel_id=CHANNEL_ID, **params):
     """cursor(다음 페이지 위치)가 없어질 때까지 메시지를 모읍니다."""
     messages = []
     cursor = ""
@@ -265,7 +300,7 @@ def read_all_pages(method, **params):
     limited = False
 
     while True:
-        page_params = {"channel": CHANNEL_ID, "limit": LIMIT, **params}
+        page_params = {"channel": channel_id, "limit": LIMIT, **params}
         if cursor:
             page_params["cursor"] = cursor
         data = call_slack(method, **page_params)
@@ -330,6 +365,7 @@ def call_slack(method, **params):
 
 if __name__ == "__main__":
     try:
-        sync_slack_data()
+        for channel_id in get_channel_ids():
+            sync_slack_data(channel_id=channel_id)
     except (RuntimeError, OSError, ValueError, ArithmeticError) as error:
         raise SystemExit(f"\n동기화 실패: {error}") from None

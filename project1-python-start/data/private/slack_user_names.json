@@ -1,35 +1,35 @@
 {
   "U0BDAC2R3AL": {
     "name": "이은비(담임매니저/LLM/1기)",
-    "fetched_at": 1789377665.867277
+    "fetched_at": 1789708948.5787792
   },
   "U0BMK5U2JRX": {
     "name": "천준석(튜터/LLM/1기)",
-    "fetched_at": 1789559063.4555132
+    "fetched_at": 1789708820.9206328
   },
   "U0B9GUJA84S": {
     "name": "진수인(KANT 매니저)",
-    "fetched_at": 1789377723.5021663
+    "fetched_at": 1789719918.9697871
   },
   "U0BUR6RKQFN": {
     "name": "강철민(튜터/LLM/1기)",
-    "fetched_at": 1789377774.5183873
+    "fetched_at": 1789708948.8736098
   },
   "U0B9TV2GVC2": {
     "name": "김경민(LLM_1기)",
-    "fetched_at": 1789559104.254975
+    "fetched_at": 1789708829.9899795
   },
   "U0BGDNUQNM8": {
     "name": "김희수(GA매니저)",
-    "fetched_at": 1789559104.5554447
+    "fetched_at": 1789708830.2605429
   },
   "U0BM9LX2NBY": {
     "name": "이정원(LLM_1기)",
-    "fetched_at": 1789559104.8370612
+    "fetched_at": 1789708830.8960705
   },
   "U0B9QHYG6AH": {
     "name": "천희재(LLM_1기)",
-    "fetched_at": 1789608732.256504
+    "fetched_at": 1789708829.6902142
   },
   "U0BJ7TBEJDR": {
     "name": "김찬영(LLM_1기)",
@@ -37,15 +37,15 @@
   },
   "U0BK0FB6TSM": {
     "name": "김창동(LLM_1기)",
-    "fetched_at": 1789608726.733902
+    "fetched_at": 1789708823.7157092
   },
   "U0BLSE5CWE4": {
     "name": "권오륜(LLM1기)",
-    "fetched_at": 1789608732.565634
+    "fetched_at": 1789708830.615836
   },
   "U0BMJN4CA5A": {
     "name": "전항록(LLM_1기)",
-    "fetched_at": 1789608733.9914243
+    "fetched_at": 1789708832.4190845
   },
   "U0BHTSWPS68": {
     "name": "이정로(LLM_1기)",
@@ -53,7 +53,7 @@
   },
   "U0BKKN3UW7K": {
     "name": "임윤성(LLM_1기)",
-    "fetched_at": 1789608725.5693784
+    "fetched_at": 1789708822.5098677
   },
   "U0B8Z7NK7FB": {
     "name": "최서영(KANT 매니저)",
@@ -65,7 +65,7 @@
   },
   "U0BDC9H17M0": {
     "name": "최선영(LLM_1기)",
-    "fetched_at": 1789628532.5284357
+    "fetched_at": 1789720063.6547627
   },
   "U0BFATC2WRW": {
     "name": "송하경(LLM_1기)",
@@ -77,11 +77,11 @@
   },
   "U0BAKV9PABB": {
     "name": "이석형(담임매니저/AX/1기)",
-    "fetched_at": 1789628515.5352552
+    "fetched_at": 1789720063.2885985
   },
   "U0BCERR2FDG": {
     "name": "김지수(LLM_1기)",
-    "fetched_at": 1789629459.1562216
+    "fetched_at": 1789719993.1598186
   },
   "U0BKZBJP1UJ": {
     "name": "박현지(담임매니저/AX/2기)",
@@ -90,5 +90,9 @@
   "U0BC26KFZ54": {
     "name": "윤승환(LLM 1기)",
     "fetched_at": 1789628525.1043112
+  },
+  "U0BE6K33A6T": {
+    "name": "이정수(LLM_1기)",
+    "fetched_at": 1789708958.7649117
   }
 }
