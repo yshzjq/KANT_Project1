@@ -55,6 +55,24 @@ class NameCacheTests(unittest.TestCase):
             self.assertEqual(names.get_user_names(["U1", "U1"], self.path), {"U1": "저장된 이름"})
         fetch.assert_not_called()
 
+    def test_quiet_lookup_keeps_cached_fallback_without_warnings(self):
+        output = io.StringIO()
+        with patch.object(names, "DEBUG", False), \
+             patch.object(names, "fetch_user_name", side_effect=names.UserNameLookupError("권한 없음")), \
+             contextlib.redirect_stdout(output):
+            result = names.get_user_names(["U1", "U2"], self.path)
+        self.assertEqual(result, {"U1": "기존 이름", "U2": "U2"})
+        self.assertEqual(output.getvalue(), "")
+
+    def test_quiet_lookup_with_invalid_cache_and_no_token_returns_id(self):
+        self.path.write_text("invalid json", encoding="utf-8")
+        output = io.StringIO()
+        with patch.object(names, "DEBUG", False), patch.dict(names.os.environ, {"SLACK_TOKEN": ""}), \
+             contextlib.redirect_stdout(output):
+            result = names.get_user_names(["U1"], self.path)
+        self.assertEqual(result, {"U1": "U1"})
+        self.assertEqual(output.getvalue(), "")
+
 
 if __name__ == "__main__":
     unittest.main()

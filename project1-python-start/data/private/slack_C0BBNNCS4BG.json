@@ -1,6 +1,6 @@
 {
   "channel_id": "C0BBNNCS4BG",
-  "last_sync_started_ts": "1789550372.946734",
+  "last_sync_started_ts": "1789639581.983914",
   "thread_versions": {
     "1782377086.422969": {
       "reply_count": 3,
@@ -389,6 +389,14 @@
     "1789356747.975839": {
       "reply_count": 2,
       "latest_reply": "1789537126.637729"
+    },
+    "1789608506.843879": {
+      "reply_count": 3,
+      "latest_reply": "1789612032.348959"
+    },
+    "1789628918.726649": {
+      "reply_count": 11,
+      "latest_reply": "1789629261.177599"
     }
   },
   "messages": [
@@ -8550,11 +8558,11 @@
             "U0BMK5U2JRX",
             "U0BHTSWPS68",
             "U0BAPLX69J9",
-            "U0BE4RMQTU5",
             "U0BK0FB6TSM",
             "U0BKR5VQFGB",
-            "U0BKT0G7K88",
+            "U0BE4RMQTU5",
             "U0BM4GD3YRG",
+            "U0BKT0G7K88",
             "U0BKKN3UW7K",
             "U0BLRGP54MC",
             "U0BLSE5CWE4",
@@ -8608,10 +8616,10 @@
             "U0BDC9H17M0",
             "U0BAPLX69J9",
             "U0BC26KFZ54",
-            "U0BKTK98P63",
-            "U0BKKN3UW7K",
-            "U0BE4RMQTU5",
             "U0BLSE5CWE4",
+            "U0BKTK98P63",
+            "U0BE4RMQTU5",
+            "U0BKKN3UW7K",
             "U0BJ7TBEJDR",
             "U0B9TV2GVC2",
             "U0BKT0G7K88",
@@ -8815,30 +8823,30 @@
           "name": "white_check_mark",
           "users": [
             "U0BMK5U2JRX",
-            "U0BE6K33A6T",
             "U0BLYK8P9N0",
+            "U0BE6K33A6T",
             "U0BLSE5CWE4",
-            "U0BM4GD3YRG",
             "U0BGP4P648Y",
-            "U0BJ7TBEJDR",
+            "U0BM4GD3YRG",
             "U0B9TV2GVC2",
+            "U0BJ7TBEJDR",
             "U0BM9LX2NBY",
             "U0BL1ALS54G",
             "U0B95PG4SJ1",
             "U0BKKN3UW7K",
+            "U0BA2JDFPTP",
             "U0BAPLX69J9",
             "U0BK0FB6TSM",
-            "U0BA2JDFPTP",
             "U0BC26KFZ54",
             "U0BE4NE2E73",
             "U0BDC9H17M0",
             "U0BG5A1SMKL",
             "U0BKT0G7K88",
-            "U0BLRGP54MC",
             "U0BE4RMQTU5",
+            "U0BLRGP54MC",
             "U0BHTSWPS68",
-            "U0BHMFP7G6A",
             "U0BKT1NQ5MW",
+            "U0BHMFP7G6A",
             "U0BKTK98P63",
             "U0BCJ4W0H4H",
             "U0BJJ2VC0MA",
@@ -8877,8 +8885,8 @@
           "name": "white_check_mark",
           "users": [
             "U0BDC9H17M0",
-            "U0BG5A1SMKL",
             "U0BMK5U2JRX",
+            "U0BG5A1SMKL",
             "U0BGP4P648Y",
             "U0BE4RMQTU5",
             "U0BK0FB6TSM",
@@ -8892,10 +8900,10 @@
             "U0BKKN3UW7K",
             "U0BE6K33A6T",
             "U0BAPLX69J9",
-            "U0BKT0G7K88",
             "U0BHTSWPS68",
-            "U0BLYK8P9N0",
+            "U0BKT0G7K88",
             "U0BJ7TBEJDR",
+            "U0BLYK8P9N0",
             "U0BKTK98P63",
             "U0BL1ALS54G",
             "U0BCERR2FDG",
@@ -9172,15 +9180,15 @@
           "users": [
             "U0BMK5U2JRX",
             "U0BE4RMQTU5",
-            "U0BHMFP7G6A",
             "U0BE6K33A6T",
+            "U0BHMFP7G6A",
             "U0BHTSWPS68",
             "U0BCJ4W0H4H",
-            "U0BE4NE2E73",
             "U0BAPLX69J9",
+            "U0BE4NE2E73",
             "U0BC26KFZ54",
-            "U0BCERR2FDG",
             "U0BA2JDFPTP",
+            "U0BCERR2FDG",
             "U0B9TV2GVC2",
             "U0BKKN3UW7K",
             "U0BJ7TBEJDR",
@@ -9225,22 +9233,22 @@
           "users": [
             "U0BMK5U2JRX",
             "U0BDC9H17M0",
-            "U0BHTSWPS68",
             "U0BLSE5CWE4",
+            "U0BHTSWPS68",
+            "U0BKKN3UW7K",
             "U0BE4RMQTU5",
             "U0BHMFP7G6A",
-            "U0BKKN3UW7K",
-            "U0BKTK98P63",
             "U0BAPLX69J9",
+            "U0BKTK98P63",
             "U0BLRGP54MC",
-            "U0BCJ4W0H4H",
             "U0B9TV2GVC2",
+            "U0BCJ4W0H4H",
             "U0BA2JDFPTP",
             "U0BK0FB6TSM",
             "U0BE6K33A6T",
             "U0BKT0G7K88",
-            "U0BC26KFZ54",
             "U0BJ7TBEJDR",
+            "U0BC26KFZ54",
             "U0BLYK8P9N0",
             "U0BM4GD3YRG",
             "U0BM9LX2NBY",
@@ -9674,22 +9682,22 @@
             "U0B9TV2GVC2",
             "U0BCERR2FDG",
             "U0BHTSWPS68",
-            "U0BE4RMQTU5",
             "U0BLSE5CWE4",
-            "U0BA2JDFPTP",
-            "U0BC26KFZ54",
+            "U0BE4RMQTU5",
             "U0BCJ4W0H4H",
+            "U0BC26KFZ54",
+            "U0BA2JDFPTP",
             "U0BJ7TBEJDR",
             "U0BM9LX2NBY",
-            "U0BE4NE2E73",
             "U0BDC9H17M0",
+            "U0BE4NE2E73",
             "U0BKKN3UW7K",
             "U0BLYK8P9N0",
             "U0B9QHYG6AH",
-            "U0BL1ALS54G",
             "U0BLRGP54MC",
-            "U0BKR5VQFGB",
+            "U0BL1ALS54G",
             "U0BM4GD3YRG",
+            "U0BKR5VQFGB",
             "U0BHMFP7G6A",
             "U0BAPLX69J9",
             "U0BK0FB6TSM",
@@ -11640,8 +11648,8 @@
           "name": "+1",
           "users": [
             "U0BCERR2FDG",
-            "U0BKKN3UW7K",
             "U0BM4GD3YRG",
+            "U0BKKN3UW7K",
             "U0BK0FB6TSM",
             "U0BHMFP7G6A",
             "U0BMK5U2JRX",
@@ -26412,11 +26420,11 @@
           "users": [
             "U0BMK5U2JRX",
             "U0BJ7TBEJDR",
-            "U0BDC9H17M0",
             "U0BLSE5CWE4",
-            "U0BE6K33A6T",
-            "U0BE4RMQTU5",
+            "U0BDC9H17M0",
             "U0BKR5VQFGB",
+            "U0BE4RMQTU5",
+            "U0BE6K33A6T",
             "U0BA2JDFPTP",
             "U0BKKN3UW7K",
             "U0BCJ4W0H4H",
@@ -35711,7 +35719,7 @@
       ],
       "reactions": [
         {
-          "name": "raised_hands",
+          "name": "eyes",
           "users": [
             "U0BMJN4CA5A",
             "U0B9QHYG6AH",
@@ -35720,7 +35728,7 @@
           "count": 3
         },
         {
-          "name": "eyes",
+          "name": "raised_hands",
           "users": [
             "U0BMJN4CA5A",
             "U0B9QHYG6AH",
@@ -39740,6 +39748,607 @@
       "client_msg_id": "3432510b-903a-471b-b92c-eb42e369257c",
       "thread_ts": "1789356747.975839",
       "parent_user_id": "U0BDAC2R3AL"
+    },
+    {
+      "text": "upstage model mini4 preview tester 하고 있는데\n갑자기 \"Samsung 모드\" 라는 것이 나오네요..!",
+      "files": [
+        {
+          "id": "F0C2JUC13L4",
+          "created": 1789608469,
+          "timestamp": 1789608469,
+          "mimetype": "image/png",
+          "filetype": "png",
+          "pretty_type": "PNG",
+          "user": "U0BMJN4CA5A",
+          "user_team": "T0B3958SGS3",
+          "editable": false,
+          "size": 37548,
+          "mode": "hosted",
+          "is_external": false,
+          "external_type": "",
+          "is_public": false,
+          "public_url_shared": false,
+          "display_as_bot": false,
+          "username": "",
+          "name": "image.png",
+          "title": "image.png",
+          "is_modified_by_ai": false,
+          "url_private": "https://files.slack.com/files-pri/T0B3958SGS3-F0C2JUC13L4/image.png",
+          "url_private_download": "https://files.slack.com/files-pri/T0B3958SGS3-F0C2JUC13L4/download/image.png",
+          "media_display_type": "unknown",
+          "thumb_64": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C2JUC13L4-0e593d6dfd/image_64.png",
+          "thumb_80": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C2JUC13L4-0e593d6dfd/image_80.png",
+          "thumb_360": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C2JUC13L4-0e593d6dfd/image_360.png",
+          "thumb_360_w": 316,
+          "thumb_360_h": 192,
+          "thumb_160": "https://files.slack.com/files-tmb/T0B3958SGS3-F0C2JUC13L4-0e593d6dfd/image_160.png",
+          "original_w": 631,
+          "original_h": 384,
+          "thumb_tiny": "AwAeADC/8yk4A555Y04Aep/OmnlsHGT23dqcMdv50AKBikKg+v50tFACY5zz+dLRRQAEE9yKCD64pOSOQOeozTSu7G5EPP1/pQA/FFGTnoMfWgk9sUAFFFFAH//Z",
+          "permalink": "https://2026kant.slack.com/files/U0BC26KFZ54/F0C2JUC13L4/image.png",
+          "permalink_public": "https://slack-files.com/T0B3958SGS3-F0C2JUC13L4-5c35cbcae9",
+          "is_starred": false,
+          "skipped_shares": true,
+          "has_rich_preview": false,
+          "file_access": "visible"
+        }
+      ],
+      "upload": false,
+      "user": "U0BMJN4CA5A",
+      "display_as_bot": false,
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "oQPzK",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "upstage model mini4 preview tester 하고 있는데\n갑자기 \"Samsung 모드\" 라는 것이 나오네요..!"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "message",
+      "ts": "1789608506.843879",
+      "client_msg_id": "146c8a3a-9d71-4ad8-b70e-8dd5207dbbf8",
+      "thread_ts": "1789608506.843879",
+      "reply_count": 3,
+      "reply_users_count": 2,
+      "latest_reply": "1789612032.348959",
+      "reply_users": [
+        "U0BK0FB6TSM",
+        "U0BMJN4CA5A"
+      ],
+      "is_locked": false,
+      "subscribed": false
+    },
+    {
+      "user": "U0BK0FB6TSM",
+      "type": "message",
+      "ts": "1789611935.173119",
+      "client_msg_id": "81b8b702-7b44-4945-86c8-82abac7ef4fa",
+      "text": "너는 매우 빠르다.. 는 항록님이 쓰신 프롬프트인가요?",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789608506.843879",
+      "parent_user_id": "U0BMJN4CA5A",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "AKxmC",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "너는 매우 빠르다.. 는 항록님이 쓰신 프롬프트인가요?"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BMJN4CA5A",
+      "type": "message",
+      "ts": "1789611981.539329",
+      "client_msg_id": "c3929a21-e6fc-481a-86a6-316dc201ea45",
+      "text": "답변이 엄청 빠르긴 해요ㅋ API key 드릴 수 있어요. /20일까지 무료에요. 필요하시면",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789608506.843879",
+      "parent_user_id": "U0BMJN4CA5A",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "Ka0dW",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "답변이 엄청 빠르긴 해요ㅋ API key 드릴 수 있어요. /20일까지 무료에요. 필요하시면"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BMJN4CA5A",
+      "type": "message",
+      "ts": "1789612032.348959",
+      "client_msg_id": "e4c6eee0-5797-429b-8571-0e84410ddb2b",
+      "text": "삼성 전사에 도입된다면 보안이 매우 철저하고 지능 대비 가격이 거의 0에 수렴하는 온프레미스 private LLM이 될 듯 합니다..!!",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789608506.843879",
+      "parent_user_id": "U0BMJN4CA5A",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "ax8OQ",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "삼성 전사에 도입된다면 보안이 매우 철저하고 지능 대비 가격이 거의 0에 수렴하는 온프레미스 private LLM이 될 듯 합니다..!!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0B9QHYG6AH",
+      "type": "message",
+      "ts": "1789621200.318019",
+      "edited": {
+        "user": "U0B9QHYG6AH",
+        "ts": "1789621225.000000"
+      },
+      "client_msg_id": "a2bc5457-f6cf-4020-bdbf-db6e590590c1",
+      "text": "얼마전에 독파모에 탈락한 모티프 20$ 체험 베타 서비스이에요.\n <https://cbt.morphfactory.io/|cbt.morphfactory.io>",
+      "team": "T0B3958SGS3",
+      "attachments": [
+        {
+          "from_url": "https://cbt.morphfactory.io/",
+          "id": 1,
+          "original_url": "https://cbt.morphfactory.io/",
+          "fallback": "Morph — AI inference, made simple",
+          "text": "Explore Morph models, pricing, and the Token Factory API.",
+          "title": "Morph — AI inference, made simple",
+          "title_link": "https://cbt.morphfactory.io/",
+          "service_name": "cbt.morphfactory.io"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "tQT1P",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "얼마전에 독파모에 탈락한 모티프 20$ 체험 베타 서비스이에요.\n "
+                },
+                {
+                  "type": "link",
+                  "url": "https://cbt.morphfactory.io/",
+                  "text": "cbt.morphfactory.io",
+                  "truncated": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reactions": [
+        {
+          "name": "eyes",
+          "users": [
+            "U0BMJN4CA5A",
+            "U0B9TV2GVC2"
+          ],
+          "count": 2
+        },
+        {
+          "name": "raised_hands",
+          "users": [
+            "U0BMJN4CA5A",
+            "U0B9TV2GVC2"
+          ],
+          "count": 2
+        },
+        {
+          "name": "+1",
+          "users": [
+            "U0BL1ALS54G",
+            "U0BKR5VQFGB",
+            "U0B9TV2GVC2",
+            "U0BC26KFZ54",
+            "U0BLSE5CWE4"
+          ],
+          "count": 5
+        },
+        {
+          "name": "오",
+          "users": [
+            "U0BHMFP7G6A",
+            "U0B9TV2GVC2"
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "subtype": "tombstone",
+      "text": "This message was deleted.",
+      "user": "USLACKBOT",
+      "hidden": true,
+      "type": "message",
+      "ts": "1789628918.726649",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "reply_count": 11,
+      "reply_users_count": 3,
+      "latest_reply": "1789629261.177599",
+      "reply_users": [
+        "U0BKR5VQFGB",
+        "U0BMK5U2JRX",
+        "U0B9QHYG6AH"
+      ],
+      "is_locked": false,
+      "subscribed": false,
+      "reactions": [
+        {
+          "name": "동공지진",
+          "users": [
+            "U0B9TV2GVC2",
+            "U0BMK5U2JRX"
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "user": "U0BKR5VQFGB",
+      "type": "message",
+      "ts": "1789629020.324989",
+      "client_msg_id": "7336f9a6-214e-4139-b436-bbda3e709d60",
+      "text": "희재님께 농담을 한 것이었습니다 소란 죄송합니다 아이고 이런 실수를",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "4ABBA",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "희재님께 농담을 한 것이었습니다 소란 죄송합니다 아이고 이런 실수를"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BKR5VQFGB",
+      "type": "message",
+      "ts": "1789629046.507419",
+      "client_msg_id": "d68b1092-0857-4372-84e6-77365a767bea",
+      "text": "저와 희재님은 사이가 괜찮습니다(혹시나 오해 마시길...)",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "B6ibP",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "저와 희재님은 사이가 괜찮습니다(혹시나 오해 마시길...)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BMK5U2JRX",
+      "type": "message",
+      "ts": "1789629056.343089",
+      "client_msg_id": "cd18d122-a9db-4df2-a5ff-072cc5c497fd",
+      "text": "8B 모델 자체가 돌아가는 것과, 긴 컨텍스트까지 안정적으로 처리하는 건 별개니깐요 ~~~",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "NqmLz",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "8B 모델 자체가 돌아가는 것과, 긴 컨텍스트까지 안정적으로 처리하는 건 별개니깐요 ~~~"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BKR5VQFGB",
+      "type": "message",
+      "ts": "1789629072.871089",
+      "client_msg_id": "a102863b-ca65-4752-9581-a75b1c22a2a4",
+      "text": "그렇더라구요ㅎㅎㅎㅎ",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "HmCnN",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "그렇더라구요ㅎㅎㅎㅎ"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BMK5U2JRX",
+      "type": "message",
+      "ts": "1789629117.411219",
+      "client_msg_id": "fe8e5678-b9af-4ed3-9fdd-011d5fbfe370",
+      "text": "입력 컨텍스트가 1만 토큰 이상으로 길어지면 -&gt;  KV Cache가 컨텍스트 길이에 따라 계속 커지고 -&gt; 모델 가중치 외에도 KV Cache나 추론 중간 메모리가 추가로 필요해집니다~~!\n그래서 VRAM이 부족하면 RAM으로 넘어가거나 시스템 메모리까지 압박하면서 Ollama뿐 아니라 PC 자체가 심하게 느려지거나 멈출 수 있죠!",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "4Yl4O",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "입력 컨텍스트가 1만 토큰 이상으로 길어지면 ->  KV Cache가 컨텍스트 길이에 따라 계속 커지고 -> 모델 가중치 외에도 KV Cache나 추론 중간 메모리가 추가로 필요해집니다~~!\n그래서 VRAM이 부족하면 RAM으로 넘어가거나 시스템 메모리까지 압박하면서 Ollama뿐 아니라 PC 자체가 심하게 느려지거나 멈출 수 있죠!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BMK5U2JRX",
+      "type": "message",
+      "ts": "1789629122.566419",
+      "client_msg_id": "606cb085-edb1-45d1-9dff-dfb8b2bb87e1",
+      "text": ":innocent:",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "xqlHK",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "emoji",
+                  "name": "innocent",
+                  "unicode": "1f607"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BKR5VQFGB",
+      "type": "message",
+      "ts": "1789629166.899489",
+      "client_msg_id": "dcf75647-c42f-4965-a091-ce2db4f73b8e",
+      "text": "네... 멈췄습니다ㅎㅎㅎㅎ 하나 배웠네용 :slightly_smiling_face:",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "EKOH6",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "네... 멈췄습니다ㅎㅎㅎㅎ 하나 배웠네용 "
+                },
+                {
+                  "type": "emoji",
+                  "name": "slightly_smiling_face",
+                  "unicode": "1f642"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0B9QHYG6AH",
+      "type": "message",
+      "ts": "1789629177.840889",
+      "client_msg_id": "cd2a53a4-fb52-4a51-a357-2bc39c331c8d",
+      "text": ":eyes:",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "kMzJv",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "emoji",
+                  "name": "eyes",
+                  "unicode": "1f440"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BMK5U2JRX",
+      "type": "message",
+      "ts": "1789629185.034259",
+      "client_msg_id": "d4e82112-b536-4029-9501-1ee8438a5756",
+      "text": "이것이 바로 희재님의 뜻 아닐까요? (갓희재)",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "9CRM/",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "이것이 바로 희재님의 뜻 아닐까요? (갓희재)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "user": "U0BKR5VQFGB",
+      "type": "message",
+      "ts": "1789629206.279249",
+      "client_msg_id": "2db9c82f-58a6-422e-8d62-2b5325e7c7a5",
+      "text": "ㅋㅋㅋㅋ갓희재 감사해요",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "SHV89",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "ㅋㅋㅋㅋ갓희재 감사해요"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reactions": [
+        {
+          "name": "ㅋㅋㅋ",
+          "users": [
+            "U0BMK5U2JRX",
+            "U0BKR5VQFGB"
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "user": "U0B9QHYG6AH",
+      "type": "message",
+      "ts": "1789629261.177599",
+      "client_msg_id": "b2c7fb1f-7a79-41a7-a321-5e27a218f902",
+      "text": ":신형만: 저도 모르는 그런 뜻이..?",
+      "team": "T0B3958SGS3",
+      "thread_ts": "1789628918.726649",
+      "parent_user_id": "USLACKBOT",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "Vosq+",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "emoji",
+                  "name": "신형만"
+                },
+                {
+                  "type": "text",
+                  "text": " 저도 모르는 그런 뜻이..?"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reactions": [
+        {
+          "name": "meow_party",
+          "users": [
+            "U0BKR5VQFGB",
+            "U0BMK5U2JRX"
+          ],
+          "count": 2
+        }
+      ]
     }
   ]
 }

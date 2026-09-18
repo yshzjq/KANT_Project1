@@ -119,12 +119,14 @@ class BotTests(unittest.TestCase):
 
     def test_running_bot_is_reused_and_waits_for_request_barrier(self):
         self.clean()
+        output = io.StringIO()
         with FileLock(self.lock_path), \
              patch.object(bot, "start_background_bot") as start, \
              patch.object(bot.time, "sleep", side_effect=lambda _: bot.sync_pending(self.state)), \
-             patch.object(bot.collector, "sync_slack_data") as sync:
-            data = bot.ensure_slack_data(timeout=1)
+             patch.object(bot.collector, "sync_slack_data") as sync, contextlib.redirect_stdout(output):
+            data = bot.ensure_slack_data(timeout=1, verbose=False)
         self.assertEqual(data, self.data)
+        self.assertEqual(output.getvalue(), "")
         start.assert_not_called()
         sync.assert_not_called()
 
@@ -132,11 +134,14 @@ class BotTests(unittest.TestCase):
         self.state.fail("이전 실패")
         self.clean()
         self.state.fail("이전 실패")
+        output = io.StringIO()
         with patch.object(bot, "is_locked", side_effect=[False, True]), \
              patch.object(bot, "start_background_bot") as start, \
-             patch.object(bot.time, "sleep", side_effect=lambda _: bot.sync_pending(self.state)):
-            self.assertEqual(bot.ensure_slack_data(timeout=1), self.data)
+             patch.object(bot.time, "sleep", side_effect=lambda _: bot.sync_pending(self.state)), \
+             contextlib.redirect_stdout(output):
+            self.assertEqual(bot.ensure_slack_data(timeout=1, verbose=False), self.data)
         start.assert_called_once()
+        self.assertEqual(output.getvalue(), "")
 
     def test_missing_cache_requests_full_recovery(self):
         self.clean()

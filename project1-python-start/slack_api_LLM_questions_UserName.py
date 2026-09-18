@@ -33,7 +33,8 @@ def load_name_cache(cache_path):
             raise ValueError("캐시가 객체 형식이 아닙니다.")
         return cache
     except (OSError, ValueError):
-        print("작성자 이름 캐시를 읽지 못해 필요한 이름을 다시 조회합니다.")
+        if DEBUG:
+            print("작성자 이름 캐시를 읽지 못해 필요한 이름을 다시 조회합니다.")
         return {}
 
 
@@ -150,9 +151,8 @@ def get_user_names(user_ids, cache_path=None):
                     continue
         pending.append(user_id)
 
-    if DEBUG : 
+    if DEBUG:
         print(
-            
             f"작성자 {len(user_ids)}명: 이름 캐시 사용 {len(user_ids) - len(pending)}명, "
             f"조회 필요 {len(pending)}명",
             flush=True,
@@ -162,7 +162,8 @@ def get_user_names(user_ids, cache_path=None):
 
     token = os.getenv("SLACK_TOKEN", "").strip()
     if not token:
-        print("SLACK_TOKEN이 없어 저장된 작성자 이름 또는 ID를 사용합니다.")
+        if DEBUG:
+            print("SLACK_TOKEN이 없어 저장된 작성자 이름 또는 ID를 사용합니다.")
         return names
 
     updates = {}
@@ -171,8 +172,9 @@ def get_user_names(user_ids, cache_path=None):
             name = fetch_user_name(user_id, token)
         except UserNameLookupError as error:
             # 권한·인증·네트워크 오류가 나면 같은 실패를 반복 호출하지 않습니다.
-            print(f"작성자 이름 조회: {error}")
-            print("나머지 작성자는 저장된 이름 또는 ID로 표시합니다.")
+            if DEBUG:
+                print(f"작성자 이름 조회: {error}")
+                print("나머지 작성자는 저장된 이름 또는 ID로 표시합니다.")
             break
 
         if name:
@@ -180,14 +182,17 @@ def get_user_names(user_ids, cache_path=None):
             updates[user_id] = {"name": name, "fetched_at": time.time()}
         else:
             # 실패 결과를 이름으로 저장하지 않아 다음 실행에서 다시 확인합니다.
-            print(f"작성자 {user_id}: 이름을 확인하지 못했습니다.")
+            if DEBUG:
+                print(f"작성자 {user_id}: 이름을 확인하지 못했습니다.")
 
     if updates:
         try:
             save_name_updates(cache_path, updates)
-            print(f"작성자 이름 {len(updates)}명을 조회해 캐시에 저장했습니다.")
+            if DEBUG:
+                print(f"작성자 이름 {len(updates)}명을 조회해 캐시에 저장했습니다.")
         except (OSError, AlreadyRunning):
-            print("이름 캐시를 저장하지 못했지만 이번 답변에는 조회한 이름을 사용합니다.")
+            if DEBUG:
+                print("이름 캐시를 저장하지 못했지만 이번 답변에는 조회한 이름을 사용합니다.")
 
     return names
 

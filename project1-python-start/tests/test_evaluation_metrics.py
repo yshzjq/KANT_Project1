@@ -117,6 +117,36 @@ class EvaluationReportTests(unittest.TestCase):
         path = chat.run_question_evaluation([], **kwargs)
         return path.read_text(encoding="utf-8")
 
+    def test_debug_controls_console_without_losing_evaluation_records(self):
+        for debug in (False, True):
+            with self.subTest(debug=debug):
+                self.client.chat.side_effect = [response('{"keywords":["공지"]}'), response("평가 답변"),
+                                                RuntimeError("검색어 호출 실패")]
+                output = io.StringIO()
+                with patch.object(chat, "DEBUG", debug), \
+                     patch.object(chat, "QUESTION_LIST", chat.QUESTION_LIST * 2), \
+                     contextlib.redirect_stdout(output):
+                    report = self.report()
+                self.assertIn("**답변**\n\n평가 답변", report)
+                self.assertIn("평가 실패: 검색어 호출 실패", report)
+                self.assertIn("모델 호출 성공 수 / 전체 시도 수: 2 / 3", report)
+                self.assertIn("tokenizer", report)
+                if debug:
+                    self.assertIn("평가 결과 저장 완료", output.getvalue())
+                    self.assertIn("평가 답변", output.getvalue())
+                else:
+                    self.assertEqual(output.getvalue(), "")
+
+    def test_quiet_evaluation_no_context_keeps_notice_only_in_report(self):
+        output = io.StringIO()
+        with patch.object(chat, "DEBUG", False), \
+             patch.object(chat, "prepare_context", side_effect=chat.NoRelevantContext("관련 기록 미확인")), \
+             contextlib.redirect_stdout(output):
+            report = self.report()
+        self.assertEqual(output.getvalue(), "")
+        self.assertIn("관련 기록 미확인", report)
+        self.assertIn("최종 모델 답변 완료: 0", report)
+
     def test_report_contains_per_call_metrics_original_response_and_actual_conditions(self):
         report = self.report()
         self.assertIn("0.50초", report)

@@ -27,6 +27,53 @@ class ChatContextTests(unittest.TestCase):
         self.assertEqual(chat.extract_search_keywords(client, "질문"), ["ollama", "특강", "질문"])
         self.assertEqual(client.chat.call_args.kwargs["format"], chat.KEYWORD_FORMAT)
 
+    def test_quiet_interactive_main_keeps_only_prompt_and_answer(self):
+        for debug in (False, True):
+            with self.subTest(debug=debug):
+                client = Mock()
+                client.chat.side_effect = [model_response('{"keywords":["공지"]}'), model_response("테스트 답변")]
+                messages = [{"ts": "100.1", "text": "공지 내용입니다."}]
+                questions = iter(["공지 내용은?", "종료"])
+                output = io.StringIO()
+
+                def sync(*, verbose):
+                    self.assertEqual(verbose, debug)
+                    if verbose:
+                        print("Slack 변경 확인 로그")
+                    return {"messages": messages}
+
+                def ask(prompt):
+                    print(prompt, end="")  # 실제 input처럼 프롬프트를 표시합니다.
+                    return next(questions)
+
+                with patch.object(chat, "DEBUG", debug), \
+                     patch.object(chat, "QUESTION_EVALUATION", False), \
+                     patch.object(chat, "ensure_slack_data", side_effect=sync), \
+                     patch.object(chat, "Client", return_value=client), \
+                     patch("builtins.input", side_effect=ask), contextlib.redirect_stdout(output):
+                    chat.main()
+                text = output.getvalue()
+                if not debug:
+                    self.assertEqual(text, "질문을 입력하면 답변합니다. 종료: 종료 / exit / quit / Ctrl+C\n"
+                                     "\n질문: 테스트 답변\n\n질문: ")
+                else:
+                    self.assertIn("Slack 변경 확인 로그", text)
+                    self.assertIn("대화기록 1개를 준비", text)
+                    self.assertIn("답변을 기다리고 있습니다", text)
+                    self.assertIn("테스트 답변", text)
+                self.assertEqual(client.chat.call_count, 2)
+
+    def test_quiet_interactive_no_context_still_displays_notice(self):
+        client = Mock()
+        client.chat.return_value = model_response('{"keywords":["일정"]}')
+        output = io.StringIO()
+        with patch.object(chat, "DEBUG", False), \
+             patch.object(chat, "prepare_context", side_effect=chat.NoRelevantContext("관련 기록을 확인하지 못했습니다.")), \
+             contextlib.redirect_stdout(output):
+            answer = chat.answer_question("일정은?", [], client)
+        self.assertEqual(output.getvalue(), answer + "\n")
+        self.assertEqual(client.chat.call_count, 1)
+
     def test_invalid_keyword_responses_stop(self):
         for content in ("not json", '{"keywords": [1]}', '{"keywords": []}'):
             with self.subTest(content=content):

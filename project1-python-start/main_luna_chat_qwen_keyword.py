@@ -1,11 +1,7 @@
 """Luna로 Slack 질문에 답합니다. 실행: python main_luna_chat.py
 
-읽는 순서: 설정 변수 → main → build_keyword_backend → 공통 질문 처리.
+읽는 순서: main → LunaClient.chat → main_ollama_chat.main.
 config.py의 QUESTION_EVALUATION과 QUESTION_LIST, prompts.py의 지침을 그대로 사용합니다.
-기본 경로는 로컬 Ollama 키워드 추출 → Slack 검색 → Luna 최종 답변입니다.
-로컬 모델은 Ollama 서버에 설치되어 있어야 합니다. 실패한 호출은 다른 모델로 대체하지 않습니다.
-클라우드 키워드 사용 예: KEYWORD_PROVIDER="openai", KEYWORD_MODEL="gpt-5.6-luna".
-다른 클라우드 모델은 Responses API·JSON Schema 지원과 계정 접근 권한이 필요합니다.
 """
 
 import os
@@ -14,26 +10,21 @@ from getpass import getpass
 from types import SimpleNamespace
 
 from openai import APIError, OpenAI
+from ollama import Client as OllamaClient
 
 import main_ollama_chat as shared
 from evaluation_metrics import field
 
 
-# 최종 답변 전용입니다. 검색어 모델을 바꿔도 이 값에는 영향을 주지 않습니다.
+# 02_luna_chat.py와 같은 모델입니다. 다른 Responses 모델을 비교할 때 이 값을 변경합니다.
+# 모델마다 reasoning 설정 지원 여부가 다를 수 있으므로 지원하지 않는 모델은 None으로 둡니다.
 MODEL = "gpt-5.6-luna"
+KEYWORD_MODEL = "qwen3:4b-instruct-2507-q4_K_M"  # 검색어 추출용 로컬 Ollama 모델
 REASONING_EFFORT = "none"
-
-# ollama: 로컬 모델 태그 / openai: Responses API 모델 ID를 KEYWORD_MODEL에 지정합니다.
-# 클라우드 키워드는 KEYWORD_PROVIDER·KEYWORD_MODEL을 함께 바꿉니다. MODEL은 최종 답변 전용입니다.
-KEYWORD_PROVIDER = "ollama"
-KEYWORD_MODEL = "qwen3:4b-instruct-2507-q4_K_M"
-KEYWORD_OLLAMA_HOST = shared.OLLAMA_HOST
-# KEYWORD_PROVIDER="openai"일 때만 사용합니다. reasoning 미지원 모델은 None으로 둡니다.
-KEYWORD_REASONING_EFFORT = "none"
-
 API_BASE_URL = "https://api.openai.com/v1"
 API_TIMEOUT = 180
 CLOUD_RUNTIME_REASON = "OpenAI Responses API는 서버의 VRAM·적재 상태·digest·양자화·실제 context_length를 제공하지 않음"
+OLLAMA_HOST = "http://127.0.0.1:11434"
 
 
 class LunaClient:
@@ -41,20 +32,31 @@ class LunaClient:
 
     provider = "openai_responses"
 
-    def __init__(self, client, *, model=MODEL, reasoning_effort=REASONING_EFFORT):
+    def __init__(
+        self,
+        client,
+        keyword_client,
+        *,
+        model=MODEL,
+        keyword_model=KEYWORD_MODEL,
+        reasoning_effort=REASONING_EFFORT,
+    ):
         self.client = client
+        self.keyword_client = keyword_client
         self.model = model
+        self.keyword_model = keyword_model
         self.reasoning_effort = reasoning_effort
         self.observed_model = None
 
     @property
     def report_header(self):
         return (
-            f"OpenAI Responses API: `{API_BASE_URL}`\n\n"
+            f"최종 답변: OpenAI Responses API `{MODEL}` / `{API_BASE_URL}`\n\n"
+            f"검색어 추출: 로컬 Ollama `{KEYWORD_MODEL}` / `{OLLAMA_HOST}`\n\n"
             f"클라이언트 timeout={API_TIMEOUT}초 / max_retries=0 / store=false\n\n"
             f"검색 문맥 선택은 기존 NUM_CTX={shared.NUM_CTX} 기준의 입력 길이 규칙을 재사용합니다. "
             "이 값은 클라우드에 num_ctx로 전송하지 않으며 서버의 실제 context_length가 아닙니다.\n\n"
-            "클라우드 temperature는 미지정입니다. 로컬 Ollama의 temperature=0과 "
+            "temperature는 02_luna_chat.py처럼 미지정입니다. 로컬 Ollama의 temperature=0과 "
             "동일한 생성 설정이라고 해석하지 마세요. 전송 설정과 API 반환 설정을 각각 보존합니다.\n\n"
         )
 
@@ -81,7 +83,7 @@ class LunaClient:
         }
         if self.reasoning_effort is not None:
             request["reasoning"] = {"effort": self.reasoning_effort}
-        # 클라우드 temperature는 미지정입니다. 실제로 보낸 설정만 보고서에 남깁니다.
+        # 02_luna_chat.py처럼 temperature는 미지정입니다. 실제로 보낸 설정만 보고서에 남깁니다.
         if format is not None:
             request["text"] = {"format": {
                 "type": "json_schema", "name": "search_keywords", "strict": True, "schema": format,
@@ -89,8 +91,22 @@ class LunaClient:
         return request
 
     def request_settings(self, **kwargs):
-        # API 키와 입력 원문을 설정 표에 섞지 않습니다. 원문·메시지는 검색 진단에 별도로 남깁니다.
-        return {key: value for key, value in self.make_request(**kwargs).items() if key not in {"input", "model"}}
+        # 검색어 생성은 로컬 Ollama, 최종 답변은 OpenAI Responses API를 사용합니다.
+        # API 키와 입력 원문은 설정 표에 넣지 않습니다.
+        if kwargs.get("format") is not None:
+            return {
+                "provider": "ollama",
+                "model": self.keyword_model,
+                "stream": kwargs.get("stream", False),
+                "options": kwargs.get("options", {}),
+                "format": kwargs.get("format"),
+            }
+
+        return {
+            key: value
+            for key, value in self.make_request(**kwargs).items()
+            if key not in {"input", "model"}
+        }
 
     def runtime_snapshot(self):
         return {
@@ -99,6 +115,18 @@ class LunaClient:
         }
 
     def chat(self, **kwargs):
+        # main_ollama_chat.extract_search_keywords()는 format=KEYWORD_FORMAT을 전달합니다.
+        # 이 호출만 로컬 Ollama의 Qwen 모델로 보냅니다.
+        if kwargs.get("format") is not None:
+            return self.keyword_client.chat(
+                model=self.keyword_model,
+                messages=kwargs["messages"],
+                format=kwargs["format"],
+                stream=kwargs.get("stream", False),
+                options=kwargs["options"],
+            )
+
+        # format이 없는 호출은 최종 답변 생성이므로 OpenAI Luna로 보냅니다.
         try:
             response = self.client.responses.create(**self.make_request(**kwargs))
         except APIError as error:
@@ -123,62 +151,8 @@ class LunaClient:
         )
 
 
-class OllamaKeywordClient:
-    """로컬 검색어 생성과 짧은 제한 시간의 메타데이터 조회를 분리합니다."""
-
-    provider = "ollama"
-
-    def __init__(self, *, model, host):
-        self.model = model
-        self.host = host
-        self.client = shared.Client(host=host, timeout=180)
-        self.observer = shared.Client(host=host, timeout=5)
-
-    @property
-    def report_header(self):
-        return f"Ollama 서버: `{self.host}` / 검색어 전용 모델: `{self.model}`\n\n"
-
-    @property
-    def measurement_notes(self):
-        return (
-            "로컬 검색어 생성은 temperature=0, num_predict=256, num_ctx="
-            f"{shared.NUM_CTX}로 요청합니다. 실제 전송 설정은 각 호출에 기록합니다.\n\n"
-            "Ollama 로딩 시간은 load_duration / 1,000,000,000초, 생성 속도는 "
-            "eval_count / (eval_duration / 1,000,000,000) tokens/s입니다. "
-            "통계가 없거나 생성 시간이 0 이하이면 측정 불가 사유를 기록합니다.\n\n"
-            "tokenizer는 show 조회값, 실제 context_length·digest·양자화·CPU/GPU 적재 정보는 "
-            "ps 조회값을 사용합니다. VRAM은 해당 모델의 size_vram / 1,048,576 MiB입니다.\n\n"
-        )
-
-    def chat(self, **kwargs):
-        return self.client.chat(**kwargs)
-
-    def show(self, model):
-        return self.observer.show(model)
-
-    def ps(self):
-        return self.observer.ps()
-
-
-def validate_keyword_config():
-    """설정 오류는 Slack 동기화나 유료 호출 전에 안내합니다."""
-    if KEYWORD_PROVIDER not in {"ollama", "openai"}:
-        raise ValueError('KEYWORD_PROVIDER는 "ollama" 또는 "openai"여야 합니다.')
-    if not isinstance(KEYWORD_MODEL, str) or not KEYWORD_MODEL.strip():
-        raise ValueError("KEYWORD_MODEL에 검색어 추출 모델을 지정하세요.")
-
-
-def build_keyword_backend(api_client):
-    validate_keyword_config()
-    if KEYWORD_PROVIDER == "ollama":
-        return OllamaKeywordClient(model=KEYWORD_MODEL, host=KEYWORD_OLLAMA_HOST)
-    # 같은 API 연결을 재사용해도 어댑터는 나눠야 모델·reasoning·관측 모델명이 섞이지 않습니다.
-    return LunaClient(api_client, model=KEYWORD_MODEL, reasoning_effort=KEYWORD_REASONING_EFFORT)
-
-
 def main():
-    validate_keyword_config()
-    # 환경변수가 없으면 화면에 보이지 않게 입력받습니다. 키를 파일에 쓰지 않습니다.
+    # 환경변수가 없으면 02_luna_chat.py처럼 화면에 보이지 않게 입력받습니다. 키를 파일에 쓰지 않습니다.
     api_key = os.environ.get("OPENAI_API_KEY", "").strip()
     if not api_key:
         try:
@@ -188,11 +162,30 @@ def main():
     if not api_key:
         raise SystemExit("키를 입력하지 않아 API를 호출하지 않았습니다.")
 
-    shared.debug_print(f"최종 답변 모델: {MODEL} / 검색어 모델: {KEYWORD_MODEL} ({KEYWORD_PROVIDER})")
-    with OpenAI(api_key=api_key, base_url=API_BASE_URL, timeout=API_TIMEOUT, max_retries=0) as client:
+    print(
+        f"검색어 모델: {KEYWORD_MODEL} (로컬 Ollama) / "
+        f"최종 답변 모델: {MODEL} (OpenAI)"
+    )
+
+    keyword_client = OllamaClient(
+        host=OLLAMA_HOST,
+        timeout=180,
+    )
+
+    with OpenAI(
+        api_key=api_key,
+        base_url=API_BASE_URL,
+        timeout=API_TIMEOUT,
+        max_retries=0,
+    ) as client:
         shared.main(
-            backend=LunaClient(client, model=MODEL, reasoning_effort=REASONING_EFFORT),
-            keyword_backend=build_keyword_backend(client),
+            backend=LunaClient(
+                client,
+                keyword_client,
+                model=MODEL,
+                keyword_model=KEYWORD_MODEL,
+                reasoning_effort=REASONING_EFFORT,
+            )
         )
 
 

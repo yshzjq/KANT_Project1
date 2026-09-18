@@ -67,14 +67,15 @@ collector = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(collector)
 
 
-def ensure_slack_data(timeout=SLACK_READY_TIMEOUT):
+def ensure_slack_data(timeout=SLACK_READY_TIMEOUT, *, verbose=True):
     """봇이 없으면 시작하고, 현재까지 수신한 변경이 저장되면 기록을 반환합니다."""
     state = BotState(STATE_PATH)
     if not is_locked(LOCK_PATH):
         state.fail("")  # 이전 프로세스의 실패를 새 시작의 실패로 오인하지 않습니다.
         start_background_bot()
-        print("Slack 감지 봇을 백그라운드로 시작합니다.", flush=True)
-    else:
+        if verbose:
+            print("Slack 감지 봇을 백그라운드로 시작합니다.", flush=True)
+    elif verbose:
         print("실행 중인 Slack 감지 봇을 사용합니다.", flush=True)
 
     # 살아 있는 봇도 파일이 지워졌다면 전체 기록을 다시 받아야 합니다.
@@ -89,7 +90,8 @@ def ensure_slack_data(timeout=SLACK_READY_TIMEOUT):
         if is_ready(snapshot, request_id) and is_locked(LOCK_PATH):
             data = collector.load_saved_data(collector.DATA_PATH)
             collector.index_messages(data.get("messages", []))
-            print("Slack 변경 확인 완료. 저장된 대화기록을 사용합니다.", flush=True)
+            if verbose:
+                print("Slack 변경 확인 완료. 저장된 대화기록을 사용합니다.", flush=True)
             return data
         if snapshot["error"]:
             raise RuntimeError(f"{snapshot['error']} (봇 로그: {LOG_PATH})")
@@ -102,7 +104,8 @@ def ensure_slack_data(timeout=SLACK_READY_TIMEOUT):
                 phase = "봇 시작·재연결 후 전체 기록 확인 중"
             else:
                 phase = "감지된 변경 기록 저장 중"
-            print(f"{phase}입니다. 로그: {LOG_PATH}", flush=True)
+            if verbose:
+                print(f"{phase}입니다. 로그: {LOG_PATH}", flush=True)
             next_notice = time.monotonic() + 15
         time.sleep(0.5)
     raise RuntimeError(
