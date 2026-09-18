@@ -107,3 +107,10 @@ QUESTION_EVALUATION_DIR = "data/private/evaluations"
 
 # 단위: 초. main이 봇의 기록 준비를 기다리는 한도이며, 봇 수명이나 API 조회 간격이 아닙니다.
 SLACK_READY_TIMEOUT = 600
+
+# 수집·감지·검색할 채널입니다. 채널 ID를 키, 보고서에 표시할 이름을 값으로 추가합니다.
+# 채널마다 slack_<채널 ID>.json으로 저장하고, 질문할 때 함께 검색합니다.
+SLACK_CHANNELS = {
+    "C0BBNNCS4BG": "LLM 질문잡담방",
+    "C0BBUDU7AEQ": "LLM 공지방",
+}

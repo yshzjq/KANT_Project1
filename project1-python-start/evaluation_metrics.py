@@ -300,10 +300,11 @@ def render_retrieval(trace):
             lines.append(f"- 검색 점수 통과 기준: {trace['score_cutoff']:.4f} (날짜 통과 후보 최고 점수의 65%)")
         lines += ["", "#### 후보 대화와 선택·제외 사유", ""]
         if candidates:
-            lines += ["| 검색 순위 | 대화 ID | 점수 | 일치 검색어 | 처리 | 사유 |",
-                      "|---:|---|---:|---|---|---|"]
+            lines += ["| 검색 순위 | 채널 | 대화 ID | 점수 | 일치 검색어 | 처리 | 사유 |",
+                      "|---:|---|---|---:|---|---|---|"]
             for candidate in candidates:
-                values = [candidate["rank"], candidate["thread_id"], f"{candidate['score']:.4f}",
+                channel = candidate.get("channel_name") or candidate.get("channel_id") or "기존 단일 채널"
+                values = [candidate["rank"], channel, candidate["thread_id"], f"{candidate['score']:.4f}",
                           ", ".join(candidate["matched_keywords"]), candidate["decision"], candidate["reason"]]
                 lines.append("| " + " | ".join(table_cell(value) for value in values) + " |")
         else:
@@ -323,6 +324,8 @@ def render_retrieval(trace):
         lines += ["", f"최종 답변 모델 미호출 사유: {trace['no_context_reason']}"]
     lines += ["", "#### 선택된 Slack 원문 (발췌·날짜 변환 전)", ""]
     for message in trace.get("selected_messages", []):
+        if message.get("channel_id"):
+            lines.append(f"- 출처 채널: {message.get('channel_name') or message['channel_id']} ({message['channel_id']})")
         lines += [f"- 메시지 ID: {message['ts']} / 대화 ID: {message['thread_id']} / 작성: {message['posted_at']}",
                   f"- 본문 발췌 여부: {'예' if message['excerpted'] else '아니요'}", "",
                   fenced(message["original_text"], "text")]

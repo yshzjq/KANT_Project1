@@ -96,6 +96,32 @@ class ChatContextTests(unittest.TestCase):
         self.assertGreater(threads[1]["score"], threads[2]["score"])
         self.assertEqual(len(threads[2]["messages"]), 3)
 
+    def test_same_timestamp_in_two_channels_stays_separate_in_search_and_trace(self):
+        messages = [
+            {"channel_id": "CCHAT", "channel_name": "질문잡담방", "ts": "100.1", "text": "학습 안내 질문"},
+            {"channel_id": "CCHAT", "channel_name": "질문잡담방", "ts": "101.1", "thread_ts": "100.1", "text": "질문방 답글"},
+            {"channel_id": "CNEWS", "channel_name": "공지방", "ts": "100.1", "text": "학습 안내 공지"},
+            {"channel_id": "CNEWS", "channel_name": "공지방", "ts": "101.1", "thread_ts": "100.1", "text": "공지방 답글"},
+        ]
+        threads = chat.find_matching_threads(messages, ["학습 안내"])
+        self.assertEqual({thread["thread_id"] for thread in threads}, {"CCHAT:100.1", "CNEWS:100.1"})
+        self.assertTrue(all(len({m["channel_id"] for m in thread["messages"]}) == 1 for thread in threads))
+        trace = {}
+        with patch.object(chat, "get_user_names", return_value={}):
+            context = chat.prepare_context(messages, ["학습 안내"], "학습 방식은?", trace=trace)
+        self.assertIn("[채널: 질문잡담방 / ID: CCHAT]", context)
+        self.assertIn("[채널: 공지방 / ID: CNEWS]", context)
+        originals = {(item["channel_id"], item["ts"]): item["original_text"] for item in trace["selected_messages"]}
+        self.assertEqual(originals, {(m["channel_id"], m["ts"]): m["text"] for m in messages})
+
+    def test_matching_text_in_one_channel_does_not_select_same_timestamp_elsewhere(self):
+        messages = [
+            {"channel_id": "CCHAT", "ts": "100.1", "text": "인사"},
+            {"channel_id": "CNEWS", "ts": "100.1", "text": "수업 준비물 안내"},
+        ]
+        threads = chat.find_matching_threads(messages, ["준비물"])
+        self.assertEqual([thread["thread_id"] for thread in threads], ["CNEWS:100.1"])
+
     def test_long_thread_is_skipped_and_short_thread_keeps_parent_and_reply(self):
         messages = [
             {"ts": "300.1", "text": "Ollama " + "긴 본문" * 10000},

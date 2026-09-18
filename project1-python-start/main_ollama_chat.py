@@ -252,6 +252,11 @@ def run_question_evaluation(all_messages, *, experiment_kind="main", backend=Non
     snapshot_hash = hashlib.sha256(json.dumps(
         all_messages, ensure_ascii=False, sort_keys=True, separators=(",", ":")
     ).encode("utf-8")).hexdigest()
+    channels = {message["channel_id"]: message.get("channel_name", message["channel_id"])
+                for message in all_messages if message.get("channel_id")}
+    channel_description = ("검색 채널: " + ", ".join(
+        f"{name} (`{channel_id}`)" for channel_id, name in sorted(channels.items())
+    ) + "\n\n") if channels else ""
     # show·ps 조회·보고서 기록은 elapsed에 포함하지 않습니다. 모델 로딩은 포함됩니다.
     with output_path.open("x", encoding="utf-8") as report:
         report.write(
@@ -260,6 +265,7 @@ def run_question_evaluation(all_messages, *, experiment_kind="main", backend=Non
             f"실험 구분: {EXPERIMENT_KINDS[experiment_kind]} / 실행 시각: {datetime.now(KST).isoformat()}\n\n"
             f"{server_description}"
             f"검색 대상: {len(all_messages)}개 메시지 / 메시지 목록 SHA-256: `{snapshot_hash}`\n\n"
+            f"{channel_description}"
             "검색 진단은 이 실행에서 수집한 기록입니다. 후보 점수는 정답 확률이 아니며, 날짜 통과는 현재 규칙의 판정입니다. "
             "선택된 원문과 실제 요청 메시지를 함께 보존합니다.\n\n"
             "응답시간(elapsed)은 검색어 생성·검색·진단 수집·이름 조회·최종 답변까지의 전체 처리 시간입니다. "
@@ -389,6 +395,8 @@ def prepare_context(all_messages, keywords, question, reference_time=None, *, tr
         if trace is not None:
             candidate = {
                 "thread_id": thread["thread_id"], "rank": rank, "score": thread["score"],
+                "channel_id": thread.get("channel_id", ""),
+                "channel_name": thread.get("channel_name", ""),
                 "matched_keywords": [word for word in keywords if any(
                     compact_text(word) in message_search_text(message) for message in thread["messages"]
                 )],
@@ -434,7 +442,7 @@ def prepare_context(all_messages, keywords, question, reference_time=None, *, tr
     # 이름을 추가하면 입력이 길어지므로 선택된 대화 안에서 길이를 다시 점검합니다.
     selected_ids = set()
     for message in selected_messages:
-        selected_ids.add(message.get("thread_ts") or message["ts"])
+        selected_ids.add(thread_key(message))
     selected_threads = []
     for thread in matched_threads:
         if thread["thread_id"] in selected_ids:
@@ -447,13 +455,15 @@ def prepare_context(all_messages, keywords, question, reference_time=None, *, tr
     )
     skipped_threads += author_skipped
     if trace is not None:
-        originals = {message["ts"]: message for message in all_messages}
+        originals = {message_key(message): message for message in all_messages}
         # 발췌 전 본문도 남겨 선택 과정에서 조건 문장이 빠졌는지 검토할 수 있습니다.
         trace.update(stage="검색 완료", context=education_info, selected_messages=[{
-            "ts": message["ts"], "thread_id": message.get("thread_ts") or message["ts"],
+            "ts": message["ts"], "thread_id": thread_key(message),
+            "channel_id": message.get("channel_id", ""),
+            "channel_name": message.get("channel_name", ""),
             "posted_at": datetime.fromtimestamp(float(message["ts"]), KST).isoformat(),
-            "original_text": originals[message["ts"]].get("text") or "",
-            "excerpted": (message.get("text") or "") != (originals[message["ts"]].get("text") or ""),
+            "original_text": originals[message_key(message)].get("text") or "",
+            "excerpted": (message.get("text") or "") != (originals[message_key(message)].get("text") or ""),
         } for message in selected_messages])
 
     if DEBUG:
@@ -575,6 +585,17 @@ def normalize_slack_links(text):
     return re.sub(r"<(https?://[^|>\s]+)(?:\|([^>]*))?>", replace_link, text)
 
 
+def message_key(message):
+    # Slack의 ts는 채널 안에서만 고유합니다. 채널이 다른 같은 시각의 메시지를 합치면 안 됩니다.
+    return message.get("channel_id", ""), message["ts"]
+
+
+def thread_key(message):
+    parent_ts = message.get("thread_ts") or message["ts"]
+    channel_id = message.get("channel_id")
+    return f"{channel_id}:{parent_ts}" if channel_id else parent_ts
+
+
 def format_message(message, user_names=None):
     """작성자, 메시지 본문, 답글 연결 정보, 첨부파일 링크를 보존합니다."""
     # ts에는 작성 시각도 들어 있습니다. 사람이 읽을 수 있는 한국 시각으로 바꿉니다.
@@ -591,6 +612,8 @@ def format_message(message, user_names=None):
         f"작성자: {author}",
         normalize_slack_links(resolve_relative_dates(message.get("text") or "", posted_at.date())),
     ]
+    if message.get("channel_id"):
+        lines.insert(0, f"[채널: {message.get('channel_name') or message['channel_id']} / ID: {message['channel_id']}]")
 
     parent_ts = message.get("thread_ts")
     if parent_ts and parent_ts != message["ts"]:
@@ -645,14 +668,14 @@ def find_matching_threads(all_messages, keywords, question=""):
     threads = {}
 
     for message in all_messages:
-        thread_id = message.get("thread_ts") or message["ts"]
+        thread_id = thread_key(message)
         # 답글은 thread_ts로 원글을 찾고, 원글은 자기 ts를 묶음 ID로 사용합니다.
         if thread_id not in threads:
             threads[thread_id] = []
         threads[thread_id].append(message)
 
     matched_threads = []
-    search_texts = {message["ts"]: message_search_text(message) for message in all_messages}
+    search_texts = {message_key(message): message_search_text(message) for message in all_messages}
     terms = list(dict.fromkeys(compact_text(word) for word in keywords if word.strip()))
     # 일반 표현의 희소성이 고유명사·핵심 주제보다 큰 점수를 만들지 않게 합니다.
     weights = {
@@ -674,14 +697,14 @@ def find_matching_threads(all_messages, keywords, question=""):
         messages = sorted(messages, key=lambda message: Decimal(message["ts"]))
         texts = [format_message(message) for message in messages]
 
-        hits = [{term for term in terms if term in search_texts[message["ts"]]} for message in messages]
+        hits = [{term for term in terms if term in search_texts[message_key(message)]} for message in messages]
         best_score = max(sum(weights[term] for term in hit) for hit in hits)
         thread_score = sum(weights[term] for term in set().union(*hits))
         # 한 메시지에 모인 단서는 전부, 다른 답글에 흩어진 추가 단서는 20%만 점수에 더합니다.
         score = best_score + 0.2 * (thread_score - best_score)
         # 질문 원문의 드문 단서(예: '본격', '100%')가 있는 대화를 우선합니다.
         # 모델이 추가한 넓은 유사어가 정확히 일치하는 대화를 밀어내지 않게 합니다.
-        if any(term in search_texts[message["ts"]] for term in anchors for message in messages):
+        if any(term in search_texts[message_key(message)] for term in anchors for message in messages):
             score *= 2
         if location_query and score > 0:
             # 문의 경로를 묻는 질문에 기술 문답 자체가 안내문보다 앞서지 않도록 합니다.
@@ -691,6 +714,8 @@ def find_matching_threads(all_messages, keywords, question=""):
         if score > 0:
             matched_threads.append({
                 "thread_id": thread_id,
+                "channel_id": messages[0].get("channel_id", ""),
+                "channel_name": messages[0].get("channel_name", ""),
                 "score": score,
                 "keywords": keywords,
                 "latest_ts": Decimal(messages[-1]["ts"]),

@@ -154,6 +154,33 @@ class SyncTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 sync.read_all_pages("conversations.history")
 
+    def test_new_channel_uses_its_id_for_history_replies_and_saved_file(self):
+        channel_id = "CTESTNEWS"
+        with patch.object(sync, "DATA_PATH", self.path), patch.object(sync, "call_slack", side_effect=[
+            {"messages": [self.parent]}, {"messages": [self.parent, self.reply]},
+        ]) as api:
+            data = sync.sync_slack_data(channel_id=channel_id)
+        self.assertEqual([call.kwargs["channel"] for call in api.call_args_list], [channel_id, channel_id])
+        self.assertEqual([call.args[0] for call in api.call_args_list],
+                         ["conversations.history", "conversations.replies"])
+        self.assertEqual(data["channel_id"], channel_id)
+        self.assertEqual(json.loads((self.path.parent / f"slack_{channel_id}.json").read_text(encoding="utf-8")), data)
+        self.assertFalse(self.path.exists())
+
+    def test_wrong_channel_file_and_foreign_delete_cannot_change_existing_data(self):
+        saved = self.save_existing()
+        before = self.path.read_bytes()
+        reader = Mock(return_value=([], False))
+        with self.assertRaisesRegex(RuntimeError, "채널 ID"):
+            sync.sync_slack_data(self.path, reader, channel_id="CTESTNEWS")
+        reader.assert_not_called()
+        data = sync.sync_slack_data(self.path, reader, full_sync=False, events=[{
+            "channel": "CTESTNEWS", "subtype": "message_deleted", "deleted_ts": self.parent["ts"],
+        }])
+        self.assertEqual(data, saved)
+        self.assertEqual(self.path.read_bytes(), before)
+        reader.assert_not_called()
+
 
 class QuestionFlowTests(unittest.TestCase):
     def setUp(self):

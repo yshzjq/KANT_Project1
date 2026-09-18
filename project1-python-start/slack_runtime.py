@@ -83,6 +83,11 @@ class BotState:
                     event_id TEXT UNIQUE NOT NULL, payload TEXT NOT NULL,
                     received REAL NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS bot_config (
+                    id INTEGER PRIMARY KEY CHECK (id = 1),
+                    channel_ids TEXT NOT NULL DEFAULT '[]'
+                );
+                INSERT OR IGNORE INTO bot_config (id) VALUES (1);
             """)
 
     def connect(self):
@@ -99,6 +104,9 @@ class BotState:
         with closing(self.connect()) as db, db:
             db.execute("BEGIN")
             state = dict(db.execute("SELECT * FROM state WHERE id=1").fetchone())
+            state["channel_ids"] = json.loads(db.execute(
+                "SELECT channel_ids FROM bot_config WHERE id=1"
+            ).fetchone()[0])
             rows = db.execute(
                 "SELECT seq, payload FROM events WHERE seq > ? ORDER BY seq",
                 (state["processed"],),
@@ -107,11 +115,15 @@ class BotState:
         state["last_event"] = rows[-1]["seq"] if rows else state["processed"]
         return state
 
-    def begin(self):
-        self.execute(
-            "UPDATE state SET pid=?, heartbeat=?, connected=0, stop=0, "
-            "recovery=recovery+1, error='' WHERE id=1", (os.getpid(), time.time()),
-        )
+    def begin(self, channel_ids=()):
+        # 실제 봇이 감지하는 채널을 남깁니다. main의 새 설정과 다르면 안전하게 재시작합니다.
+        with closing(self.connect()) as db, db:
+            db.execute(
+                "UPDATE state SET pid=?, heartbeat=?, connected=0, stop=0, "
+                "recovery=recovery+1, error='' WHERE id=1", (os.getpid(), time.time()),
+            )
+            db.execute("UPDATE bot_config SET channel_ids=? WHERE id=1",
+                       (json.dumps(list(channel_ids)),))
 
     def heartbeat(self):
         self.execute("UPDATE state SET heartbeat=? WHERE id=1", (time.time(),))

@@ -1,6 +1,6 @@
 {
   "channel_id": "C0BBNNCS4BG",
-  "last_sync_started_ts": "1789639581.983914",
+  "last_sync_started_ts": "1789691879.595203",
   "thread_versions": {
     "1782377086.422969": {
       "reply_count": 3,
@@ -8558,11 +8558,11 @@
             "U0BMK5U2JRX",
             "U0BHTSWPS68",
             "U0BAPLX69J9",
-            "U0BK0FB6TSM",
             "U0BKR5VQFGB",
+            "U0BK0FB6TSM",
             "U0BE4RMQTU5",
-            "U0BM4GD3YRG",
             "U0BKT0G7K88",
+            "U0BM4GD3YRG",
             "U0BKKN3UW7K",
             "U0BLRGP54MC",
             "U0BLSE5CWE4",
@@ -8612,13 +8612,13 @@
         {
           "name": "white_check_mark",
           "users": [
-            "U0BHMFP7G6A",
             "U0BDC9H17M0",
-            "U0BAPLX69J9",
+            "U0BHMFP7G6A",
             "U0BC26KFZ54",
+            "U0BAPLX69J9",
             "U0BLSE5CWE4",
-            "U0BKTK98P63",
             "U0BE4RMQTU5",
+            "U0BKTK98P63",
             "U0BKKN3UW7K",
             "U0BJ7TBEJDR",
             "U0B9TV2GVC2",
@@ -8834,19 +8834,19 @@
             "U0BL1ALS54G",
             "U0B95PG4SJ1",
             "U0BKKN3UW7K",
-            "U0BA2JDFPTP",
-            "U0BAPLX69J9",
             "U0BK0FB6TSM",
-            "U0BC26KFZ54",
+            "U0BAPLX69J9",
+            "U0BA2JDFPTP",
             "U0BE4NE2E73",
+            "U0BC26KFZ54",
             "U0BDC9H17M0",
             "U0BG5A1SMKL",
             "U0BKT0G7K88",
-            "U0BE4RMQTU5",
             "U0BLRGP54MC",
+            "U0BE4RMQTU5",
             "U0BHTSWPS68",
-            "U0BKT1NQ5MW",
             "U0BHMFP7G6A",
+            "U0BKT1NQ5MW",
             "U0BKTK98P63",
             "U0BCJ4W0H4H",
             "U0BJJ2VC0MA",
@@ -9179,10 +9179,10 @@
           "name": "white_check_mark",
           "users": [
             "U0BMK5U2JRX",
-            "U0BE4RMQTU5",
-            "U0BE6K33A6T",
             "U0BHMFP7G6A",
+            "U0BE6K33A6T",
             "U0BHTSWPS68",
+            "U0BE4RMQTU5",
             "U0BCJ4W0H4H",
             "U0BAPLX69J9",
             "U0BE4NE2E73",
@@ -9231,8 +9231,8 @@
         {
           "name": "white_check_mark",
           "users": [
-            "U0BMK5U2JRX",
             "U0BDC9H17M0",
+            "U0BMK5U2JRX",
             "U0BLSE5CWE4",
             "U0BHTSWPS68",
             "U0BKKN3UW7K",
@@ -9241,14 +9241,14 @@
             "U0BAPLX69J9",
             "U0BKTK98P63",
             "U0BLRGP54MC",
-            "U0B9TV2GVC2",
             "U0BCJ4W0H4H",
+            "U0B9TV2GVC2",
             "U0BA2JDFPTP",
             "U0BK0FB6TSM",
             "U0BE6K33A6T",
             "U0BKT0G7K88",
-            "U0BJ7TBEJDR",
             "U0BC26KFZ54",
+            "U0BJ7TBEJDR",
             "U0BLYK8P9N0",
             "U0BM4GD3YRG",
             "U0BM9LX2NBY",
@@ -9682,23 +9682,23 @@
             "U0B9TV2GVC2",
             "U0BCERR2FDG",
             "U0BHTSWPS68",
-            "U0BLSE5CWE4",
             "U0BE4RMQTU5",
-            "U0BCJ4W0H4H",
-            "U0BC26KFZ54",
             "U0BA2JDFPTP",
-            "U0BJ7TBEJDR",
+            "U0BLSE5CWE4",
+            "U0BC26KFZ54",
+            "U0BCJ4W0H4H",
             "U0BM9LX2NBY",
+            "U0BJ7TBEJDR",
+            "U0BKKN3UW7K",
             "U0BDC9H17M0",
             "U0BE4NE2E73",
-            "U0BKKN3UW7K",
             "U0BLYK8P9N0",
             "U0B9QHYG6AH",
-            "U0BLRGP54MC",
             "U0BL1ALS54G",
-            "U0BM4GD3YRG",
-            "U0BKR5VQFGB",
+            "U0BLRGP54MC",
             "U0BHMFP7G6A",
+            "U0BKR5VQFGB",
+            "U0BM4GD3YRG",
             "U0BAPLX69J9",
             "U0BK0FB6TSM",
             "U0BMK5U2JRX"
@@ -26422,9 +26422,9 @@
             "U0BJ7TBEJDR",
             "U0BLSE5CWE4",
             "U0BDC9H17M0",
-            "U0BKR5VQFGB",
             "U0BE4RMQTU5",
             "U0BE6K33A6T",
+            "U0BKR5VQFGB",
             "U0BA2JDFPTP",
             "U0BKKN3UW7K",
             "U0BCJ4W0H4H",
@@ -40347,6 +40347,54 @@
             "U0BMK5U2JRX"
           ],
           "count": 2
+        }
+      ]
+    },
+    {
+      "user": "U0BMJN4CA5A",
+      "type": "message",
+      "ts": "1789690183.248419",
+      "client_msg_id": "f32fc2e3-7752-4792-8442-0fcb71fd9b7c",
+      "text": "하루가 남아서 선택/도전과제 하려고 양자화모델 다운받는데 랜선으로 하니 엄청 빨라졌네요. 고생해주신 분들 감사합니다",
+      "team": "T0B3958SGS3",
+      "blocks": [
+        {
+          "type": "rich_text",
+          "block_id": "8Pz1Q",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "하루가 남아서 선택/도전과제 하려고 양자화모델 다운받는데 랜선으로 하니 엄청 빨라졌네요. 고생해주신 분들 감사합니다"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reactions": [
+        {
+          "name": "감사합니다_핑크",
+          "users": [
+            "U0B9QHYG6AH"
+          ],
+          "count": 1
+        },
+        {
+          "name": "우와",
+          "users": [
+            "U0B9QHYG6AH"
+          ],
+          "count": 1
+        },
+        {
+          "name": "최고",
+          "users": [
+            "U0B9QHYG6AH"
+          ],
+          "count": 1
         }
       ]
     }
